@@ -96,5 +96,5 @@
 
 **Регистрация**
 
-![Регистрация](registration.jpg)
+![Регистрация](registration.JPG)
 
