@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="open-iconic/font/css/open-iconic-bootstrap.css">
 	<style type="text/css">
 		html, body {
 				    height: 100%;
@@ -10,33 +11,53 @@
 	</style>
 </head>
 <body>
-	<div class="contaimer-fluid" style="min-height: calc(100% - 50px);">
-	<header class="contaimer-fluid bg-secondary d-flex ">
-					<a href="#" role="button" class="btn btn-lg text-white rounded-0 border-right-0 border-white"">Лого</a>
-					<a href="#" role="button" class="btn btn-lg text-white rounded-0 border-right-0 border-white"">Статьи</a>
-					<a href="#" role="button" class="btn btn-lg text-white rounded-0 border-white"">О нас</a>
-		<div class="btn-group-vertical">
-			<a href="#" role="button" class="mx-2 btn btn-sm text-white"> Регистрация</a>
-			<a href="#" role="button" class="mx-2 btn btn-sm text-white"> Войти</a>
-		</div>
+	<div class="contaimer-fluid bg-light" style="min-height: calc(100% - 50px);">
+		<header class="container-fluid bg-info">
+			<div class="row">
+				<div class="col-xl">
+				</div>
+				<div class="col my-auto p-0">
+					<div class="btn-group p-1 m-0">
+						<a href="#" role="button" class="btn btn-lg bg-primary text-white border">Лого</a>
+						<a href="#" role="button" class="btn btn-lg bg-secondary text-white border mx-1">Статьи</a>
+						<a href="#" role="button" class="btn btn-lg bg-secondary text-white border">О нас</a>
+					</div>
+				</div>
+				<div class="col my-auto d-none d-sm-block py-1">
+					    <form action='#' method="get" class="form-inline float-right">
+					       <input class="form-control p-0 m-0" name="q" type="text" class="input-medium search-query" placeholder="Search..." style="max-width: 250px;">
+						</form>
 
-	
-	</header>
-	<div class="contaimer-fluid">
-		<div class="row m-0">
-			<div class="col-9 p-0">
-				<div class="container-fluid bg-danger">a
-					
-				</div>				
-			</div>
-			<div class="col-3 p-0">
-				<div class="container bg-success ">
-					a
+				</div>
+				<div class="col d-sm-none py-1">
+					<a href="#" role="button" class="btn btn-lg text-white"><span class="oi oi-magnifying-glass"></span></a>
+				</div>
+				<div class="container col p-0 m-0 btn-group-vertical">
+					<div class="container text-center d-none d-sm-none d-md-block"> 
+						<a href="#" role="button" class="btn btn-sm border-white bg-primary rounded text-white" style="">Войти</a>
+						<a href="#" class="text-white small text-nowrap">Впервые на сайте?</a>
+					</div>
+					<div class="d-md-none p-0 m-0 float-right">
+						<a href="#" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-login"></span></a>
+					</div>
 				</div>
 			</div>
+		</header>
+		<div class="contaimer-fluid p-4">
+			<div class="row m-0">
+				<div class="col-9 pr-2">
+					<div class="container-fluid bg-danger">a
+						
+					</div>				
+				</div>
+				<div class="col-3 p-0">
+					<div class="container bg-success  ">
+						a
+					</div>
+				</div>
+			</div>
+			
 		</div>
-		
-	</div>
 	</div>
 	<footer class="contaimer-fluid text-center" style="height: 50px">
 		<p class="">Хм</p>
