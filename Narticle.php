@@ -12,7 +12,7 @@
 						</div >
 						<h3 class="display-3 text-center">Дайкири</h3>
 						<div class="text-center">
-  						<img src="daikiri.jpg" width="500" height="400" class="rounded" style="margin: 20px" alt="Дайкири">
+  						<img src="img/daikiri.jpg" width="500" height="400" class="rounded" style="margin: 20px" alt="Дайкири">
 						</div>
 						<p style="margin: 0px 150px 100px 100px"><big>Существует не так много коктейлей, способных по узнаваемости сравняться с Дайкири. Благодаря простому составу и оригинальному вкусу у него масса почитателей во всем мире, среди них даже известные люди. Я расскажу, как приготовить Дайкири в домашних условиях, отдельно мы рассмотрим самые популярные вариации.
 
