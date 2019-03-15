@@ -1,4 +1,6 @@
-<div class="col-md-3 p-0">
+</div>				
+				</div>
+				<div class="col-md-3 p-0">
 					<div class="container p-2 my-auto text-light rounded" style="background:url(technicalissues.jpg);">
 						<h6 class="text-center ">Популярные статьи</h6>
 					</div>
@@ -23,16 +25,8 @@
 			</div>
 			<div class="col-auto col-sm-2">
 				<a class="p-0 float-left" href="#"><img src="inst.png"></a>
-			</div>
-					
-						
-			
-		</div>
-		
-
-		
+			</div>			
+		</div>		
 	</footer>
-
-
 </body>
 </html>
