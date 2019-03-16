@@ -1,5 +1,8 @@
 <?php
 session_start(); 
+if($_GET['do'] == 'logout'){
+	unset($_SESSION['user']);
+	session_destroy();}
  ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +22,7 @@ session_start();
 			<div class="row">
 				<div class="col my-auto p-0 ">
 					<div class="btn-group p-1 m-0 float-right">
-						<a href="#" role="button" class="btn btn-lg bg-primary text-white border">Лого</a>
+						<a href="../main.php" role="button" class="btn btn-lg bg-primary text-white border">Лого</a>
 						<a href="#" role="button" class="btn btn-lg bg-secondary text-white border mx-1">Статьи</a>
 						<a href="#" role="button" class="btn btn-lg bg-secondary text-white border">О нас</a>
 					</div>
@@ -34,12 +37,17 @@ session_start();
 					<a href="#" role="button" class="btn btn-lg text-white"><span class="oi oi-magnifying-glass"></span></a>
 				</div>
 				<div class="container col p-0 m-0 btn-group my-auto">
-					<div class="container text-center d-none d-sm-none d-md-block p-0 m-0"> 
-						<a href="#" role="button" class="btn  border-white bg-primary rounded text-white" style="">Вход</a>
-						<a href="#" role="button" class="btn  border-white bg-primary rounded text-white">Регистрация</a>
+					<div class="container text-center d-none d-sm-none d-md-block p-0 m-0">
+					<?php
+					if (!$_SESSION['user']){
+						echo '<a href="../login.php" role="button" class="btn  border-white bg-primary rounded text-white" style="">Вход</a>';
+						echo '<a href="#" role="button" class="btn  border-white bg-primary rounded text-white">Регистрация</a>';}
+					else
+						echo '<a href="?do=logout" class="text-white">Выйти</a>';
+					?>
 					</div>
 					<div class="d-md-none p-0 m-auto">
-						<a href="#" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-login"></span></a>
+						<a href="../login.php" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-login"></span></a>
 					</div>
 				</div>
 			</div>
