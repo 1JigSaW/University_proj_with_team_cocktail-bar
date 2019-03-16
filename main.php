@@ -11,10 +11,8 @@ if (!empty($_POST["login"]) && !empty($_POST["password"]))
 	else
 		{header("Location: login.php");
 		exit;}
-
 }
-else
-	echo "error";
+
 include "header.php";
 include 'footer.php';
 ?>
