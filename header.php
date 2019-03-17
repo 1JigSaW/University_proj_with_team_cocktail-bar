@@ -39,15 +39,20 @@ if($_GET['do'] == 'logout'){
 				<div class="container col p-0 m-0 btn-group my-auto">
 					<div class="container text-center d-none d-sm-none d-md-block p-0 m-0">
 					<?php
-					if (!$_SESSION['user']){
-						echo '<a href="../login.php" role="button" class="btn  border-white bg-primary rounded text-white" style="">Вход</a>';
-						echo '<a href="#" role="button" class="btn  border-white bg-primary rounded text-white">Регистрация</a>';}
-					else
-						echo '<a href="?do=logout" class="text-white">Выйти</a>';
+						if (!$_SESSION['user']){
+							echo '<a href="../login.php" role="button" class="btn  border-white bg-primary rounded text-white" style="">Вход</a>';
+							echo '<a href="#" role="button" class="btn  border-white bg-primary rounded text-white">Регистрация</a>';}
+						else
+							echo '<a href="?do=logout" class="text-white">Выйти</a>';
 					?>
 					</div>
 					<div class="d-md-none p-0 m-auto">
-						<a href="../login.php" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-login"></span></a>
+						<?php
+						if (!$_SESSION['user'])
+							echo '<a href="../login.php" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-login"></span></a>';
+						else
+							echo '<a href="?do=logout" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-logout"></span></a>';
+						?>
 					</div>
 				</div>
 			</div>
