@@ -7,4 +7,5 @@ function connect(){
 	$connect=mysqli_connect($host,$user,$password,$db_name)	or die("Ошибка " . mysqli_error($connect));
 	if($connect)
 		return $connect;}
+	mysqli_set_charset($link,'utf8');
  ?>
