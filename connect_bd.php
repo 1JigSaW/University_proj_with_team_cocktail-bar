@@ -15,6 +15,7 @@ $db_name='db_coctailbar';
 
 $connect=mysqli_connect($host,$user,$password,$db_name)
 or die("Ошибка " . mysqli_error($connect));
+ mysqli_set_charset($link,'utf8');
 /*
 mysqli_select_db($db_name,$connect);
 
