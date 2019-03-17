@@ -7,7 +7,7 @@
 <?php
 require_once 'connect_bd.php'; // подключаем скрипт
 
-// здесь будет номер статьи
+$id=$_GET['page'];// здесь будет номер статьи
 // здесь будет номер пользователя
 $data=date("Y-m-d H:i:s");
 if(isset($_POST['comment'])){
@@ -22,7 +22,7 @@ if(isset($_POST['comment'])){
     
      
     // создание строки запроса
-    $query ="INSERT INTO comment VALUES(NULL,'article','user', '$comment','$data')";
+    $query ="INSERT INTO comment VALUES(NULL,'$id','user', '$comment','$data')";
      
     // выполняем запрос
     $result = mysqli_query($link, $query) or die("Ошибка " . mysqli_error($link)); 
@@ -58,8 +58,15 @@ if(isset($_POST['comment'])){
 }while ($myrow = mysqli_fetch_array($result));*/
 echo '<table>';
 while($row = mysqli_fetch_assoc($res)) {
-echo '<tr><td>'.$row['article_id'].'</td><td>'.$row['user_id'].'</td><td>'.$row['text_comment'].'</td><td>'.$row['data_comment'].'</td></tr>';}
-echo '</table>';
+if($id==$row['article_id']){
+echo "<div class=\"bg-info rounded m-2 h4 container mb-2 p-2 p-sm-3 p-md-4   \">";
+echo "<div>";	
+echo $row['text_comment'];
+echo "</div>";
+echo "<div class=\"text-right\">";
+echo $row['data_comment'];
+echo "</div>";
+echo "</div>";}}
  
 
 mysqli_close($link);
