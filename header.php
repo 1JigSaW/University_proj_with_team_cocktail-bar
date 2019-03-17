@@ -33,17 +33,19 @@ if($_GET['do'] == 'logout'){
 						</form>
 
 				</div>
-				<div class="col d-sm-none py-1">
+				<div class="col d-sm-none py-1 px-0">
 					<a href="#" role="button" class="btn btn-lg text-white"><span class="oi oi-magnifying-glass"></span></a>
 				</div>
 				<div class="container col p-0 m-0 btn-group my-auto">
-					<div class="container text-center d-none d-sm-none d-md-block p-0 m-0">
+					<div class="container text-white text-center d-none d-sm-none d-md-block p-0 m-0">
 					<?php
+						$logout='<a href="?do=logout" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-logout"></span></a>';
 						if (!$_SESSION['user']){
-							echo '<a href="../login.php" role="button" class="btn  border-white bg-primary rounded text-white" style="">Вход</a>';
+							echo '<a href="../login.php" role="button" class="btn  border-white bg-primary rounded " style="">Вход</a>';
 							echo '<a href="#" role="button" class="btn  border-white bg-primary rounded text-white">Регистрация</a>';}
 						else
-							echo '<a href="?do=logout" class="text-white">Выйти</a>';
+							{echo '<ul class="list-inline my-auto"><li class="list-inline-item">Вы вошли как <b>'.$_SESSION['log'].'</b></li>';
+							echo $logout;}
 					?>
 					</div>
 					<div class="d-md-none p-0 m-auto">
@@ -51,7 +53,7 @@ if($_GET['do'] == 'logout'){
 						if (!$_SESSION['user'])
 							echo '<a href="../login.php" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-login"></span></a>';
 						else
-							echo '<a href="?do=logout" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-logout"></span></a>';
+							echo $logout;
 						?>
 					</div>
 				</div>
