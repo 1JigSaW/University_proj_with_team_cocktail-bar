@@ -1,7 +1,7 @@
 <?php include "header.php" ?>
 <h3 class="text-center pb-3">Авторизация</h3>
 <?php 
-if (!$_SESSION['user']) 
+if (!@$_SESSION['user']) 
 	include "loginform.php";
 else
 	echo '<p class="text-center">Страница доступна только неавторизованным пользователям.</p>';
