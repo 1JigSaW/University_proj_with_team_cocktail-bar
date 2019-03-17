@@ -41,7 +41,7 @@ if($_GET['do'] == 'logout'){
 					<?php
 						$logout='<a href="?do=logout" role="button" class="p-0 m-0 btn btn-lg"><span class="oi oi-account-logout"></span></a>';
 						if (!$_SESSION['user']){
-							echo '<a href="../login.php" role="button" class="btn  border-white bg-primary rounded text-white" style="">Вход</a>';
+							echo '<a href="../login.php" role="button" class="btn  border-white bg-primary rounded text-white mr-1" style="">Вход</a>';
 							echo '<a href="#" role="button" class="btn  border-white bg-primary rounded text-white">Регистрация</a>';}
 						else
 							{echo '<ul class="list-inline my-auto"><li class="list-inline-item">Вы вошли как <b>'.$_SESSION['log'].'</b></li>';
