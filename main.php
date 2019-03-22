@@ -7,8 +7,7 @@ if (!empty($_POST["login"]) && !empty($_POST["password"]))
 		session_start();
 		$row=mysqli_fetch_assoc($result);
 		$_SESSION['user'] = $row['id'];
-		$_SESSION['log'] = $row['log'];
-					}
+		$_SESSION['log'] = $row['log'];}
 	else
 		{header("Location: login.php");
 		exit;}
