@@ -3,6 +3,11 @@
 				<div class="col-md-3 p-0">
 					<div class="container p-2 my-auto text-light rounded" style="background:url(img/technicalissues.jpg);">
 						<h6 class="text-center ">Популярные статьи</h6>
+						<div class="row p-0 mx-2 my-2">
+							<div class="col mr-2 col-md-12 mb-md-2 bg-success">b</div>
+								
+							<div class="col ml-2 col-md-12 m-md-0 bg-danger">a</div>
+						</div>
 					</div>
 				</div>
 			</div>
