@@ -1,9 +1,14 @@
 <?php
-session_start(); 
-if(@$_GET['do'] == 'logout'){
+if (!isset($_SESSION['user']) && !isset($_SESSION['log']))
+	session_start();
+
+if(@$_GET['do'] == 'logout')
+	{
 	unset($_SESSION['user']);
-	session_destroy();}
+	session_destroy();
+	}
  ?>
+
 <!DOCTYPE html>
 <html>
 <head>
