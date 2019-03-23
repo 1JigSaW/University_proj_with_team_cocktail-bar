@@ -1,9 +1,14 @@
 <?php
-session_start(); 
-if(@$_GET['do'] == 'logout'){
+if (!isset($_SESSION['user']) && !isset($_SESSION['log']))
+	session_start();
+
+if(@$_GET['do'] == 'logout')
+	{
 	unset($_SESSION['user']);
-	session_destroy();}
+	session_destroy();
+	}
  ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +27,7 @@ if(@$_GET['do'] == 'logout'){
 			<div class="row">
 				<div class="col my-auto p-0 ">
 					<div class="btn-group p-1 m-0 float-right">
-						<a href="../main.php" role="button" class="btn btn-lg bg-primary text-white border">Лого</a>
+						<a href="main.php" role="button" class="btn btn-lg bg-primary text-white border">Лого</a>
 						<a href="spisok.php" role="button" class="btn btn-lg bg-secondary text-white border mx-1">Статьи</a>
 						<a href="#" role="button" class="btn btn-lg bg-secondary text-white border">О нас</a>
 					</div>
@@ -40,7 +45,7 @@ if(@$_GET['do'] == 'logout'){
 					<div class="container text-white text-center d-none d-sm-none d-md-block p-0 m-0">
 					<?php
 						if (!@$_SESSION['user']){
-							echo '<a href="../login.php" role="button" class="btn  border-white bg-primary rounded text-white mr-1" style="">Вход</a>';
+							echo '<a href="login.php" role="button" class="btn  border-white bg-primary rounded text-white mr-1" style="">Вход</a>';
 							echo '<a href="#" role="button" class="btn  border-white bg-primary rounded text-white">Регистрация</a>';}
 						else
 							{$logout='<a href="?do=logout" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-logout"></span></a>';
