@@ -6,7 +6,7 @@ if(@$_GET['do'] == 'logout')
 	{
 	unset($_SESSION['user']);
 	session_destroy();}
-include "connect_function.php"?>
+?>
 
 <!DOCTYPE html>
 <html>
