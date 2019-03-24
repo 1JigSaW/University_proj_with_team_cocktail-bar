@@ -5,8 +5,8 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['log']))
 if(@$_GET['do'] == 'logout')
 	{
 	unset($_SESSION['user']);
-	session_destroy();
-include "connect_function.php"}?>
+	session_destroy();}
+include "connect_function.php"?>
 
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,11 @@ include "connect_function.php"}?>
 							echo '<a href="login.php" role="button" class="btn  border-white bg-primary rounded text-white mr-1" style="">Вход</a>';
 							echo '<a href="#" role="button" class="btn  border-white bg-primary rounded text-white">Регистрация</a>';}
 						else
-							{$logout='<a href="?do=logout" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-logout"></span></a>';
+							{if (isset($_SERVER['QUERY_STRING']))
+								$request=$_SERVER['QUERY_STRING']."&";
+							else
+								$request="";
+							$logout='<a href="?'.$request.'do=logout" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-logout"></span></a>';
 							echo '<ul class="list-inline my-auto"><li class="list-inline-item">Вы вошли как <b>'.$_SESSION['log'].'</b></li>';
 							echo $logout;}
 					?>
