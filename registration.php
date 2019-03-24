@@ -1,3 +1,4 @@
+<?php require ('header.php');?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,8 +6,10 @@
 	<title>Регистрация</title>
 </head>
 <body>
-<?php require ('header.php');
-require ('conn.php');
+
+<?php
+
+require ('connection.php');
 if (isset($_POST['log']) && isset($_POST['password'])){
 $log=$_POST['log'];
 $password=$_POST['password'];
@@ -35,7 +38,7 @@ else{
 			<label for="password" class="text-center pb-3">Введите ваш пароль:</label>
 			<input type="password" name="password" class="form-control" placeholder="password" ><br>
 			<label for="data_born" class="text-center pb-3">Дата рожения:</label>
-			<input type="data" name="data_born" class="form-control" placeholder="date of birth"><br>
+			<input type="date" name="data_born" class="form-control" placeholder="date of birth"><br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
 		</form>
 		<?php include "footer.php"; ?>
