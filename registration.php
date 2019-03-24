@@ -43,7 +43,8 @@ else{
 			<input type="date" name="data_born" class="form-control" placeholder="Дата рождения"><br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
 		</form>
-		<?php include "footer.php"; ?>
+		
 	</div>
 </body>
 </html>
+<?php include "footer.php"; ?>
