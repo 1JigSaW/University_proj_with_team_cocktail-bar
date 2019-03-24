@@ -36,11 +36,11 @@ else{
 			<?php if(isset($sm)){?><div class="alert alert-success" role="alert"><?php echo $sm; ?></div><?php }?>
 			<?php if(isset($fsm)){?><div class="alert alert-success" role="alert"><?php echo $fsm; ?></div><?php }?>
 			<label for="log" class="text-center pb-3">Введите ваш логин:</label>
-			<input type="text" name="log" class="form-control" placeholder="login" ><br>
+			<input type="text" name="log" class="form-control" placeholder="Имя пользователя" ><br>
 			<label for="password" class="text-center pb-3">Введите ваш пароль:</label>
-			<input type="password" name="password" class="form-control" placeholder="password" ><br>
+			<input type="password" name="password" class="form-control" placeholder="Пароль" ><br>
 			<label for="data_born" class="text-center pb-3">Дата рожения:</label>
-			<input type="date" name="data_born" class="form-control" placeholder="date of birth"><br>
+			<input type="date" name="data_born" class="form-control" placeholder="Дата рождения"><br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
 		</form>
 		<?php include "footer.php"; ?>
