@@ -1,3 +1,6 @@
+﻿<?php header('Content-Type: text/html; charset=utf-8');
+mysql_query("SET NAMES 'UTF8'");
+?>
 <?php include "header.php" ?>
 <?php include "connect_bd.php" ?>
 
@@ -87,66 +90,72 @@ if(isset($_GET['page'])){
 
 					?>
 
-					<?php 
-					$article = mysqli_query($connect,"SELECT * FROM `article` WHERE $id=`id`")or die(mysqli_error());	
+					<!-- <?php 
+					$article = mysqli_query($connect,"SELECT * FROM `rating` WHERE $id=`id`")or die(mysqli_error());	
 					while($arr = mysqli_fetch_assoc($article)){?>
 						<div class="container-fluid text-center">
 							<div  class="display-4"><?php echo $arr['rating'];}?></div>
 						</div>
+					-->
+					<?php
 
-						<?php
-
-						$data=date("Y-m-d H:i:s", (time()+60*60*2));
-						$id=$_GET['page'];
-
-						if(isset($_POST['comment'])){
+					$id=$_GET['page'];
+					$input=$_SESSION['log'];
+					$user_id=$_SESSION['user'];
+					$data=date("Y-m-d H:i:s", (time()-60*60));
+					$id=$_GET['page'];
+					
+					if(isset($_POST['comment'])){
     								// экранирования символов для mysql
-							$comment = htmlentities(mysqli_real_escape_string($connect, $_POST['comment']));
-							$query ="INSERT INTO comment VALUES(NULL,'$id','$user_id', '$comment','$data')";
+						$comment = htmlentities(mysqli_real_escape_string($connect, $_POST['comment']));
+						$query ="INSERT INTO  comment VALUES(NULL,'$comment','$data','$id' ,'$user_id')";
    								 // выполняем запрос
-							$result = mysqli_query($connect, $query) or die("Ошибка " . mysqli_error($connect)); }
+						$result = mysqli_query($connect, $query) or die("Ошибка " . mysqli_error($connect)); }
+						if($result=true)
+						{
+							echo "<span style='color:blue;'>Данные добавлены</span>";
+						}
+						?>
+						<div>
+							<form action="" method="post" >
+								<div class="m-2"><input class="form-control form-control-lg rounded " type="text" placeholder="Введите ваш комментраий" name="comment"></div>
+								<div class="container"></div>
+								<div class="row"></div>
+								<div class="m-2"><input class="btn btn-primary p-1 text-center col-12" type="submit" value="Добавить комментарий"></div>
 
-							?>
-							<div>
-								<form action="" method="post" >
-									<div class="m-2"><input class="form-control form-control-lg rounded " type="text" placeholder="Введите ваш комментраий" name="comment"></div>
-									<div class="container"></div>
-									<div class="row"></div>
-									<div class="m-2"><input class="btn btn-primary p-1 text-center col-12" type="submit" value="Добавить комментарий"></div>
-
-								</form>
-							</div>
-							<?php 
+							</form>
+						</div>
+						<?php 
 
 						// $res = mysqli_query($connect,"SELECT id,log FROM `user`  ")or die(mysqli_error());
 						// while($row = mysqli_fetch_assoc($res)){
 						// 	if($user_id==$row['id']){
 						// 	$user_id=$row['log'];}
-							$res = mysqli_query($connect,"SELECT * FROM `comment` JOIN `user`")or die(mysqli_error());
+						$res = mysqli_query($connect,"SELECT * FROM `comment` JOIN `user` WHERE `user`.`id`=`comment`.`user_id`")or die(mysqli_error());
 
 
 
-							while($row = mysqli_fetch_assoc($res)) {
-								if($id==$row['article_id'] && $row['id']==$row['user_id'] ){
+						while($row = mysqli_fetch_assoc($res)) {
+							if($id==$row['article_id']    ){
 
-									echo "<div class=\"bg-info rounded  container text-white  \">";
-									echo "<p></p>";
-									echo "<div class=\"container-fluid \"></div>";
-									echo "<div class=\"\"></div>";
-									echo $row['log'];
-									echo "<div class=\"container-fluid  h4\">";	
-									echo $row['text_comment'];
-									echo "</div>";
-									echo "<div class=\"text-right\">";
+								echo "<div class=\"bg-info rounded  container text-white  \">";
+								echo "<p></p>";
+								echo "<div class=\"container-fluid \"></div>";
+								echo "<div class=\"\"></div>";
+								echo $row['log'];
+								echo "<div class=\"container-fluid  h4\">";	
+								echo $row['text_comment'];
+								echo "</div>";
+								echo "<div class=\"text-right\">";
 
-									echo $row['data_comment'];
-
-
-
-									echo "</div>";
-									echo "</div>";}}
-									mysqli_close($connect);
-									?>
+								echo $row['data_comment'];
 
 
-									<?php include "footer.php" ?>
+
+								echo "</div>";
+								echo "</div>";}}
+								mysqli_close($connect);
+								?>
+
+
+								<?php include "footer.php" ?>
