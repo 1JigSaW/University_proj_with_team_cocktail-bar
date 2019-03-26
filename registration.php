@@ -18,7 +18,7 @@ $password=$_POST['password'];
 $data_born=$_POST['data_born'];
 $query = "INSERT INTO user (log,password,data_born) VALUES ('$log','$password','$data_born')";
 $result=mysqli_query($connect,$query);
-if(result){
+if($result){
 	$sm = "Регистрация прошла успешно";
 }
 else{
