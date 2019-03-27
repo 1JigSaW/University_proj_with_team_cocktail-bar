@@ -75,36 +75,6 @@
 					</div>
 				</div>
 				
-				<?php
-				if (isset($_SESSION['added']))
-					foreach ($_SESSION['added'] as $id)
-					{
-						$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `id` = '" . $id . "'");
-						$type = mysqli_fetch_assoc($result);
-						echo "<div class='row mt-2'><div class='col-5 text-center'>";
-						if($type['unit'] == "drink")
-						{
-							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `id` = '" . $id . "'");
-							$title = mysqli_fetch_assoc($result);
-							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
-						}
-						echo "</div><div class='col-1 text-center'>";
-						if($type['unit'] == "drink")
-							echo "<button type='button submit' form='isearch' name='remove' value='" . $id . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
-						echo "</div><div class='col-5 text-center'>";
-						if($type['unit'] == "product")
-						{
-							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `id` = '" . $id . "'");
-							$title = mysqli_fetch_assoc($result);
-							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
-						}
-						echo "</div><div class='col-1 text-center'>";
-						if($type['unit'] == "product")
-							echo "<button type='button submit' form='isearch' name='remove' value='" . $id . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
-						echo "</div></div>";
-					}
-				?>
-
 				<div class="row mt-2">
 					<div class="col text-center">
 						<button type="button submit" form="isearch" name="add" value="drink" class="btn bg-success text-white btn-block">Добавить</button>
@@ -113,6 +83,67 @@
 						<button type="button submit" form="isearch" name="add" value="product" class="btn bg-success text-white btn-block">Добавить</button>
 					</div>
 				</div>
+
+				<?php
+					$i = 0;
+					if(isset($_GET['drink']) && isset($_GET['product']))
+					{
+						$_SESSION['drink'] = $_GET['drink'];
+						$_SESSION['product'] = $_GET['product'];
+					}
+					if (isset($_SESSION['drink']) && isset($_SESSION['product']))
+					{
+						$num_drink = $_SESSION['drink'];
+						$num_prod = $_SESSION['product'];
+					}
+					if(isset($num_drink) && isset($num_prod))
+						while ($num_drink && $num_prod):
+							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `id` = '" . $_SESSION['added_drink'][$i] . "'");
+							$title = mysqli_fetch_assoc($result);
+							echo "<div class='row mt-2'><div class='col-5 text-center'>";
+							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
+							echo "</div><div class='col-1 text-center'>";
+							echo "<button type='button submit' form='isearch' name='remove' value='" . $_SESSION['added_drink'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
+							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `id` = '" . $_SESSION['added_product'][$i] . "'");
+							$title = mysqli_fetch_assoc($result);
+							echo "</div><div class='col-5 text-center'>";
+							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
+							echo "</div><div class='col-1 text-center'>";
+							echo "<button type='button submit' form='isearch' name='remove' value='" . $_SESSION['added_product'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
+							echo "</div></div>";
+							$num_drink--;
+							$num_prod--;
+							$i++;
+						endwhile;
+					if(isset($num_drink) && $num_drink)
+						while ($num_drink):
+							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `id` = '" . $_SESSION['added_drink'][$i] . "'");
+							$title = mysqli_fetch_assoc($result);
+							echo "<div class='row mt-2'><div class='col-5 text-center'>";
+							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
+							echo "</div><div class='col-1 text-center'>";
+							echo "<button type='button submit' form='isearch' name='remove' value='" . $_SESSION['added_drink'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
+							echo "</div><div class='col-5 text-center'>";
+							echo "</div><div class='col-1 text-center'>";
+							echo "</div></div>";
+							$num_drink--;
+							$i++;
+						endwhile;
+					if(isset($num_prod) && $num_prod)
+						while ($num_prod):
+							echo "<div class='row mt-2'><div class='col-5 text-center'>";
+							echo "</div><div class='col-1 text-center'>";
+							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `id` = '" . $_SESSION['added_product'][$i] . "'");
+							$title = mysqli_fetch_assoc($result);
+							echo "</div><div class='col-5 text-center'>";
+							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
+							echo "</div><div class='col-1 text-center'>";
+							echo "<button type='button submit' form='isearch' name='remove' value='" . $_SESSION['added_product'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
+							echo "</div></div>";
+							$num_prod--;
+							$i++;
+						endwhile;
+				?>
 				<div class="row mt-2">
 					<div class="col text-center">
 						<?php

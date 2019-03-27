@@ -13,16 +13,16 @@ if(isset($_POST['add']))
 			header("Location: main.php?error=drink");
 			exit;
 		}
-		if(isset($_SESSION['added']))
-			foreach($_SESSION['added'] as $val)
+		if(isset($_SESSION['added_drink']))
+			foreach($_SESSION['added_drink'] as $val)
 				if($_POST['drink'] == $val)
 				{
 					header("Location: main.php?error=same_drink");
 					exit;
 				}
-		foreach($_SESSION['added'] as $key => $value)
-			$_SESSION['added'][$key+1] = $value;
-		$_SESSION['added'][0]=$_POST['drink'];
+		foreach($_SESSION['added_drink'] as $key => $value)
+			$_SESSION['added_drink'][$key+1] = $value;
+		$_SESSION['added_drink'][0]=$_POST['drink'];
 	}
 	if($_POST['add'] == "product")
 	{
@@ -32,19 +32,34 @@ if(isset($_POST['add']))
 		header("Location: main.php?error=product");
 		exit;
 		}
-		if(isset($_SESSION['added']))
-			foreach($_SESSION['added'] as $val)
+		if(isset($_SESSION['added_product']))
+			foreach($_SESSION['added_product'] as $val)
 				if($_POST['product'] == $val)
 				{
 					header("Location: main.php?error=same_product");
 					exit;
 				}
-		foreach($_SESSION['added'] as $key => $value)
-			$_SESSION['added'][$key+1] = $value;
-		$_SESSION['added'][0]=$_POST['product'];
+		foreach($_SESSION['added_product'] as $key => $value)
+			$_SESSION['added_product'][$key+1] = $value;
+		$_SESSION['added_product'][0]=$_POST['product'];
 	}
-	header ("Location: main.php");
 }
+
+$ndrink = 0;
+$nproduct = 0;
+if (isset($_SESSION['added_drink']))
+{	
+	foreach ($_SESSION['added_drink'] as $id)
+		$ndrink++;
+}
+if (isset($_SESSION['added_product']))
+{	
+	foreach ($_SESSION['added_product'] as $id)
+		$nproduct++;
+}
+
+if(isset($_POST['add']))
+	header ("Location: main.php?drink=" . $ndrink . "&product=" . $nproduct);
 
 print_r($_POST);
 
