@@ -16,7 +16,7 @@
 			<h2 class="display-5">Имеющиеся ингридиенты:</h2>
 		</div>
 		<div class="col-6">
-			<button type="button submit" form="isearch" class="btn border-white bg-primary rounded text-white btn-lg btn-block">Подобрать</button>
+			<button type="button submit" name="search" form="isearch" class="btn border-white bg-primary rounded text-white btn-lg btn-block">Подобрать</button>
 		</div>
 	</div>
 
@@ -168,7 +168,7 @@
 					<div class="col text-center">
 						<?php
 						if (isset($_GET['error']) && $_GET['error'] == "drink")
-							echo "<div class='alert alert-warning text-center' role='alert'>Выберите напиток</div>";
+							echo "<div class='alert alert-warning text-center' role='alert' style='height: 50px;''>Выберите напиток</div>";
 						if (isset($_GET['error']) && $_GET['error'] == "same_drink")
 							echo "<div class='alert alert-dark text-center' role='alert'>Напиток уже добавлен</div>";
 						?>
@@ -187,9 +187,6 @@
 	</form>
 </div>
 
-
-
-
 <div class="container">
 	<div class="row mt-5">
 		<div class="col">
@@ -197,7 +194,7 @@
 			if (isset($_GET['error']) && $_GET['error'] == "choose")
 			{
 				echo "<div class='alert alert-danger text-center' role='alert'>Выберите хотя бы один ингридиент<br>";
-				echo "<a href='main.php' role='button' class='btn bg-secondary btn-sm text-white'>Окей</a>" . "</div>";
+				echo "<a href='main.php' role='button' class='btn bg-secondary btn-sm text-white'>Окей</a></div>";
 			}
 			?>
 		</div>

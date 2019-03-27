@@ -57,7 +57,7 @@ if(isset($_POST['remove_drink']))
 				$_SESSION['added_drink'][$key+1] = 0;
 			}
 			else
-				session_unset($_SESSION['added_drink'][$key]);
+				unset($_SESSION['added_drink'][$key]);
 	}
 
 if(isset($_POST['remove_product']))
@@ -72,9 +72,8 @@ if(isset($_POST['remove_product']))
 				$_SESSION['added_product'][$key+1] = 0;
 			}
 			else
-				session_unset($_SESSION['added_product'][$key]);
+				unset($_SESSION['added_product'][$key]);
 	}
-
 
 $ndrink = 0;
 $nproduct = 0;
@@ -93,6 +92,12 @@ if (isset($_SESSION['added_product']))
 
 if(isset($_POST['add']) || isset($_POST['remove_drink']) || isset($_POST['remove_product']))
 	header ("Location: main.php?drink=" . $ndrink . "&product=" . $nproduct);
+
+if(isset($_POST['search']) && !$ndrink && !$nproduct)
+{
+	header("Location: main.php?error=choose");
+	exit;
+}
 
 
 // временное  VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
