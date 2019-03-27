@@ -103,13 +103,13 @@
 							echo "<div class='row mt-2'><div class='col-5 text-center'>";
 							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
 							echo "</div><div class='col-1 text-center'>";
-							echo "<button type='button submit' form='isearch' name='remove' value='" . $_SESSION['added_drink'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
+							echo "<button type='button submit' form='isearch' name='remove_drink' value='" . $_SESSION['added_drink'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
 							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `id` = '" . $_SESSION['added_product'][$i] . "'");
 							$title = mysqli_fetch_assoc($result);
 							echo "</div><div class='col-5 text-center'>";
 							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
 							echo "</div><div class='col-1 text-center'>";
-							echo "<button type='button submit' form='isearch' name='remove' value='" . $_SESSION['added_product'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
+							echo "<button type='button submit' form='isearch' name='remove_product' value='" . $_SESSION['added_product'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
 							echo "</div></div>";
 							$num_drink--;
 							$num_prod--;
@@ -122,7 +122,7 @@
 							echo "<div class='row mt-2'><div class='col-5 text-center'>";
 							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
 							echo "</div><div class='col-1 text-center'>";
-							echo "<button type='button submit' form='isearch' name='remove' value='" . $_SESSION['added_drink'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
+							echo "<button type='button submit' form='isearch' name='remove_drink' value='" . $_SESSION['added_drink'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
 							echo "</div><div class='col-6 text-center'>";
 							if (isset($_GET['error']) && $_GET['error'] == "product")
 							{
@@ -158,7 +158,7 @@
 							echo "</div><div class='col-5 text-center'>";
 							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
 							echo "</div><div class='col-1 text-center'>";
-							echo "<button type='button submit' form='isearch' name='remove' value='" . $_SESSION['added_product'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
+							echo "<button type='button submit' form='isearch' name='remove_product' value='" . $_SESSION['added_product'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
 							echo "</div></div>";
 							$num_prod--;
 							$i++;
