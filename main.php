@@ -123,16 +123,36 @@
 							echo "<button type='button' class='btn btn-primary btn-block' disabled>" . $title['title_product'] . "</button>";
 							echo "</div><div class='col-1 text-center'>";
 							echo "<button type='button submit' form='isearch' name='remove' value='" . $_SESSION['added_drink'][$i] . "' class='btn bg-danger text-white btn-block'><span class='oi oi-x'></span></button>";
-							echo "</div><div class='col-5 text-center'>";
-							echo "</div><div class='col-1 text-center'>";
+							echo "</div><div class='col-6 text-center'>";
+							if (isset($_GET['error']) && $_GET['error'] == "product")
+							{
+								echo "<div class='alert alert-warning text-center' role='alert'>Выберите продукт</div>";
+								$_GET['error'] = "no";
+							}
+
+							if (isset($_GET['error']) && $_GET['error'] == "same_product")
+							{
+								echo "<div class='alert alert-dark text-center' role='alert'>Продукт уже добавлен</div>";
+								$_GET['error'] = "no";
+							}
 							echo "</div></div>";
 							$num_drink--;
 							$i++;
 						endwhile;
 					if(isset($num_prod) && $num_prod)
 						while ($num_prod):
-							echo "<div class='row mt-2'><div class='col-5 text-center'>";
-							echo "</div><div class='col-1 text-center'>";
+							echo "<div class='row mt-2'><div class='col-6 text-center'>";
+							if (isset($_GET['error']) && $_GET['error'] == "drink")
+							{
+								echo "<div class='alert alert-warning text-center' role='alert'>Выберите напиток</div>";
+								$_GET['error'] = "no";
+							}
+							if (isset($_GET['error']) && $_GET['error'] == "same_drink")
+							{
+								echo "<div class='alert alert-dark text-center' role='alert'>Напиток уже добавлен</div>";
+								$_GET['error'] = "no";
+							}
+
 							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `id` = '" . $_SESSION['added_product'][$i] . "'");
 							$title = mysqli_fetch_assoc($result);
 							echo "</div><div class='col-5 text-center'>";
