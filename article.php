@@ -141,7 +141,7 @@ if(isset($_GET['page'])){
 											<?php 
 
 
-											$res = mysqli_query($connect,"SELECT * FROM `comment` JOIN `user` WHERE `user`.`id`=`comment`.`user_id` ORDER BY `comment`.`id` asc")or die(mysqli_error());
+											$res = mysqli_query($connect,"SELECT * FROM `comment` JOIN `user` WHERE `user`.`id`=`comment`.`user_id` ORDER BY `comment`.`id` desc")or die(mysqli_error());
 
 											while($row = mysqli_fetch_assoc($res)) {
 												if($id==$row['article_id'] ){
