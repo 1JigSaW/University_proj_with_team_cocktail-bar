@@ -7,7 +7,7 @@
 							<?php
 								include "random_articles.php";
 								$query=
-										"<a class='col col-md-12 %s text-center' href='/article.php?page=%d'><div class='row align-items-center text-white' style='height:144px; background:url(img/%s);'><div class='col item'>%s</div></div></a>
+										"<a class='col col-md-12 %s text-center' href='/article.php?page=%d'><div class='row align-items-center text-white' style='height:144px; background:url(img/%s);background-size: cover;background-position: center;'><div class='col item'>%s</div></div></a>
 										";
 								$m=array('mr-2 mr-md-0 mb-md-2','ml-2 ml-md-0 mt-md-2');
 								for($i=0;$i<2;$i++){
