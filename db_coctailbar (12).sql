@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 04 2019 г., 20:25
+-- Время создания: Апр 04 2019 г., 22:38
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -183,9 +183,12 @@ INSERT INTO `ingredient` (`id`, `product_id`, `count`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `popular` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `article_id` int(11) unsigned NOT NULL,
-  KEY `article_id` (`article_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `article_id` (`article_id`),
+  KEY `article_id_2` (`article_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
