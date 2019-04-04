@@ -1,11 +1,19 @@
-</div>				
+</div>		
 				</div>
 				<div class="col-md-3 p-0">
 					<div class="container p-2 my-auto text-white rounded" style="min-width:200px;background:url(img/technicalissues.jpg);">
 						<h6 class="text-center ">Популярные статьи</h6>
 						<div class="row p-0 mx-2 my-2">
-							<a class="col mr-2 col-md-12 mr-md-0 mb-md-2 text-center" href="#"><div class="row align-items-center text-white" style="height:144px; background:url(img/daikiri.jpg);"><div class="col item">a</div></div></a>
-							<a class="col ml-2 col-md-12 ml-md-0 mt-md-2 text-center" href=""><div class="row align-items-center text-white" style="height:144px; background:url(img/daikiri.jpg);"><div class="col item">b</div></div></a>
+							<?php
+								include "random_articles.php";
+								$query=
+										"<a class='col col-md-12 %s text-center' href='/article.php?page=%d'><div class='row align-items-center text-white' style='height:144px; background:url(img/%s);'><div class='col item'>%s</div></div></a>
+										";
+								$m=array('mr-2 mr-md-0 mb-md-2','ml-2 ml-md-0 mt-md-2');
+								for($i=0;$i<2;$i++){
+									printf($query,$m[$i],$return[$i]['id'],$return[$i]['img'],$return[$i]['title_coctail']);
+								}
+							?>
 						</div>
 					</div>
 				</div>
