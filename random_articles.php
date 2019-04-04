@@ -18,8 +18,9 @@ $query="
 		AND `article`.`cocktail_id`=`cocktail`.`id`	AND `set_img`.`id`=`article`.`id`
 		";
 $res=mysqli_query($db,$query)or die(mysqli_error($db));
+$return=array();
 while ($b=mysqli_fetch_array($res)){
-	echo $b['id'], $b['img'],$b['title_coctail'];}
+	$return[]=$b;}
 
 
 /*$query="
