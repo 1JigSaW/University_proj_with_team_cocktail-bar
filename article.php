@@ -1,15 +1,21 @@
-<?php mysql_set_charset("UTF-8");?>
+<?php 
+mysql_set_charset("UTF-8");
+
+?>
 <?php include "header.php" ?>
 <?php include "connect_bd.php" ?>
 
 <?php 
+
+
+
 if(isset($_GET['page'])){
 	$id=$_GET['page'];
 
 	$cocktail = mysqli_query($connect,"SELECT * FROM `cocktail` WHERE $id=`id` ")or die(mysqli_error());	//////////////
 	while($arr = mysqli_fetch_assoc($cocktail)){
 		?>
-		<div class="container ">
+		<div class="container">
 			<div class="row">
 				<div class="col"></div>
 				<div class="col-6">
@@ -51,18 +57,16 @@ if(isset($_GET['page'])){
 
 
 						<?php 
-					$a=0;
-					  /////Переменная для вывода одиночной информации, а не набора из цикла
+					$a=0;  /////Переменная для вывода одиночной информации, а не набора из цикла
 					$user_id=$_SESSION['user'];//////
 					$input=$_SESSION['log'];
-					if($user_id!=0){
-					if(($_POST['like'] || $_POST['dislike'])){
+					if($_POST['like'] || $_POST['dislike']){
 						$us="SELECT  `user_id`,`article_id` FROM `rating` ";
 						$res = mysqli_query($connect,$us)or die(mysqli_error());
 
 						while($arr = mysqli_fetch_assoc($res)){
 							
-							if($user_id==$arr['user_id'] && $id==$arr['article_id'] ){
+							if($user_id==$arr['user_id'] && $id==$arr['article_id']){
 
 
 								echo "<div class=\"alert alert-success text-center\" role=\"alert\">
@@ -74,55 +78,55 @@ if(isset($_GET['page'])){
 
 							}
 							if($a!=1){	
-								if($_POST['like']){//////////////////////////////////////////////
+								if($_POST['like']){
 									$plus=1;
 									$query ="INSERT INTO  rating VALUES(NULL,'$user_id','$plus','$id')";}
-									else {echo "ТЫ лох";}
 									if($_POST['dislike']){
 										$minus=-1;
 
 										$query ="INSERT INTO  rating VALUES(NULL,'$user_id','$minus','$id')";}
 										$result = mysqli_query($connect, $query) or die("Ошибка " . mysqli_error($connect));
+										//Надеюсь, проблем не возникнет
+										include "popular.php";
+										//Вот так вот
 										echo "<div class=\"alert alert-success text-center\" role=\"alert\">
 										<h4 class=\"alert-heading\">";
 										echo $input; 
 										echo "</h4> Спасибо за вашу активность! </div>";}	}
-										
 										?>
 
 										<?php 
 										$article = mysqli_query($connect,"SELECT SUM(`sum`) as sum FROM `rating` WHERE $id=`article_id`")or die(mysqli_error());	
 										while($arr = mysqli_fetch_assoc($article)){?>
-
 											<form action="" method="post" class="row p-3">
 
 
 												<input class="btn btn-outline-dark col" type="submit" name="dislike" value="DISLIKE">
 												<div  class="display-5 col-6 text-center alert alert-info m-3" role="alert">ТЕКУЩИЙ РЕЙТИНГ:<?php echo $arr['sum'];}?></div>
 												<input class="btn btn-outline-light col" type="submit" name="like" value="LIKE" >
-											</form>   
 
+											</form>   
 										</div>
-										<?php } 
-										?>
-										</div>
+
+
 										<?php
+
 										$id=$_GET['page'];
 										$input=$_SESSION['log'];
 										$user_id=$_SESSION['user'];
 										$data=date("Y-m-d H:i:s", (time()-60*60));
 
-										if($user_id!=0){
+
 										if(isset($_POST['comment'])){
     								// экранирования символов для mysql
 											$comment = htmlentities(mysqli_real_escape_string($connect, $_POST['comment']));
 											$query ="INSERT INTO  comment VALUES(NULL,'$comment','$data','$id' ,'$user_id')";
    								 // выполняем запрос
-											$result = mysqli_query($connect, $query) or die("Ошибка " . mysqli_error($connect)); 
-										}
+											$result = mysqli_query($connect, $query) or die("Ошибка " . mysqli_error($connect)); }
+
 											?>
 											<div>
-												<form action="" method="post" accept-charset="utf-8" >
+												<form action="" method="post" >
 													<div class="m-2"><input class="form-control form-control-lg rounded " type="text" placeholder="Введите ваш комментраий" name="comment"></div>
 													<div class="container"></div>
 													<div class="row"></div>
@@ -130,33 +134,26 @@ if(isset($_GET['page'])){
 
 												</form>
 											</div>
-										<?php } 
-										else{echo "<div class=\"alert alert-success text-center\" role=\"alert\">
-								<h4 class=\"alert-heading\">";
-								echo $input; 
-								echo "</h4> Войдите на сайт для комментирования </div>";}
-											?>
-											</div>
+											<?php 
 
 
-
-											<?php $res = mysqli_query($connect,"SELECT * FROM `comment` JOIN `user` WHERE `user`.`id`=`comment`.`user_id` ORDER BY `comment`.`id` desc")or die(mysqli_error());
+											$res = mysqli_query($connect,"SELECT * FROM `comment` JOIN `user` WHERE `user`.`id`=`comment`.`user_id` ORDER BY `comment`.`id` asc")or die(mysqli_error());
 
 											while($row = mysqli_fetch_assoc($res)) {
 												if($id==$row['article_id'] ){
 
-													echo "<div class=\"bg-info rounded  container text-light   \">";
+													echo "<div class=\"bg-info rounded  container text-white  \">";
 													echo "<p></p>";
-													echo "<div class=\"container-fluid \" ></div>";
-													
+													echo "<div class=\"container-fluid \"></div>";
+													echo "<div class=\"\"></div>";
 													echo $row['log'];
-													echo "<div class=\"container-fluid  h5\"><strong>";	
+													echo "<div class=\"container-fluid  h4\">";	
 													echo $row['text_comment'];
-													echo "</strong></div>";
-													echo "<div class=\"text-right \"><small>";
+													echo "</div>";
+													echo "<div class=\"text-right\">";
 
 													echo $row['data_comment'];
-													echo "</small></div>";
+													echo "</div>";
 													echo "</div>";}}
 													mysqli_close($connect);
 													?>
