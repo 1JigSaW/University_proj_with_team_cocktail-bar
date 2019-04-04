@@ -18,6 +18,9 @@ if(@$_GET['do'] == 'logout')
 		html, body {
 				    height: 100%;
 				    min-height: 100%;}
+		a:hover{
+			text-decoration:none;
+		}
 	</style>
 </head>
 <body>
