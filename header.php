@@ -23,9 +23,8 @@ if(@$_GET['do'] == 'logout')
 		}
 	</style>
 </head>
-<body>
-	<div class="contaimer-fluid bg-light" style="min-height: calc(100% - 50px);">
-		<header class="container-fluid bg-info">
+	<body>
+		<header class="container-fluid bg-info fixed-top">
 			<div class="row">
 				<div class="col my-auto p-0 ">
 					<div class="btn-group p-1 m-0 float-right">
@@ -71,6 +70,11 @@ if(@$_GET['do'] == 'logout')
 				</div>
 			</div>
 		</header>
+	
+	<div class="contaimer-fluid bg-light" style="min-height: calc(100% - 50px);">
+		<div class="contaimer-fluid" style="height:56px;">	
+		</div>
+	
 		<div class=" mx-xl-4 mx-lg-3 mx-md-2 p-4">
 			<div class="row m-0">
 				<div class="col-md-9 p-0 pr-md-2 m-0">
