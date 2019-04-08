@@ -147,7 +147,6 @@ while($arr = mysqli_fetch_assoc($cocktail)){
 												echo $row['data_comment'];
 												echo "</div>";
 												echo "</div>";}}
-												mysqli_close($connect);
 												?>
 
 
