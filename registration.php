@@ -9,8 +9,7 @@
 
 <?php
 
-require ('connect_function.php');
-$connect=connect();
+require ('connect_bd.php');
 $select_db=mysqli_select_db($connect,'db_coctailbar');
 if (isset($_POST['log']) && isset($_POST['password'])){
 $log=$_POST['log'];

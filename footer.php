@@ -6,6 +6,8 @@
 						<div class="row p-0 mx-2 my-2">
 							<?php
 								include "random_articles.php";
+								include "connect_bd.php";
+								$return=popular_range($connect);
 								$query=
 										"<a class='col col-md-12 %s text-center popular' href='/article.php?page=%d'><div class='row align-items-center text-white' style='height:144px; background:url(img/%s);background-size: cover;background-position: center;'><div class='col item'><p style='text-shadow:black 1px 1px 0, black -1px -1px 0,black -1px 1px 0, black 1px -1px 0;'>%s</p></div></div></a>
 										";
