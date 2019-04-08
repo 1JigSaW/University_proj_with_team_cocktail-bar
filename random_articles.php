@@ -1,5 +1,5 @@
 <?php 
-function popularrange($db){
+function popular_range($db){
 	$query="SELECT MAX(id) as max, MIN(id) as min FROM `popular`";
 	$res=mysqli_query($db,$query)or die(mysqli_error($db));
 	$row=mysqli_fetch_assoc($res);
@@ -19,7 +19,7 @@ function popularrange($db){
 	$res=mysqli_query($db,$query)or die(mysqli_error($db));
 	$return=array();
 	while ($b=mysqli_fetch_array($res)){
-		$result[]=$b}
+		$result[]=$b;}
 	return $result;
 }
 
