@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 04 2019 г., 22:11
+-- Время создания: Апр 12 2019 г., 01:50
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -32,16 +32,18 @@ CREATE TABLE IF NOT EXISTS `article` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
   KEY `id_2` (`id`),
-  KEY `cocktail_id` (`cocktail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  KEY `cocktail_id` (`cocktail_id`),
+  KEY `cocktail_id_2` (`cocktail_id`),
+  KEY `cocktail_id_3` (`cocktail_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Дамп данных таблицы `article`
 --
 
 INSERT INTO `article` (`id`, `cocktail_id`) VALUES
-(1, 0),
-(2, 0);
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -80,20 +82,17 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`,`user_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=82 ;
+  KEY `user_id` (`user_id`),
+  KEY `article_id_2` (`article_id`),
+  KEY `user_id_2` (`user_id`),
+  KEY `article_id_3` (`article_id`,`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=87 ;
 
 --
 -- Дамп данных таблицы `comment`
 --
 
 INSERT INTO `comment` (`id`, `text_comment`, `data_comment`, `article_id`, `user_id`) VALUES
-(39, 'wqdqwd', '2019-03-25 13:02:17', 0, 0),
-(44, '123', '2019-03-25 13:06:52', 0, 0),
-(64, '2', '0000-00-00 00:00:00', 0, 2019),
-(65, '2', '0000-00-00 00:00:00', 0, 2019),
-(66, '2', '0000-00-00 00:00:00', 0, 2019),
-(67, '2', '0000-00-00 00:00:00', 0, 2019),
 (68, '&Ntilde;', '2019-03-25 15:16:37', 2, 3),
 (69, 'qwewerty', '2019-03-25 15:24:50', 1, 3),
 (70, 'qwewerty', '2019-03-25 15:25:04', 1, 3),
@@ -107,7 +106,12 @@ INSERT INTO `comment` (`id`, `text_comment`, `data_comment`, `article_id`, `user
 (78, '&Ntilde;', '2019-03-25 12:38:30', 2, 3),
 (79, '&Ntilde;', '2019-03-25 12:38:59', 2, 3),
 (80, '&Ntilde;', '2019-03-25 12:41:09', 1, 3),
-(81, 'sad', '2019-04-01 12:55:43', 2, 4);
+(81, 'sad', '2019-04-01 12:55:43', 2, 4),
+(82, 'qwerty', '2019-04-11 02:13:55', 2, 1),
+(83, 'qqq', '2019-04-11 02:21:16', 2, 1),
+(84, 'qqq', '2019-04-11 02:30:17', 2, 1),
+(85, 'qqq', '2019-04-11 02:33:11', 2, 1),
+(86, 'qqq', '2019-04-11 02:33:34', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -183,19 +187,12 @@ INSERT INTO `ingredient` (`id`, `product_id`, `count`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `popular` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `article_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
-  KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Дамп данных таблицы `popular`
---
-
-INSERT INTO `popular` (`id`, `article_id`) VALUES
-(1, 0),
-(2, 1);
+  KEY `article_id_2` (`article_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -232,17 +229,19 @@ CREATE TABLE IF NOT EXISTS `rating` (
   PRIMARY KEY (`id`),
   KEY `article_id` (`user_id`),
   KEY `user_id` (`user_id`),
-  KEY `article_id_2` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  KEY `article_id_2` (`article_id`),
+  KEY `article_id_3` (`article_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Дамп данных таблицы `rating`
 --
 
 INSERT INTO `rating` (`id`, `user_id`, `sum`, `article_id`) VALUES
-(1, 1, 110101010, 0),
-(2, 2, 1, 0),
-(3, 4, 1, 1);
+(1, 1, 110101010, 1),
+(2, 2, 1, 2),
+(3, 4, 1, 1),
+(4, 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -318,36 +317,56 @@ INSERT INTO `user` (`id`, `log`, `password`, `data_born`) VALUES
 --
 
 --
+-- Ограничения внешнего ключа таблицы `article`
+--
+ALTER TABLE `article`
+  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`cocktail_id`) REFERENCES `cocktail` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`);
+
+--
 -- Ограничения внешнего ключа таблицы `content`
 --
 ALTER TABLE `content`
-  ADD CONSTRAINT `content_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `content_ibfk_2` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `ingredient`
 --
 ALTER TABLE `ingredient`
-  ADD CONSTRAINT `ingredient_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `ingredient_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `popular`
+--
+ALTER TABLE `popular`
+  ADD CONSTRAINT `popular_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `rating`
 --
 ALTER TABLE `rating`
-  ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `rating_ibfk_3` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+  ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `set_img`
 --
 ALTER TABLE `set_img`
-  ADD CONSTRAINT `set_img_ibfk_1` FOREIGN KEY (`img_id`) REFERENCES `img` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `set_img_ibfk_2` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `set_img_ibfk_4` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`),
+  ADD CONSTRAINT `set_img_ibfk_3` FOREIGN KEY (`img_id`) REFERENCES `img` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `set_ingredients`
 --
 ALTER TABLE `set_ingredients`
-  ADD CONSTRAINT `set_ingredients_ibfk_1` FOREIGN KEY (`cocktail_id`) REFERENCES `cocktail` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `set_ingredients_ibfk_2` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredient` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `set_ingredients_ibfk_4` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredient` (`id`),
+  ADD CONSTRAINT `set_ingredients_ibfk_3` FOREIGN KEY (`cocktail_id`) REFERENCES `cocktail` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
