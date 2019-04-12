@@ -29,8 +29,9 @@
 		<div class="row m-0 text-nowrap align-items-center">
 			<div class="col text-center px-0 px-md-3">
 				<div class="row flex-row-reverse">
-					<div class="col">
-						<p class="m-0 my-auto float-md-right">Обратная связь: cocktailbarteam@mail.ru</p>
+					<div class="col ">
+						<p class="m-0 d-none d-sm-block my-auto float-md-right">Обратная связь: cocktailbarteam@mail.ru</p>
+						<p class="m-0 d-sm-none my-auto float-md-right">cocktailbarteam@mail.ru</p>
 					</div>
 					<div class="col">
 						<p class="m-0">copyright 2019 ©</p>
