@@ -23,14 +23,17 @@ if(@$_GET['do'] == 'logout')
 		a:hover{
 			text-decoration:none;
 		}
+		body{
+			background: url(img/textur.jpg);
+		}
 	</style>
 </head>
 	<body>
 		<header class="container-fluid bg-info fixed-top px-3">
 			<div class="row">
 				<div class="col my-auto p-0 m-0">
-					<div class="btn-group p-1 m-0">
-						<a href="/main.php" role="button" class="btn btn-lg bg-primary text-white border">Лого</a>
+					<div class="btn-group p-1 m-0 float-right">
+						<a href="/main.php" role="button" class="btn btn-lg text-white border">Лого</a>
 						<a href="/spisok.php" role="button" class="btn btn-lg bg-secondary text-white border mx-1">Статьи</a>
 						<div class="d-none d-sm-block">
 							<a href="/about" role="button" class="btn btn-lg bg-secondary text-white border">О нас</a>
@@ -53,8 +56,8 @@ if(@$_GET['do'] == 'logout')
 					<div class="container text-white text-center d-none d-sm-none d-md-block p-0 m-0">
 					<?php
 						if (!@$_SESSION['user']){
-							echo '<a href="/login.php" role="button" class="btn  border-white bg-primary rounded text-white" style="">Вход</a>';
-							echo '<a href="/registration.php" role="button" class="btn  border-white bg-primary rounded text-white">Регистрация</a>';}
+							echo '<a href="/login.php" role="button" class="btn  border-white rounded text-white" style="">Вход</a>';
+							echo '<a href="/registration.php" role="button" class="btn  border-white rounded text-white">Регистрация</a>';}
 						else
 							{if (isset($_SERVER['QUERY_STRING']))
 								$request=$_SERVER['QUERY_STRING']."&";
@@ -78,7 +81,7 @@ if(@$_GET['do'] == 'logout')
 			</div>
 		</header>
 	
-	<div class="container-fluid p-0 bg-light" style="min-height: calc(100% - 50px);">
+	<div class="container-fluid p-0" style="min-height: calc(100% - 48px);">
 		<div class="container-fluid" style="height:56px;">	
 		</div>
 	
