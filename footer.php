@@ -1,7 +1,7 @@
 </div>		
 				</div>
 				<div class="col-md-3 p-0 ">
-					<div class="container p-2 my-auto text-white rounded bg-success" style="min-width:200px;">
+					<div class="container p-2 my-auto text-white rounded" style="min-width:200px; background-color:rgba(0,100,0,.95);">
 						<h6 class="text-center ">Популярные статьи</h6>
 						<div class="row p-0 mx-2 my-2">
 							<?php
@@ -23,13 +23,11 @@
 			
 		</div>
 	</div>
-	<footer class="contaimer-fluid text-center bg-light" style="height: 50px;
-	background: rgb(213,213,213);
-	background: linear-gradient(180deg, rgba(213,213,213,0) 0%, rgba(59,59,59,0.7511379551820728) 100%);">
+	<footer class="contaimer-fluid text-center text-white" style="height: 50px;background-color:rgba(0,0,0,.6);">
 		<div class="row m-0 text-nowrap align-items-center">
 			<div class="col text-center px-0 px-md-3">
 				<div class="row flex-row-reverse">
-					<div class="col ">
+					<div class="col">
 						<p class="m-0 d-none d-sm-block my-auto float-md-right">Обратная связь: cocktailbarteam@mail.ru</p>
 						<p class="m-0 d-sm-none my-auto float-md-right">cocktailbarteam@mail.ru</p>
 					</div>
