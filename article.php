@@ -1,34 +1,35 @@
 <?php include "header.php" ?>
 <?php include "connect_bd.php" ?>
 
+
 	<?php  $id=$_GET['page'];    // присваиваю переменной id номер статьи, взятый с помощью GET метода из ссылки статьи, а именно, ее номер
 	$cocktail = mysqli_query($connect,"SELECT * FROM `cocktail` WHERE $id=`id` ")or die(mysqli_error());  // Обращаюсь к бд, к таблице - cocktail, к тем полям где номер страницы равен id  в таблице cocktail
 	while($arr_cocktail = mysqli_fetch_assoc($cocktail)){  //  Через цикл while присваиваю новому массиву значения , которые получили при обращении к бд через ассоциативный список													  ?>
 		
-		<div class="container ">
-			<div class="container bg-white rounded">
-				<h1 class="display-4 text-center">
-					<?php echo $arr_cocktail['title_coctail'];?>
-				</h1> <!-- С помощью ассоциативного массива запрашиваю из таблицы cocktail название коктейлей, которые хранятся  -->
-			</div> 
+	
+				<div class="container  bg-white rounded">
+					<div class="container bg-white rounded ">
+						<h1 class="display-4 text-center p-2">
+							<?php echo $arr_cocktail['title_coctail'];?>
+						</h1> <!-- С помощью ассоциативного массива запрашиваю из таблицы cocktail название коктейлей, которые хранятся  -->
+					</div> 
+					<div class="row  justify-content-between">																				   <!-- в поле title_cocktail   -->
+						<div class="alert alert-danger lead col-5 text-center rounded" role="alert">						
+							<small>
+								Крепость: <?php  echo $arr_cocktail['fortress'];?>
+							</small>
+						</div>   <!-- С помощью ассоциативного массива запрашиваю из таблицы cocktail крепость коктейля, которое находится в поле fortress   -->
 
-
-			<div class="container mb-3 p-sm-3 p-md-4 bg-white rounded">
-				<div class="row justify-content-between">																				   <!-- в поле title_cocktail   -->
-					<div class="alert alert-info lead col-5 text-center rounded" role="alert">						
-						<small>
-							Крепость: <?php  echo $arr_cocktail['fortress'];?>
-						</small>
-					</div>   <!-- С помощью ассоциативного массива запрашиваю из таблицы cocktail крепость коктейля, которое находится в поле fortress   -->
-
-					<div class="alert alert-info lead col-5 text-center rounded" role="alert">	
-						<small>
-							<?php echo $arr_cocktail['category'];}?>
-						</small>
+						<div class="alert alert-info lead col-5 text-center rounded" role="alert">	
+							<small>
+								<?php echo $arr_cocktail['category'];}?>
+							</small>
+						</div>
 					</div>
-				</div>    <!-- С помощью ассоциативного массива запрашиваю из таблицы cocktail категорию коктейля, которое находится в поле category   -->
+				</div>   <!-- С помощью ассоциативного массива запрашиваю из таблицы cocktail категорию коктейля, которое находится в поле category   -->
 
 				<div>
+
 					<?php 
 					$img = mysqli_query($connect,"SELECT * FROM `set_img` JOIN `content` JOIN `img`  WHERE `set_img`.`content_id`=`content`.`id` AND `set_img`.`img_id`=`img`.`id` AND $id=`set_img`.`id`")
 					or die(mysqli_error($connect));
@@ -37,35 +38,31 @@
 						<img src="<?php echo $arr_img['img'];?>" class="img-fluid p-1">
 					<?php } ?>
 				</div>
-			</div>
+			
 
-			<div class="container-fluid h5 bg-info rounded mybtn text-white">
+		<div class="container-fluid h5 bg-info rounded mybtn text-white">
+			<?php 
+			$content = mysqli_query($connect,"SELECT `article_id`,`text_article`,`links` FROM `content` WHERE $id=`article_id`")or die(mysqli_error());
+			while($arr_content = mysqli_fetch_assoc($content)){?>
+				<p class="p-3">
+					<?php  echo $arr_content['text_article'];?>				
+				</p>
+				<div class="container-fluid text-right ">
+					<a href="<?php echo $arr_content['links'];?>" class="h4 text-white">
+						ССЫЛКА
+					</a>
+				</div>
+			<?php } ?>
+			<div>
 				<?php 
-				$content = mysqli_query($connect,"SELECT `article_id`,`text_article`,`links` FROM `content` WHERE $id=`article_id`")or die(mysqli_error());
-				while($arr_content = mysqli_fetch_assoc($content)){?>
-					<p class="p-3">
-						<?php  echo $arr_content['text_article'];?>				
-					</p>
-					<div class="container-fluid text-right ">
-						<a href="<?php echo $arr_content['links'];?>" class="h4 text-white">
-							ССЫЛКА
-						</a>
-					</div>
-				<?php } ?>
-				<div>
-					<?php 
 					$a=0;        //  Переменная для вывода одиночной информации, а не набора из цикла
 					$user_id=$_SESSION['user'];//////
 					$login=$_SESSION['log'];
 					if($user_id!=0){
 						if(($_POST['like'] || $_POST['dislike'])){
-							$rating="SELECT  `user_id`,`article_id` FROM `rating`";
-							$res = mysqli_query($connect,$rating)or die(mysqli_error());
-
-							while($arr = mysqli_fetch_assoc($res)){
-
-								if($user_id==$arr['user_id'] && $id==$arr['article_id'] ){ ?>
-
+							$rating=mysqli_query($connect,"SELECT  `user_id`,`article_id` FROM `rating`")or die(mysqli_error());
+							while($arr_rating = mysqli_fetch_assoc($rating)){
+								if($user_id==$arr_rating['user_id'] && $id==$arr_rating['article_id'] ){ ?>
 
 									<div class="alert alert-success text-center" role="alert">
 										<h4 class="alert-heading">
@@ -81,7 +78,6 @@
 									if($_POST['like']){
 										$plus=1;
 										$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$plus','$id')";}
-										else {echo "ТЫ лох";}
 										if($_POST['dislike']){
 											$minus=-1;
 
@@ -90,10 +86,13 @@
 
 											<div class="alert alert-success text-center" role="alert">
 												<h4 class="alert-heading">
+
 													<?php  echo $login; ?>
+
 												</h4> 
 												Спасибо за вашу активность! 
 											</div>
+
 										<?php  }} ?>
 
 										<?php 
@@ -108,7 +107,8 @@
 													<?php echo $arr_rating['sum'];?>													
 												</div>
 												<input class="btn btn-outline-light col" type="submit" name="like" value="LIKE" >
-											</form>   
+											</form>
+
 										<?php }} ?>
 									</div>
 								</div>
@@ -117,14 +117,16 @@
 								<div>
 
 									<?php
+									$comment=$_POST['comment'];
 									$id=$_GET['page'];
 									$data=date("Y-m-d H:i:s", (time()-60*60));
 
 									if($user_id!=0){
 										if(isset($_POST['comment'])){
     								// экранирования символов для mysql
-											$comment = htmlentities(mysqli_real_escape_string($connect, $_POST['comment']));
+											
 											$add_comment =mysqli_query($connect,"INSERT INTO  comment VALUES(NULL,'$comment','$data','$id' ,'$user_id')") or die("Ошибка " . mysqli_error($connect));}
+
 											?>
 
 
@@ -150,9 +152,9 @@
 										else { ?>
 											<div class="alert alert-success text-center" role="alert">
 												<h4 class="alert-heading">
-													<?php  echo $login;?> 
+													Войдите на сайт для комментирования 
 												</h4> 
-												Войдите на сайт для комментирования 
+												
 											</div>
 										<?php  } ?>
 
@@ -182,7 +184,7 @@
 											<?php  }}?>
 										</div>
 
-									</div>
 
 
-									<?php include "footer.php" ?>
+
+										<?php include "footer.php" ?>
