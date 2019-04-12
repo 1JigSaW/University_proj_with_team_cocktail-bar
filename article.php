@@ -1,153 +1,188 @@
-<?php 
-mysql_set_charset("UTF-8");
-include "header.php";
-include "connect_bd.php";
-if(isset($_GET['page'])){
-$id=$_GET['page'];
-$cocktail = mysqli_query($connect,"SELECT * FROM `cocktail` WHERE $id=`id` ")or die(mysqli_error());	//////////////
-while($arr = mysqli_fetch_assoc($cocktail)){
-	?>
-	<div class="container">
-		<div class="row">
-			<div class="col"></div>
-			<div class="col-6">
-				<h1 class="display-3 text-center "><?php echo $arr['title_coctail'];?></h1></div>
-				<div class="col">
-					<div class="card " >
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item lead text-center bg-info text-white"><strong>Крепость: <?php  echo $arr['fortress'];?></strong></li>
-							<li class="list-group-item lead text-center bg-info text-white"><strong><?php echo $arr['category'];}}?></strong></li>
-						</ul>
+<?php include "header.php" ?>
+<?php include "connect_bd.php" ?>
+
+	<?php  $id=$_GET['page'];    // присваиваю переменной id номер статьи, взятый с помощью GET метода из ссылки статьи, а именно, ее номер
+	$cocktail = mysqli_query($connect,"SELECT * FROM `cocktail` WHERE $id=`id` ")or die(mysqli_error());  // Обращаюсь к бд, к таблице - cocktail, к тем полям где номер страницы равен id  в таблице cocktail
+	while($arr_cocktail = mysqli_fetch_assoc($cocktail)){  //  Через цикл while присваиваю новому массиву значения , которые получили при обращении к бд через ассоциативный список													  ?>
+		
+		<div class="container ">
+			<div class="container bg-white rounded">
+				<h1 class="display-4 text-center">
+					<?php echo $arr_cocktail['title_coctail'];?>
+				</h1> <!-- С помощью ассоциативного массива запрашиваю из таблицы cocktail название коктейлей, которые хранятся  -->
+			</div> 
+
+
+			<div class="container mb-3 p-sm-3 p-md-4 bg-white rounded">
+				<div class="row justify-content-between">																				   <!-- в поле title_cocktail   -->
+					<div class="alert alert-info lead col-5 text-center rounded" role="alert">						
+						<small>
+							Крепость: <?php  echo $arr_cocktail['fortress'];?>
+						</small>
+					</div>   <!-- С помощью ассоциативного массива запрашиваю из таблицы cocktail крепость коктейля, которое находится в поле fortress   -->
+
+					<div class="alert alert-info lead col-5 text-center rounded" role="alert">	
+						<small>
+							<?php echo $arr_cocktail['category'];}?>
+						</small>
 					</div>
+				</div>    <!-- С помощью ассоциативного массива запрашиваю из таблицы cocktail категорию коктейля, которое находится в поле category   -->
+
+				<div>
+					<?php 
+					$img = mysqli_query($connect,"SELECT * FROM `set_img` JOIN `content` JOIN `img`  WHERE `set_img`.`content_id`=`content`.`id` AND `set_img`.`img_id`=`img`.`id` AND $id=`set_img`.`id`")
+					or die(mysqli_error($connect));
+					while($arr_img = mysqli_fetch_assoc($img)){
+						?>
+						<img src="<?php echo $arr_img['img'];?>" class="img-fluid p-1">
+					<?php } ?>
 				</div>
 			</div>
-		</div>
 
-		
-		<?php 
-		
-		$img = "SELECT * FROM `set_img` JOIN `content` JOIN `img`  WHERE `set_img`.`content_id`=`content`.`id` AND `set_img`.`img_id`=`img`.`id` AND $id=`set_img`.`id`";
-		$a=mysqli_query($connect,$img)or die(mysqli_error($connect));
-		while($arr = mysqli_fetch_assoc($a)){
-			
-			?>
-
-
-			
-			<img src="<?php echo $arr['img'];}?>" class="img-fluid p-5 " alt="">
 			<div class="container-fluid h5 bg-info rounded mybtn text-white">
 				<?php 
-
-				$text = mysqli_query($connect,"SELECT `article_id`,`text_article`,`links` FROM `content` WHERE $id=`article_id`")or die(mysqli_error());
-				while($arr = mysqli_fetch_assoc($text)){
-					?>
-					<p class="p-3"><?php  echo $arr['text_article'];?></p>
-
+				$content = mysqli_query($connect,"SELECT `article_id`,`text_article`,`links` FROM `content` WHERE $id=`article_id`")or die(mysqli_error());
+				while($arr_content = mysqli_fetch_assoc($content)){?>
+					<p class="p-3">
+						<?php  echo $arr_content['text_article'];?>				
+					</p>
 					<div class="container-fluid text-right ">
-						<a href="<?php echo $arr['links'];}?>" class="h4 text-white">ССЫЛКА</a>
+						<a href="<?php echo $arr_content['links'];?>" class="h4 text-white">
+							ССЫЛКА
+						</a>
 					</div>
-
-
+				<?php } ?>
+				<div>
 					<?php 
-				$a=0;  /////Переменная для вывода одиночной информации, а не набора из цикла
-				$user_id=$_SESSION['user'];//////
-				$input=$_SESSION['log'];
-				if($_POST['like'] || $_POST['dislike']){
-					$us="SELECT  `user_id`,`article_id` FROM `rating` ";
-					$res = mysqli_query($connect,$us)or die(mysqli_error());
+					$a=0;        //  Переменная для вывода одиночной информации, а не набора из цикла
+					$user_id=$_SESSION['user'];//////
+					$login=$_SESSION['log'];
+					if($user_id!=0){
+						if(($_POST['like'] || $_POST['dislike'])){
+							$rating="SELECT  `user_id`,`article_id` FROM `rating`";
+							$res = mysqli_query($connect,$rating)or die(mysqli_error());
 
-					while($arr = mysqli_fetch_assoc($res)){
-						
-						if($user_id==$arr['user_id'] && $id==$arr['article_id']){
+							while($arr = mysqli_fetch_assoc($res)){
 
-
-							echo "<div class=\"alert alert-success text-center\" role=\"alert\">
-							<h4 class=\"alert-heading\">";
-							echo $input; 
-							echo "</h4> Вы уже оставляли свой голос! </div>";
-							$a=1;
-							break;}
-
-						}
-						if($a!=1){	
-							if($_POST['like']){
-								$plus=1;
-								$query ="INSERT INTO  rating VALUES(NULL,'$user_id','$plus','$id')";}
-								if($_POST['dislike']){
-									$minus=-1;
-
-									$query ="INSERT INTO  rating VALUES(NULL,'$user_id','$minus','$id')";}
-									$result = mysqli_query($connect, $query) or die("Ошибка " . mysqli_error($connect));
-									//Надеюсь, проблем не возникнет
-									include "popular.php";
-									//Вот так вот
-									echo "<div class=\"alert alert-success text-center\" role=\"alert\">
-									<h4 class=\"alert-heading\">";
-									echo $input; 
-									echo "</h4> Спасибо за вашу активность! </div>";}	}
-									?>
-
-									<?php 
-									$article = mysqli_query($connect,"SELECT SUM(`sum`) as sum FROM `rating` WHERE $id=`article_id`")or die(mysqli_error());	
-									while($arr = mysqli_fetch_assoc($article)){?>
-										<form action="" method="post" class="row p-3">
+								if($user_id==$arr['user_id'] && $id==$arr['article_id'] ){ ?>
 
 
-											<input class="btn btn-outline-dark col" type="submit" name="dislike" value="DISLIKE">
-											<div  class="display-5 col-6 text-center alert alert-info m-3" role="alert">ТЕКУЩИЙ РЕЙТИНГ:<?php echo $arr['sum'];}?></div>
-											<input class="btn btn-outline-light col" type="submit" name="like" value="LIKE" >
+									<div class="alert alert-success text-center" role="alert">
+										<h4 class="alert-heading">
+											<?php  echo $login; ?>
+										</h4> 
+										Вы уже оставляли свой голос! 
+									</div>
+									<?php  $a=1;
+									break;}
 
-										</form>   
+								}
+								if($a!=1){	
+									if($_POST['like']){
+										$plus=1;
+										$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$plus','$id')";}
+										else {echo "ТЫ лох";}
+										if($_POST['dislike']){
+											$minus=-1;
+
+											$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$minus','$id')";}
+											$result = mysqli_query($connect, $golos) or die("Ошибка " . mysqli_error($connect));?>
+
+											<div class="alert alert-success text-center" role="alert">
+												<h4 class="alert-heading">
+													<?php  echo $login; ?>
+												</h4> 
+												Спасибо за вашу активность! 
+											</div>
+										<?php  }} ?>
+
+										<?php 
+										$rating = mysqli_query($connect,"SELECT SUM(`sum`) as sum FROM `rating` WHERE $id=`article_id`")or die(mysqli_error());	
+										while($arr_rating = mysqli_fetch_assoc($rating)){
+											?>
+
+											<form action="" method="post" class="row p-3">
+												<input class="btn btn-outline-dark col" type="submit" name="dislike" value="DISLIKE">
+												<div class="display-5 text-center alert alert-info m-3" role="alert">
+													ТЕКУЩИЙ РЕЙТИНГ:
+													<?php echo $arr_rating['sum'];?>													
+												</div>
+												<input class="btn btn-outline-light col" type="submit" name="like" value="LIKE" >
+											</form>   
+										<?php }} ?>
+									</div>
+								</div>
+
+
+								<div>
+
+									<?php
+									$id=$_GET['page'];
+									$data=date("Y-m-d H:i:s", (time()-60*60));
+
+									if($user_id!=0){
+										if(isset($_POST['comment'])){
+    								// экранирования символов для mysql
+											$comment = htmlentities(mysqli_real_escape_string($connect, $_POST['comment']));
+											$add_comment =mysqli_query($connect,"INSERT INTO  comment VALUES(NULL,'$comment','$data','$id' ,'$user_id')") or die("Ошибка " . mysqli_error($connect));}
+											?>
+
+
+											<div>
+												<form action="" method="post" accept-charset="utf-8" >
+													<div class="m-2">
+														<input class="form-control form-control-lg rounded " type="text" placeholder="Введите ваш комментраий" name="comment">
+													</div>
+													<div class="container">
+														
+													</div>
+													<div class="row">
+														
+													</div>
+													<div class="m-2">
+														<input class="btn btn-primary p-1 text-center col-12" type="submit" value="Добавить комментарий">
+													</div>
+
+												</form>
+											</div>
+
+										<?php } 
+										else { ?>
+											<div class="alert alert-success text-center" role="alert">
+												<h4 class="alert-heading">
+													<?php  echo $login;?> 
+												</h4> 
+												Войдите на сайт для комментирования 
+											</div>
+										<?php  } ?>
+
+
+
+
+										<?php 
+										$comment = mysqli_query($connect,"SELECT * FROM `comment` JOIN `user` WHERE `user`.`id`=`comment`.`user_id` ORDER BY `comment`.`id` desc")or die(mysqli_error());
+										while($arr_comment = mysqli_fetch_assoc($comment)) {
+											if($id==$arr_comment['article_id'] ){
+												?>
+												<div class="bg-info rounded  container text-light">
+													<p>
+													</p>
+													<?php  echo $arr_comment['log'];?>
+													<div class="container-fluid  h5">
+														<strong>
+															<?php  echo $arr_comment['text_comment'];?>
+														</strong>
+													</div>
+													<div class="text-right ">
+														<small>
+															<?php  echo $arr_comment['data_comment'];?>
+														</small>
+													</div>
+												</div>
+											<?php  }}?>
+										</div>
+
 									</div>
 
 
-									<?php
-
-									$id=$_GET['page'];
-									$input=$_SESSION['log'];
-									$user_id=$_SESSION['user'];
-									$data=date("Y-m-d H:i:s", (time()-60*60));
-
-
-									if(isset($_POST['comment'])){
-								// экранирования символов для mysql
-										$comment = htmlentities(mysqli_real_escape_string($connect, $_POST['comment']));
-										$query ="INSERT INTO  comment VALUES(NULL,'$comment','$data','$id' ,'$user_id')";
-								 // выполняем запрос
-										$result = mysqli_query($connect, $query) or die("Ошибка " . mysqli_error($connect)); }
-
-										?>
-										<div>
-											<form action="" method="post" >
-												<div class="m-2"><input class="form-control form-control-lg rounded " type="text" placeholder="Введите ваш комментраий" name="comment"></div>
-												<div class="container"></div>
-												<div class="row"></div>
-												<div class="m-2"><input class="btn btn-primary p-1 text-center col-12" type="submit" value="Добавить комментарий"></div>
-
-											</form>
-										</div>
-										<?php 
-
-
-										$res = mysqli_query($connect,"SELECT * FROM `comment` JOIN `user` WHERE `user`.`id`=`comment`.`user_id` ORDER BY `comment`.`id` asc")or die(mysqli_error());
-
-										while($row = mysqli_fetch_assoc($res)) {
-											if($id==$row['article_id'] ){
-
-												echo "<div class=\"bg-info rounded  container text-white  \">";
-												echo "<p></p>";
-												echo "<div class=\"container-fluid \"></div>";
-												echo "<div class=\"\"></div>";
-												echo $row['log'];
-												echo "<div class=\"container-fluid  h4\">";	
-												echo $row['text_comment'];
-												echo "</div>";
-												echo "<div class=\"text-right\">";
-
-												echo $row['data_comment'];
-												echo "</div>";
-												echo "</div>";}}
-												?>
-
-
-												<?php include "footer.php" ?>
+									<?php include "footer.php" ?>
