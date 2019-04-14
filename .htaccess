@@ -3,10 +3,8 @@ Options FollowSymLinks
  RewriteRule ^article-([0-9]+)$ article.php?page=$1
 RewriteRule ^spisok$ spisok.php [NC]
 RewriteRule ^main$ main.php [NC]
+RewriteRule ^localhost/.* http://www.coctailbar.com
 AddDefaultCharset utf-8 
-<IfModule mod_charset.c>
-CharsetSourceEnc utf-8
-CharsetDefault utf-8
-</IfModule>
+
 
 
