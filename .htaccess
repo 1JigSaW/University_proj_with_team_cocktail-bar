@@ -1,1 +1,10 @@
-﻿AddDefaultCharset utf-8 
+﻿RewriteEngine On
+Options FollowSymLinks
+RewriteRule ^spisok$ spisok.php [NC]
+AddDefaultCharset utf-8 
+<IfModule mod_charset.c>
+CharsetSourceEnc utf-8
+CharsetDefault utf-8
+</IfModule>
+
+
