@@ -6,6 +6,7 @@ RewriteRule ^main$ main.php [NC]
 RewriteRule ^localhost/.* http://www.coctailbar.com
 Redirect /article-0$ http://localhost/article-1$
 ErrorDocument 404 /404.html
+RewriteRule ^error$ 404.html [NC]
 AddDefaultCharset utf-8 
 
 
