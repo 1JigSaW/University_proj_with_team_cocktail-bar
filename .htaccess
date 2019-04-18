@@ -1,9 +1,10 @@
 ﻿RewriteEngine On
 Options FollowSymLinks
- RewriteRule ^article-([0-9]+)$ article.php?page=$1
+RewriteRule ^article-([0-9]+)$ article.php?page=$1
 RewriteRule ^spisok$ spisok.php [NC]
 RewriteRule ^main$ main.php [NC]
 RewriteRule ^localhost/.* http://www.coctailbar.com
+ErrorDocument 404 /404.html
 AddDefaultCharset utf-8 
 
 
