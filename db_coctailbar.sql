@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 22 2019 г., 01:48
+-- Время создания: Апр 22 2019 г., 01:54
 -- Версия сервера: 10.1.38-MariaDB
 -- Версия PHP: 7.3.3
 
@@ -188,7 +188,12 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `title_product`, `type`) VALUES
-(1, 'Виски', 'л');
+(1, 'Виски', 'drink'),
+(2, 'Водка', 'drink'),
+(3, 'Пиво', 'drink'),
+(4, 'Лимон', 'product'),
+(5, 'Лайм', 'product'),
+(6, 'Лёд', 'product');
 
 -- --------------------------------------------------------
 
@@ -428,7 +433,7 @@ ALTER TABLE `popular`
 -- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `rating`
