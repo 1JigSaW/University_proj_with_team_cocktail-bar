@@ -32,7 +32,7 @@
 						<select id="select01" name="drink" class="form-control">
 							<option value="0">Выберите</option>
 							<?php
-							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `unit` = 'drink'");
+							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `type` = 'drink'");
 								for ($i=0; $i<mysqli_num_rows($result); $i++)
 								{
 									$titles = mysqli_fetch_assoc($result);
@@ -55,7 +55,7 @@
 						<select id="select02" name="product" class="form-control">
 							<option value="0">Выберите</option>
 							<?php
-							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `unit` = 'product'");
+							$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `type` = 'product'");
 								for ($i=0; $i<mysqli_num_rows($result); $i++)
 								{
 									$titles = mysqli_fetch_assoc($result);
