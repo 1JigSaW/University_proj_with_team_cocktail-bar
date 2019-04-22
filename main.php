@@ -4,11 +4,9 @@
 <div class="container">
 
 	<div class="row">
-		<div class="col"></div>
-		<div class="col-7">
-			<h1 class="display-3 text-center ">Подбор коктейля</h1>
+		<div class="col">
+			<h1 class="display-3 text-center">Подбор коктейля</h1>
 		</div>
-		<div class="col"></div>
 	</div>
 
 	<div class="row mt-2">
