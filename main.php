@@ -5,15 +5,16 @@
 
 	<div class="row">
 		<div class="col">
-			<h1 class="display-3 text-center">Подбор коктейля</h1>
+			<h1 class="display-3 d-none d-lg-block text-center">Подбор коктейля</h1>
+			<h1 class="display-4 d-lg-none text-center">Подбор коктейля</h1>
 		</div>
 	</div>
 
 	<div class="row mt-2">
 		<div class="col">
-			<h2 class="display-5">Имеющиеся ингридиенты:</h2>
+			<h2 class="display-5 d-none d-md-block">Имеющиеся ингридиенты:</h2>
 		</div>
-		<div class="col-6">
+		<div class="col-12 col-md-6">
 			<button type="button submit" name="search" form="isearch" class="btn border-white bg-primary rounded text-white btn-lg btn-block">Подобрать</button>
 		</div>
 	</div>
@@ -26,7 +27,8 @@
 			<div class="control-group">
 				<div class="row">
 					<div class="col text-center">
-						<label class="control-label display-4" for="select01">НАПИТКИ</label>
+						<label class="control-label display-4 d-none d-lg-block" for="select01">НАПИТКИ</label>
+						<label class="control-label display-5 d-lg-none" for="select01">НАПИТКИ</label>
 						<select id="select01" name="drink" class="form-control">
 							<option value="0">Выберите</option>
 							<?php
@@ -49,7 +51,8 @@
 						</select>
 					</div>
 					<div class="col text-center">
-						<label class="control-label display-4" for="select02">ПРОДУКТЫ</label>
+						<label class="control-label display-4 d-none d-lg-block" for="select02">ПРОДУКТЫ</label>
+						<label class="control-label display-5 d-lg-none" for="select02">ПРОДУКТЫ</label>
 						<select id="select02" name="product" class="form-control">
 							<option value="0">Выберите</option>
 							<?php
