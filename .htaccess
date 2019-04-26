@@ -2,6 +2,8 @@
 Options FollowSymLinks
 RewriteRule ^article_([0-9]+)$ article.php?page=$1
 RewriteRule ^spisok$ spisok.php [NC]
+RewriteRule ^registration$ registration.php [NC]
+RewriteRule ^login$ login.php [NC]
 RewriteRule ^$ main.php [NC]
 RewriteRule ^about$ about.php [NC]
 RewriteRule ^localhost/.* http://www.coctailbar.com
