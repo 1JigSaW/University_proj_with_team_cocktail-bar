@@ -1,6 +1,6 @@
 ﻿RewriteEngine On
 Options FollowSymLinks
-RewriteRule ^article-([0-9]+)$ article.php?page=$1
+RewriteRule ^article_([0-9]+)$ article.php?page=$1
 RewriteRule ^spisok$ spisok.php [NC]
 RewriteRule ^$ main.php [NC]
 RewriteRule ^about$ about.php [NC]
