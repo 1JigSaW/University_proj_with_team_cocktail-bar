@@ -54,8 +54,8 @@ if(@$_GET['do'] == 'logout')
 					<div class="container text-white text-center d-none d-sm-none d-md-block p-0 m-0">
 					<?php
 						if (!@$_SESSION['user']){
-							echo '<a href="/login.php" role="button" class="btn  border-white rounded text-white mr-1" style="">Вход</a>';
-							echo '<a href="/registration.php" role="button" class="btn  border-white rounded text-white">Регистрация</a>';}
+							echo '<a href="/login" role="button" class="btn  border-white rounded text-white mr-1" style="">Вход</a>';
+							echo '<a href="/registration" role="button" class="btn  border-white rounded text-white">Регистрация</a>';}
 						else
 							{if (isset($_SERVER['QUERY_STRING']))
 								$request=$_SERVER['QUERY_STRING']."&";
@@ -69,7 +69,7 @@ if(@$_GET['do'] == 'logout')
 					<div class="d-md-none p-0 m-auto">
 						<?php
 						if (!@$_SESSION['user'])
-							echo '<a href="/login.php" role="button" class="p-0 m-0 btn btn-lg mr-1 text-white"><span class="oi oi-account-login"></span></a>';
+							echo '<a href="/login" role="button" class="p-0 m-0 btn btn-lg mr-1 text-white"><span class="oi oi-account-login"></span></a>';
 						else
 							echo $logout;
 
