@@ -81,7 +81,10 @@
 										if($_POST['dislike']){
 											$minus=-1;
 											$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$minus','$id')";}
-											$result = mysqli_query($connect, $golos) or die("Ошибка " . mysqli_error($connect));?>
+											$result = mysqli_query($connect, $golos) or die("Ошибка " . mysqli_error($connect));
+											include "popular.php";
+											set_popular($connect)
+											?>
 
 											<div class="alert alert-success text-center" role="alert">
 												<h4 class="alert-heading">
