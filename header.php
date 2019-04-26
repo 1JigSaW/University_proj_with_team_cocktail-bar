@@ -31,7 +31,7 @@ if(@$_GET['do'] == 'logout')
 			<div class="row">
 				<div class="col my-auto p-0 m-0">
 					<div class="btn-group p-1 m-0 float-right">
-						<a href="/main" role="button" class="btn btn-lg text-white border"><span class="oi oi-home"></span></a>
+						<a href="/" role="button" class="btn btn-lg text-white border"><span class="oi oi-home"></span></a>
 						<a href="/spisok" role="button" class="btn btn-lg bg-secondary text-white border mx-1">Статьи</a>
 						<div class="d-none d-sm-block">
 							<a href="/about" role="button" class="btn btn-lg bg-secondary text-white border">О нас</a>
