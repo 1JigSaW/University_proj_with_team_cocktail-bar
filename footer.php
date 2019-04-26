@@ -37,7 +37,7 @@
 			</div>
 			</div>
 			<div class="col-auto col-sm-2">
-				<a class="p-0 float-left" href="#"><img src="img/inst.png"></a>
+				<a class="p-0 float-left" href="https://instagram.com/cocktailbar"><img src="img/inst.png"></a>
 			</div>			
 		</div>		
 	</footer>
