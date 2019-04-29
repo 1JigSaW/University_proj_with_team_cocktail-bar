@@ -150,7 +150,7 @@
 										<button type='button submit' form='isearch' name='remove_drink' value='" . $_SESSION['added_drink'][$i] . "' class='btn btn-primary btn-block'>" . $title['title_product'] . "</button>
 									</div>
 									<div class='col-1 text-center d-none d-sm-block'>
-										<button type='button submit' form='isearch' name='remove_drink' value='" . $_SESSION['added_drink'][$i] . "' class='btn bg-danger text-white'><span class='oi oi-x'></span></button>'
+										<button type='button submit' form='isearch' name='remove_drink' value='" . $_SESSION['added_drink'][$i] . "' class='btn bg-danger text-white'><span class='oi oi-x'></span></button>
 									</div>
 									<div class='col-1 d-none d-sm-block d-md-block d-lg-none'></div>
 									<div class='col-6'>";
