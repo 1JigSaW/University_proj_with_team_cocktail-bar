@@ -10,11 +10,11 @@ if (!empty($_POST["login"]) && !empty($_POST["password"]))
 		$row=mysqli_fetch_assoc($result);
 		$_SESSION['user'] = $row['id'];
 		$_SESSION['log'] = $row['log'];
-		header("Location: main.php");
+		header("Location: /");
 	}
 	else
 	{
-		header("Location: login.php");
+		header("Location: login");
 		exit;
 	}
 }
