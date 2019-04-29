@@ -96,7 +96,8 @@ if (isset($_SESSION['added_product']))
 
 if(isset($_POST['add']) || isset($_POST['remove_drink']) || isset($_POST['remove_product']))
 {
-	header("Location: main.php?drink=" . $ndrink . "&product=" . $nproduct);
+	$string = "Location: main.php?drink=" . $ndrink . "&product=" . $nproduct;
+	header($string);
 	exit;
 }
 
