@@ -1,32 +1,44 @@
 <?php include "header.php" ?>
 <?php include "connect_bd.php" ?>
-
-
-	<?php  $id=$_GET['page'];   
-	$cocktail = mysqli_query($connect,"SELECT * FROM `cocktail` WHERE $id=`id` ")or die(mysqli_error()); 
-	while($arr_cocktail = mysqli_fetch_assoc($cocktail)){ 						  ?>
-		
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		<?php   $id=$_GET['page'];
+		$cocktail = mysqli_query($connect,"SELECT * FROM `cocktail` WHERE $id=`id` ")or die(mysqli_error()); 
+		while($arr_cocktail = mysqli_fetch_assoc($cocktail)){
+			echo $arr_cocktail['title_coctail'];  ?></title>
+			<style>
+			
+		</style>
+	</head>
+	<body>
 
 		<div class="container  bg-white rounded">
-			<div class="container bg-white rounded ">
-				<h1 class="display-4 text-center p-2">
-					<?php echo $arr_cocktail['title_coctail'];?>
-				</h1> 
-			</div> 
-			<div class="row  justify-content-between">																				  
-				<div class="alert alert-danger lead col-5 text-center rounded" role="alert">						
-					<small>
-						Крепость: <?php  echo $arr_cocktail['fortress'];?>
-					</small>
-				</div>   
-
-				<div class="alert alert-info lead col-5 text-center rounded" role="alert">	
-					<small>
-						<?php echo $arr_cocktail['category'];}?>
-					</small>
+			<div class="container">
+				<div class="container bg-white rounded ">
+					<h1 class="display-4">
+						<?php echo $arr_cocktail['title_coctail'];?>
+					</h1> 
 				</div>
 			</div>
-		</div>   
+			<div class="container ">																				  
+				<div class="container rounded text-right bg-danger">						
+					<h5><font color="white">
+						КРЕПОСТЬ: <?php  echo $arr_cocktail['fortress'];?>
+					</font></h5>
+				</div>   
+			</div>
+			<div class="container">
+				<div class=" container bg-success rounded text-left">	
+					<h5><font color="white">
+						КАТЕГОРИЯ:<?php echo $arr_cocktail['category'];}?>
+					</font></h5>
+				</div>
+			</div>
+
+		</div>
+
 
 		<div class="container">
 
@@ -40,7 +52,7 @@
 		</div>
 
 
-		<div class="container-fluid h5 bg-info rounded mybtn text-white">
+		<div class="container-fluid h5 bg-light rounded mybtn text-secondary">
 			<?php 
 			$content = mysqli_query($connect,"SELECT `article_id`,`text_article`,`links` FROM `content` WHERE $id=`article_id`")or die(mysqli_error());
 			while($arr_content = mysqli_fetch_assoc($content)){?>
@@ -48,7 +60,7 @@
 					<?php  echo $arr_content['text_article'];?>				
 				</p>
 				<div class="container-fluid text-right ">
-					<a href="<?php echo $arr_content['links'];?>" class="h4 text-white">
+					<a href="<?php echo $arr_content['links'];?>" class="h4 text-secondary">
 						ССЫЛКА
 					</a>
 				</div>
@@ -63,17 +75,17 @@
 							$rating=mysqli_query($connect,"SELECT  `user_id`,`article_id` FROM `rating`")or die(mysqli_error());
 							while($arr_rating = mysqli_fetch_assoc($rating)){
 								if($user_id==$arr_rating['user_id'] && $id==$arr_rating['article_id'] ){ ?>   <!-- Проверяет, не голосовал ли этот пользователь на этой статье -->
-																										
-									<div class="alert alert-success text-center" role="alert">
-										<h4 class="alert-heading">
-											<?php  echo $login; ?>
-										</h4> 
-										Вы уже оставляли свой голос! 
-									</div>
-									<?php  $a=true;
-									break;}
 
-								}
+								<div class="alert alert-success text-center" role="alert">
+									<h4 class="alert-heading">
+										<?php  echo $login; ?>
+									</h4> 
+									Вы уже оставляли свой голос! 
+								</div>
+								<?php  $a=true;
+								break;}
+
+							}
 								if($a==false){	//Пользователь не голосовал
 									if($_POST['like']){
 										$plus=1;
@@ -103,12 +115,13 @@
 											?>
 
 											<form action="" method="post" class="row p-3">
-												<input class="btn btn-outline-dark col" type="submit" name="dislike" value="DISLIKE">
+												<input class="btn btn-outline-danger col" type="submit" name="dislike" value="DISLIKE">
 												<div class="display-5 text-center alert alert-info m-3" role="alert">
 													ТЕКУЩИЙ РЕЙТИНГ:
+											
 													<?php echo $arr_rating['sum'];?>													
 												</div>
-												<input class="btn btn-outline-light col" type="submit" name="like" value="LIKE">
+												<input class="btn btn-outline-success col" type="submit" name="like" value="LIKE">
 											</form>
 
 										<?php }} ?>
@@ -166,8 +179,10 @@
 											<div class="bg-info rounded  container text-light">
 												<p>
 												</p>
-												<?php  echo $arr_comment['log'];?>
-												<div class="container-fluid  h5">
+												<div class="text-warning m-1">
+													<h5><?php  echo $arr_comment['log'];?></h5>
+												</div>
+												<div class="container-fluid h5">
 													<strong>
 														<?php  echo $arr_comment['text_comment'];?>
 													</strong>
@@ -185,3 +200,5 @@
 
 
 									<?php include "footer.php" ?>
+								</body>
+								</html>
