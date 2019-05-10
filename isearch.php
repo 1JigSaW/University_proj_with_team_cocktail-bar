@@ -127,6 +127,59 @@ if($_POST['product'])
 echo $_POST['product'];
 else
 echo "[ПРОДУКТ НЕ БЫЛ ВЫБРАН]";
-
 ?>
+
+<div class="container">
+	<div class="row mt-2 text-center">
+		<div class="col-2">
+			<button type="button" class="btn border-white bg-primary rounded text-white btn-lg btn-block">Назад</button>
+		</div>
+		<div class="col-8">
+			<h1 class="display-3 d-none d-lg-block text-center">Результаты поиска</h1>
+		</div>
+		<div class="col-2"></div>
+	</div>
+	<div class="row mt-2 text-center">
+		<div class="col-6"></div>
+		<div class="col-2">
+			Сортировать по:
+		</div>
+		<div class="col-2">
+			<button type="button" class="btn border-white bg-primary rounded text-white btn-lg btn-block">Совпадению</button>
+		</div>
+		<div class="col-2">
+			<button type="button" class="btn border-white bg-primary rounded text-white btn-lg btn-block">Крепости</button>
+		</div>
+	</div>
+	<div class="row mt-2 text-center">
+		<div class="col">
+			ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+		</div>
+	</div>
+	<div class="row mt-2 text-center">
+		<div class="col-9">
+			texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+		</div>
+		<div class="col-3">
+			texttexttexttexttexttexttexttext
+		</div>
+	</div>
+	<div class="row mt-2 text-center">
+		<div class="col-9">
+			texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+		</div>
+		<div class="col-3">
+			texttexttexttexttexttexttexttext
+		</div>
+	</div>
+	<div class="row mt-2 text-center">
+		<div class="col-9">
+			texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+		</div>
+		<div class="col-3">
+			texttexttexttexttexttexttexttext
+		</div>
+	</div>
+</div>
+
 <?php include "footer.php";?>
