@@ -1,8 +1,6 @@
-<?php include "header.php";?>
 <?php include "connect_bd.php";?>
-
 <?php
-
+session_start(); //нужно здесь, потому что включение header'a было перемещено ниже, а сессия нужна
 if(isset($_POST['add']))
 {
 	if($_POST['add'] == "drink")
@@ -105,8 +103,9 @@ if(isset($_POST['search']) && !$ndrink && !$nproduct)
 	header("Location: /?error=choose");
 	exit;
 }
-
-
+?>
+<?php include "header.php"; //включается только тут, потому что иначе он мешает функции header()?>
+<?php
 // временное  VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 print_r($_POST);
 echo "<br>";
@@ -130,5 +129,4 @@ else
 echo "[ПРОДУКТ НЕ БЫЛ ВЫБРАН]";
 
 ?>
-
 <?php include "footer.php";?>
