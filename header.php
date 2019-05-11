@@ -9,6 +9,11 @@ if(@$_GET['do'] == 'logout')
 <!DOCTYPE html>
 <html>
 <head>
+
+	<!--Удалить, когда с цветами наиграемся-->
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<!--Удалить, когда с цветами наиграемся-->
+	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -31,10 +36,10 @@ if(@$_GET['do'] == 'logout')
 			<div class="row">
 				<div class="col my-auto p-0 m-0">
 					<div class="btn-group p-1 m-0 float-right">
-						<a href="/" role="button" class="btn btn-lg text-white border"><span class="oi oi-home"></span></a>
-						<a href="/spisok" role="button" class="btn btn-lg bg-secondary text-white border mx-1">Статьи</a>
+						<a href="/" role="button" class="btn btn-lg bg-primary text-white border"><span class="oi oi-home"></span></a>
+						<a href="/spisok" role="button" class="btn btn-lg bg-primary text-white border mx-1">Статьи</a>
 						<div class="d-none d-sm-block">
-							<a href="/about" role="button" class="btn btn-lg bg-secondary text-white border">О нас</a>
+							<a href="/about" role="button" class="btn btn-lg bg-primary text-white border">О нас</a>
 						</div>
 						<div class="d-sm-none">
 							<a href="/about" role="button" class="btn btn-lg text-white px-3 py-2"><span class="oi oi-info"></span></a>
