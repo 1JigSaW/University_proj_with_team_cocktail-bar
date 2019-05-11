@@ -105,6 +105,7 @@ if(isset($_POST['search']) && !$ndrink && !$nproduct)
 }
 ?>
 <?php include "header.php"; //включается только тут, потому что иначе он мешает функции header()?>
+
 <?php
 // временное  VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 print_r($_POST);
@@ -127,57 +128,97 @@ if($_POST['product'])
 echo $_POST['product'];
 else
 echo "[ПРОДУКТ НЕ БЫЛ ВЫБРАН]";
+//временное  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ?>
 
 <div class="container">
 	<div class="row mt-2 text-center">
 		<div class="col-2">
-			<button type="button" class="btn border-white bg-primary rounded text-white btn-lg btn-block">Назад</button>
+			<a href="/" role="button" class="btn btn-block bg-secondary text-white border mx-1 mt-4">Назад</a>
 		</div>
 		<div class="col-8">
-			<h1 class="display-3 d-none d-lg-block text-center">Результаты поиска</h1>
+			<h1 class="display-3 d-none d-lg-block">Результаты поиска</h1>
 		</div>
 		<div class="col-2"></div>
 	</div>
 	<div class="row mt-2 text-center">
-		<div class="col-6"></div>
-		<div class="col-2">
-			Сортировать по:
+		<div class="col-5"></div>
+		<div class="col-3 font-size-2 mt-2">
+			<h4>Сортировать по:</h3>
 		</div>
 		<div class="col-2">
-			<button type="button" class="btn border-white bg-primary rounded text-white btn-lg btn-block">Совпадению</button>
+			<?php
+			if ($_GET['sort'] == "s")
+				$paste = "disabled";
+			else
+				$paste = "";
+			echo "<h4><a href='/isearch.php?sort=s' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Совпадению</a></h4>";
+			?>
 		</div>
 		<div class="col-2">
-			<button type="button" class="btn border-white bg-primary rounded text-white btn-lg btn-block">Крепости</button>
+			<?php
+			if ($_GET['sort'] == "k")
+					$paste = "disabled";
+				else
+					$paste = "";
+			echo "<h4><a href='/isearch.php?sort=k' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Крепости</a></h4>";
+			?>
 		</div>
 	</div>
-	<div class="row mt-2 text-center">
-		<div class="col">
-			ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+	<div class="row mt-2">
+		<div class="col-1">
+			<h3>Номер</h3>
+		</div>
+		<div class="col-6">
+			<h3>Название</h3>
+		</div>
+		<div class="col-1">
+			<h3>Креп.</h3>
+		</div>
+		<div class="col-4">
+			<h3>Совпадения</h3>
 		</div>
 	</div>
-	<div class="row mt-2 text-center">
-		<div class="col-9">
-			texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+	<div class="row mt-2">
+		<div class="col-1 text-center">
+			<h3>1.</h3>
 		</div>
-		<div class="col-3">
-			texttexttexttexttexttexttexttext
+		<div class="col-6">
+			<h3><a href="/article_1">Зеленая фея</a></h3>
 		</div>
-	</div>
-	<div class="row mt-2 text-center">
-		<div class="col-9">
-			texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+		<div class="col-1">
+			<h3>36%</h3>
 		</div>
-		<div class="col-3">
-			texttexttexttexttexttexttexttext
+		<div class="col-4">
+			<h5><p class="text-primary">Белый ром, Лёд,</p>Лимон, Абсент, Энергетик... (+5)</h5>
 		</div>
 	</div>
-	<div class="row mt-2 text-center">
-		<div class="col-9">
-			texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+	<div class="row mt-2">
+		<div class="col-1 text-center">
+			<h3>2.</h3>
 		</div>
-		<div class="col-3">
-			texttexttexttexttexttexttexttext
+		<div class="col-6">
+			<h3><a href="/article_2">Дайкири</a></h3>
+		</div>
+		<div class="col-1">
+			<h3>100%</h3>
+		</div>
+		<div class="col-4">
+			<h5><p class="text-primary">Белый ром, Лёд,</p>Лайм, Сахарный сироп</h5>
+		</div>
+	</div>
+	<div class="row mt-2">
+		<div class="col-1 text-center">
+			<h3>3.</h3>
+		</div>
+		<div class="col-6">
+			<h3><a href="###">Коктейль с длинным названием</a></h3>
+		</div>
+		<div class="col-1">
+			<h3>5%</h3>
+		</div>
+		<div class="col-4">
+			<h5><p class="text-primary">Ингридиенты, Совпавшие... (+4),</p>Прочие, Еще прочие... (+12)</h5>
 		</div>
 	</div>
 </div>
