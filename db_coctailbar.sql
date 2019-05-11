@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 26 2019 г., 22:22
--- Версия сервера: 5.5.25
--- Версия PHP: 5.3.13
+-- Время создания: Май 11 2019 г., 13:18
+-- Версия сервера: 10.1.38-MariaDB
+-- Версия PHP: 7.3.3
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- База данных: `db_coctailbar`
@@ -26,16 +28,10 @@ SET time_zone = "+00:00";
 -- Структура таблицы `article`
 --
 
-CREATE TABLE IF NOT EXISTS `article` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `cocktail_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id` (`id`),
-  KEY `id_2` (`id`),
-  KEY `cocktail_id` (`cocktail_id`),
-  KEY `cocktail_id_2` (`cocktail_id`),
-  KEY `cocktail_id_3` (`cocktail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+CREATE TABLE `article` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `cocktail_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `article`
@@ -51,14 +47,12 @@ INSERT INTO `article` (`id`, `cocktail_id`) VALUES
 -- Структура таблицы `cocktail`
 --
 
-CREATE TABLE IF NOT EXISTS `cocktail` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cocktail` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title_coctail` varchar(255) NOT NULL,
   `fortress` int(11) NOT NULL,
-  `category` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `title_coctail` (`title_coctail`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `category` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `cocktail`
@@ -74,19 +68,13 @@ INSERT INTO `cocktail` (`id`, `title_coctail`, `fortress`, `category`) VALUES
 -- Структура таблицы `comment`
 --
 
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comment` (
+  `id` int(10) UNSIGNED NOT NULL,
   `text_comment` text NOT NULL,
   `data_comment` datetime NOT NULL,
-  `article_id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `article_id` (`article_id`,`user_id`),
-  KEY `user_id` (`user_id`),
-  KEY `article_id_2` (`article_id`),
-  KEY `user_id_2` (`user_id`),
-  KEY `article_id_3` (`article_id`,`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=87 ;
+  `article_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `comment`
@@ -119,15 +107,12 @@ INSERT INTO `comment` (`id`, `text_comment`, `data_comment`, `article_id`, `user
 -- Структура таблицы `content`
 --
 
-CREATE TABLE IF NOT EXISTS `content` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `article_id` int(10) unsigned NOT NULL,
+CREATE TABLE `content` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `article_id` int(10) UNSIGNED NOT NULL,
   `text_article` text NOT NULL,
-  `links` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `article_id` (`article_id`),
-  KEY `article_id_2` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  `links` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `content`
@@ -143,11 +128,10 @@ INSERT INTO `content` (`id`, `article_id`, `text_article`, `links`) VALUES
 -- Структура таблицы `img`
 --
 
-CREATE TABLE IF NOT EXISTS `img` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `img` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+CREATE TABLE `img` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `img` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `img`
@@ -163,15 +147,11 @@ INSERT INTO `img` (`id`, `img`) VALUES
 -- Структура таблицы `ingredient`
 --
 
-CREATE TABLE IF NOT EXISTS `ingredient` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `product_id` int(10) unsigned NOT NULL,
-  `count` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `product_id_2` (`product_id`),
-  KEY `product_id_3` (`product_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE `ingredient` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `ingredient`
@@ -186,13 +166,10 @@ INSERT INTO `ingredient` (`id`, `product_id`, `count`) VALUES
 -- Структура таблицы `popular`
 --
 
-CREATE TABLE IF NOT EXISTS `popular` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `article_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `article_id` (`article_id`),
-  KEY `article_id_2` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+CREATE TABLE `popular` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `article_id` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `popular`
@@ -208,13 +185,11 @@ INSERT INTO `popular` (`id`, `article_id`) VALUES
 -- Структура таблицы `product`
 --
 
-CREATE TABLE IF NOT EXISTS `product` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `product` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title_product` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ingredient_id_2` (`title_product`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `product`
@@ -226,7 +201,15 @@ INSERT INTO `product` (`id`, `title_product`, `type`) VALUES
 (3, 'Пиво', 'drink'),
 (4, 'Лимон', 'product'),
 (5, 'Лайм', 'product'),
-(6, 'Лёд', 'product');
+(6, 'Лёд', 'product'),
+(7, 'Серебряная текила', 'drink'),
+(8, 'Абсент', 'drink'),
+(9, 'Белый ром', 'drink'),
+(10, 'Ликер блю кюрасао', 'drink'),
+(11, 'Дынный ликер', 'drink'),
+(12, 'Энергетик', 'drink'),
+(13, 'Коктейльная вишня', 'product'),
+(14, 'Сахарный сироп', 'product');
 
 -- --------------------------------------------------------
 
@@ -234,17 +217,12 @@ INSERT INTO `product` (`id`, `title_product`, `type`) VALUES
 -- Структура таблицы `rating`
 --
 
-CREATE TABLE IF NOT EXISTS `rating` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
+CREATE TABLE `rating` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
   `sum` int(11) NOT NULL,
-  `article_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `article_id` (`user_id`),
-  KEY `user_id` (`user_id`),
-  KEY `article_id_2` (`article_id`),
-  KEY `article_id_3` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+  `article_id` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `rating`
@@ -267,14 +245,11 @@ INSERT INTO `rating` (`id`, `user_id`, `sum`, `article_id`) VALUES
 -- Структура таблицы `set_img`
 --
 
-CREATE TABLE IF NOT EXISTS `set_img` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `img_id` int(10) unsigned NOT NULL,
-  `content_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `img_id` (`img_id`),
-  KEY `article_id` (`content_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+CREATE TABLE `set_img` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `img_id` int(10) UNSIGNED NOT NULL,
+  `content_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `set_img`
@@ -290,21 +265,31 @@ INSERT INTO `set_img` (`id`, `img_id`, `content_id`) VALUES
 -- Структура таблицы `set_ingredients`
 --
 
-CREATE TABLE IF NOT EXISTS `set_ingredients` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `cocktail_id` int(10) unsigned NOT NULL,
-  `ingredient_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ingredient_id` (`ingredient_id`),
-  KEY `cocktail_id` (`cocktail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE `set_ingredients` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `cocktail_id` int(10) UNSIGNED NOT NULL,
+  `ingredient_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `set_ingredients`
 --
 
 INSERT INTO `set_ingredients` (`id`, `cocktail_id`, `ingredient_id`) VALUES
-(1, 1, 1);
+(1, 1, 7),
+(2, 1, 8),
+(3, 1, 2),
+(4, 1, 9),
+(5, 1, 10),
+(6, 1, 11),
+(7, 1, 4),
+(8, 1, 12),
+(9, 1, 6),
+(10, 1, 13),
+(13, 2, 9),
+(14, 2, 14),
+(15, 2, 5),
+(16, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -312,13 +297,12 @@ INSERT INTO `set_ingredients` (`id`, `cocktail_id`, `ingredient_id`) VALUES
 -- Структура таблицы `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id` int(11) UNSIGNED NOT NULL,
   `log` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `data_born` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  `data_born` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `user`
@@ -333,6 +317,185 @@ INSERT INTO `user` (`id`, `log`, `password`, `data_born`) VALUES
 (6, 'a', 'a', '1111-01-01'),
 (7, 'b', 'b', '0001-01-01'),
 (8, 'c', 'c', '0001-01-01');
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `article`
+--
+ALTER TABLE `article`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`),
+  ADD KEY `id_2` (`id`),
+  ADD KEY `cocktail_id` (`cocktail_id`),
+  ADD KEY `cocktail_id_2` (`cocktail_id`),
+  ADD KEY `cocktail_id_3` (`cocktail_id`);
+
+--
+-- Индексы таблицы `cocktail`
+--
+ALTER TABLE `cocktail`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `title_coctail` (`title_coctail`);
+
+--
+-- Индексы таблицы `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `article_id` (`article_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `article_id_2` (`article_id`),
+  ADD KEY `user_id_2` (`user_id`),
+  ADD KEY `article_id_3` (`article_id`,`user_id`);
+
+--
+-- Индексы таблицы `content`
+--
+ALTER TABLE `content`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `article_id` (`article_id`),
+  ADD KEY `article_id_2` (`article_id`);
+
+--
+-- Индексы таблицы `img`
+--
+ALTER TABLE `img`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `ingredient`
+--
+ALTER TABLE `ingredient`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `product_id_2` (`product_id`),
+  ADD KEY `product_id_3` (`product_id`);
+
+--
+-- Индексы таблицы `popular`
+--
+ALTER TABLE `popular`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `article_id` (`article_id`),
+  ADD KEY `article_id_2` (`article_id`);
+
+--
+-- Индексы таблицы `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ingredient_id_2` (`title_product`);
+
+--
+-- Индексы таблицы `rating`
+--
+ALTER TABLE `rating`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `article_id` (`user_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `article_id_2` (`article_id`),
+  ADD KEY `article_id_3` (`article_id`);
+
+--
+-- Индексы таблицы `set_img`
+--
+ALTER TABLE `set_img`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `img_id` (`img_id`),
+  ADD KEY `article_id` (`content_id`);
+
+--
+-- Индексы таблицы `set_ingredients`
+--
+ALTER TABLE `set_ingredients`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ingredient_id` (`ingredient_id`),
+  ADD KEY `cocktail_id` (`cocktail_id`);
+
+--
+-- Индексы таблицы `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `article`
+--
+ALTER TABLE `article`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `cocktail`
+--
+ALTER TABLE `cocktail`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+
+--
+-- AUTO_INCREMENT для таблицы `content`
+--
+ALTER TABLE `content`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `img`
+--
+ALTER TABLE `img`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `ingredient`
+--
+ALTER TABLE `ingredient`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `popular`
+--
+ALTER TABLE `popular`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT для таблицы `rating`
+--
+ALTER TABLE `rating`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT для таблицы `set_img`
+--
+ALTER TABLE `set_img`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `set_ingredients`
+--
+ALTER TABLE `set_ingredients`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT для таблицы `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -388,7 +551,8 @@ ALTER TABLE `set_img`
 --
 ALTER TABLE `set_ingredients`
   ADD CONSTRAINT `set_ingredients_ibfk_3` FOREIGN KEY (`cocktail_id`) REFERENCES `cocktail` (`id`),
-  ADD CONSTRAINT `set_ingredients_ibfk_4` FOREIGN KEY (`ingredient_id`) REFERENCES `ingredient` (`id`);
+  ADD CONSTRAINT `set_ingredients_ibfk_4` FOREIGN KEY (`ingredient_id`) REFERENCES `product` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
