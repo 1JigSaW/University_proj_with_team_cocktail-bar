@@ -2016,7 +2016,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 select.form-control:focus::-ms-value {
-  color: #495057;
+  color: #29A5A5;
   background-color: #fff;
 }
 
@@ -6075,13 +6075,13 @@ button.close {
 }
 
 .bg-primary {
-  background-color: #007bff !important;
+  background-color: #004B4B !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-  background-color: #0062cc !important;
+  background-color: #0E3838 !important;
 }
 
 .bg-secondary {
@@ -6095,17 +6095,17 @@ button.bg-secondary:focus {
 }
 
 .bg-success {
-  background-color: #28a745 !important;
+  background-color: #134B13 !important;
 }
 
 a.bg-success:hover, a.bg-success:focus,
 button.bg-success:hover,
 button.bg-success:focus {
-  background-color: #1e7e34 !important;
+  background-color: #004100 !important;
 }
 
 .bg-info {
-  background-color: #17a2b8 !important;
+  background-color: #0E3838 !important; 
 }
 
 a.bg-info:hover, a.bg-info:focus,
