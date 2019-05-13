@@ -140,6 +140,63 @@ echo "[ПРОДУКТ НЕ БЫЛ ВЫБРАН]";
 	</div>
 	<div class="col-2"></div>
 </div>
+
+<?php
+//получаем строки из базы данных, где есть хотя бы одно совпадение с добавленными ингридиентами, если таких нет, то выводим ошибку
+$added = array_merge($_SESSION['added_drink'], $_SESSION['added_product']);
+$query = "SELECT * FROM `set_ingredients` WHERE `ingredient_id` = " . $added['0'];
+foreach ($added as $item)
+	$query = $query . " OR `ingredient_id` = " . $item;
+$query = $query . " ORDER BY `set_ingredients`.`cocktail_id` ASC";
+$result = mysqli_query($connect, $query);
+$matches = mysqli_num_rows($result);
+if (!$matches)
+{
+	echo "
+		<div class='row mt-2'>
+			<div class='col'>
+				<div class='alert alert-danger text-center' role='alert'>По выбранным ингридиентам не было найдено ни одного коктейля</div>
+			</div>
+		</div>
+		 ";
+	die;
+}
+
+//подсчитываем количество совпадений с ингридиентами, а также записываем id совпавших ингридиентов и id коктейля в общий массив для вывода
+$output = array();
+$any_match = mysqli_fetch_assoc($result);
+$tmp = $any_match['cocktail_id'];
+$number = 0;
+$output[$number] = array(
+	'id' => $any_match['cocktail_id'], 
+	'matches' => 1,
+	'matched' => array(0 => $any_match['ingredient_id']),
+	// также в этом массиве будут поля для крепости и несовпавших ингридиентов 'fortress' => int, 'other' => array()
+);
+for ($i=1; $i<$matches; $i++)
+{
+	$any_match = mysqli_fetch_assoc($result);
+	if ($any_match['cocktail_id'] == $tmp)
+	{
+		$output[$number]['matches']++;
+		$output[$number]['matched'][] = $any_match['ingredient_id'];
+	}
+	else
+	{
+		$tmp = $any_match['cocktail_id'];
+		$output[++$number] = array('id' => $any_match['cocktail_id'], 'matches' => 1, 'matched' => array(0 => $any_match['ingredient_id']));
+	}
+}
+
+
+//временное VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+print_r($added); echo "<br><br><br>";
+echo $query; echo "<br><br><br>";
+print_r($any_match); echo "<br><br><br>";
+print_r($output); echo "<br><br><br>";
+//временное ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+?>
+
 <div class="row mt-2 text-center">
 	<div class="col-5"></div>
 	<div class="col-3 font-size-2 mt-2">
@@ -164,6 +221,7 @@ echo "[ПРОДУКТ НЕ БЫЛ ВЫБРАН]";
 		?>
 	</div>
 </div>
+
 <div class="row mt-2">
 	<div class="col-1">
 		<h3>Номер</h3>
