@@ -17,7 +17,7 @@
 	</div>
 </div>
 
-<form id="isearch" action = "isearch.php" method = "post">
+<form id="isearch" action = "isearch.php?sort=s" method = "post">
 	<fieldset>
 		<div class="control-group">
 			<div class="row mt-4">
@@ -27,6 +27,7 @@
 					<select id="select01" name="drink" class="form-control">
 						<option value="0">Выберите</option>
 						<?php
+						//вывод всех напитков из базы данных
 						$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `type` = 'drink'");
 							for ($i=0; $i<mysqli_num_rows($result); $i++)
 							{
@@ -51,6 +52,7 @@
 					<select id="select02" name="product" class="form-control">
 						<option value="0">Выберите</option>
 						<?php
+						//вывод всех продуктов из базы данных
 						$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `type` = 'product'");
 							for ($i=0; $i<mysqli_num_rows($result); $i++)
 							{
@@ -81,6 +83,7 @@
 			</div>
 
 			<?php
+			//подсчет и вывод уже добавленных напитков и продуктов, а также вывод ошибок
 				$i = 0;
 				if(isset($_GET['drink']) && isset($_GET['product']))
 				{
