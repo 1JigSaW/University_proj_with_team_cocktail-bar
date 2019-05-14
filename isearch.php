@@ -170,6 +170,7 @@ $number = 0;
 $output[$number] = array(
 	'id' => $any_match['cocktail_id'], 
 	'matches' => 1,
+	'fortress' => 0,
 	'matched' => array(0 => $any_match['ingredient_id']),
 	'other' => array(),
 );
@@ -184,7 +185,7 @@ for ($i=1; $i<$matches; $i++)
 	else
 	{
 		$tmp = $any_match['cocktail_id'];
-		$output[++$number] = array('id' => $any_match['cocktail_id'], 'matches' => 1, 'matched' => array(0 => $any_match['ingredient_id']), 'other' => array());
+		$output[++$number] = array('id' => $any_match['cocktail_id'], 'matches' => 1, 'fortress' => 0, 'matched' => array(0 => $any_match['ingredient_id']), 'other' => array());
 	}
 }
 
@@ -211,11 +212,30 @@ for ($i=0; $i<$others; $i++)
 				$output[$key]['other'][] = $other['ingredient_id'];
 }
 
+//записываем данные о крепости коктейля в массив вывода
+foreach ($output as $key => $cocktail)
+{
+	$result = mysqli_query($connect, "SELECT * FROM `cocktail` WHERE `id` = " . $cocktail['id']);
+	$recieved = mysqli_fetch_assoc($result);
+	$output[$key]['fortress'] = $recieved['fortress'];
+}
+
+//сортируем массив перед выводом
+if ($_GET['sort'] == 's')
+{
+	
+}
+if ($_GET['sort'] == 'k')
+{
+
+}
+
 //временное VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 print_r($added); echo "<br><br><br>";
 echo $query; echo "<br><br><br>";
 print_r($any_match); echo "<br><br><br>";
 print_r($output); echo "<br><br><br>";
+print_r($recieved); echo "<br><br><br>";
 //временное ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ?>
 
