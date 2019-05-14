@@ -220,14 +220,33 @@ foreach ($output as $key => $cocktail)
 	$output[$key]['fortress'] = $recieved['fortress'];
 }
 
+//подсчитаем количество коктейлей, попавших в массив вывода
+$count = 0;
+foreach ($output as $value)
+	$count++;
+
 //сортируем массив перед выводом
 if ($_GET['sort'] == 's')
 {
-	
+	for ($j=0; $j<$count; $j++)
+		for ($i=0; $i<$count-$j; $i++)
+			if (isset($output[$i+1]) && $output[$i]['matches'] < $output[$i+1]['matches'])
+			{
+				$tmp = $output[$i];
+				$output[$i] = $output[$i+1];
+				$output[$i+1] = $tmp;
+			}
 }
 if ($_GET['sort'] == 'k')
 {
-
+	for ($j=0; $j<$count; $j++)
+		for ($i=0; $i<$count-$j; $i++)
+			if (isset($output[$i+1]) && $output[$i]['fortress'] < $output[$i+1]['fortress'])
+			{
+				$tmp = $output[$i];
+				$output[$i] = $output[$i+1];
+				$output[$i+1] = $tmp;
+			}
 }
 
 //временное VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
@@ -236,6 +255,7 @@ echo $query; echo "<br><br><br>";
 print_r($any_match); echo "<br><br><br>";
 print_r($output); echo "<br><br><br>";
 print_r($recieved); echo "<br><br><br>";
+echo $count; echo "<br><br><br>";
 //временное ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ?>
 
