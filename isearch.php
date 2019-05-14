@@ -171,7 +171,7 @@ $output[$number] = array(
 	'id' => $any_match['cocktail_id'], 
 	'matches' => 1,
 	'matched' => array(0 => $any_match['ingredient_id']),
-	// также в этом массиве будут поля для крепости и несовпавших ингридиентов 'fortress' => int, 'other' => array()
+	'other' => array(),
 );
 for ($i=1; $i<$matches; $i++)
 {
@@ -184,10 +184,32 @@ for ($i=1; $i<$matches; $i++)
 	else
 	{
 		$tmp = $any_match['cocktail_id'];
-		$output[++$number] = array('id' => $any_match['cocktail_id'], 'matches' => 1, 'matched' => array(0 => $any_match['ingredient_id']));
+		$output[++$number] = array('id' => $any_match['cocktail_id'], 'matches' => 1, 'matched' => array(0 => $any_match['ingredient_id']), 'other' => array());
 	}
 }
 
+//добавляем в массив вывода прочие несовпавшие ингридиенты, соответствующие выводимым коктейлям
+$query = "SELECT * FROM `set_ingredients` WHERE `cocktail_id` = " . $output[0]['id'];
+foreach ($output as $value)
+	$query = $query . " OR `cocktail_id` = " . $value['id'];
+$result = mysqli_query($connect, $query);
+$others = mysqli_num_rows($result);
+for ($i=0; $i<$others; $i++)
+{
+	$flag = 1;
+	$other = mysqli_fetch_assoc($result);
+	foreach ($output as $value)
+		foreach ($value['matched'] as $already)
+			if ($other['ingredient_id'] == $already)
+				{
+					$flag = 0;
+					break;
+				}
+	if ($flag)
+		foreach ($output as $key => $value)
+			if ($value['id'] == $other['cocktail_id'])
+				$output[$key]['other'][] = $other['ingredient_id'];
+}
 
 //временное VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
 print_r($added); echo "<br><br><br>";
