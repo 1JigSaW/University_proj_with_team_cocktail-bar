@@ -143,7 +143,12 @@ echo "[ПРОДУКТ НЕ БЫЛ ВЫБРАН]";
 
 <?php
 //получаем строки из базы данных, где есть хотя бы одно совпадение с добавленными ингридиентами, если таких нет, то выводим ошибку
-$added = array_merge($_SESSION['added_drink'], $_SESSION['added_product']);
+if (isset($_SESSION['added_drink']) && isset($_SESSION['added_product']))
+	$added = array_merge($_SESSION['added_drink'], $_SESSION['added_product']);
+elseif (isset($_SESSION['added_drink']) && !isset($_SESSION['added_product']))
+	$added = $_SESSION['added_drink'];
+elseif (!isset($_SESSION['added_drink']) && isset($_SESSION['added_product']))
+	$added = $_SESSION['added_product'];
 $query = "SELECT * FROM `set_ingredients` WHERE `ingredient_id` = " . $added['0'];
 foreach ($added as $item)
 	$query = $query . " OR `ingredient_id` = " . $item;
