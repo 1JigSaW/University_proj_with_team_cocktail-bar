@@ -173,7 +173,8 @@ $any_match = mysqli_fetch_assoc($result);
 $tmp = $any_match['cocktail_id'];
 $number = 0;
 $output[$number] = array(
-	'id' => $any_match['cocktail_id'], 
+	'id' => $any_match['cocktail_id'],
+	'name' => "",
 	'matches' => 1,
 	'fortress' => 0,
 	'matched' => array(0 => $any_match['ingredient_id']),
@@ -190,7 +191,7 @@ for ($i=1; $i<$matches; $i++)
 	else
 	{
 		$tmp = $any_match['cocktail_id'];
-		$output[++$number] = array('id' => $any_match['cocktail_id'], 'matches' => 1, 'fortress' => 0, 'matched' => array(0 => $any_match['ingredient_id']), 'other' => array());
+		$output[++$number] = array('id' => $any_match['cocktail_id'], 'name' => "", 'matches' => 1, 'fortress' => 0, 'matched' => array(0 => $any_match['ingredient_id']), 'other' => array());
 	}
 }
 
@@ -223,6 +224,7 @@ foreach ($output as $key => $cocktail)
 	$result = mysqli_query($connect, "SELECT * FROM `cocktail` WHERE `id` = " . $cocktail['id']);
 	$recieved = mysqli_fetch_assoc($result);
 	$output[$key]['fortress'] = $recieved['fortress'];
+	$output[$key]['name'] = $recieved['title_coctail'];
 }
 
 //подсчитаем количество коктейлей, попавших в массив вывода
@@ -254,14 +256,6 @@ if ($_GET['sort'] == 'k')
 			}
 }
 
-//временное VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-print_r($added); echo "<br><br><br>";
-echo $query; echo "<br><br><br>";
-print_r($any_match); echo "<br><br><br>";
-print_r($output); echo "<br><br><br>";
-print_r($recieved); echo "<br><br><br>";
-echo $count; echo "<br><br><br>";
-//временное ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ?>
 
 <div class="row mt-2 text-center">
@@ -290,8 +284,8 @@ echo $count; echo "<br><br><br>";
 </div>
 
 <div class="row mt-2">
-	<div class="col-1">
-		<h3>Номер</h3>
+	<div class="col-1 text-center">
+		<h3>№</h3>
 	</div>
 	<div class="col-6">
 		<h3>Название</h3>
@@ -303,6 +297,105 @@ echo $count; echo "<br><br><br>";
 		<h3>Совпадения</h3>
 	</div>
 </div>
+
+<?php
+//выводим уже упрорядоченный массив результатов поиска
+for ($i=0; $i<$count; $i++)
+{
+	$num = $i+1;
+	$link = "/article_" . $output[$i]['id'];
+	$title = $output[$i]['name'];
+	$fortress = $output[$i]['fortress'];
+
+	//образуем строку совпавших (выделяемых цветом) ингридиентов
+	$matched_title[0] = "";
+	$matched_title[1] = "";
+	foreach ($output[$i]['matched'] as $key => $value)
+	{
+		$result = mysqli_query($connect, "SELECT title_product FROM `product` WHERE `id` = " . $value);
+		$recieved = mysqli_fetch_assoc($result);
+		$matched_title[$key] = $recieved['title_product'];
+		if ($key == 1 || $output[$i]['matches'] == 1)
+		{
+			if ($key+1 < $output[$i]['matches'])
+				$matched_plus = $output[$i]['matches']-$key-1;
+			else
+				$matched_plus = 0;
+			break;
+		}
+	}
+	$matched_titles = "";
+	if (isset($matched_plus) && $matched_plus)
+		$matched_titles = $matched_title[0] . ", " . $matched_title[1] . "... (+" . $matched_plus . ")";
+	else
+		foreach ($matched_title as $key => $value)
+			if (isset($matched_title[$key]) && $matched_title[$key])
+				$matched_titles = $matched_titles . $value . ", ";
+
+	//образуем строку несовпавших ингридиентов
+	$other_count[$i] = 0;
+	foreach ($output[$i]['other'] as $value)
+		$other_count[$i]++;
+	$other_title[0] = "";
+	$other_title[1] = "";	
+	foreach ($output[$i]['other'] as $key => $value)
+	{
+		$result = mysqli_query($connect, "SELECT title_product FROM `product` WHERE `id` = " . $value);
+		$recieved = mysqli_fetch_assoc($result);
+		$other_title[$key] = $recieved['title_product'];
+		if ($key == 1 || $other_count[$i] == 1)
+		{
+			if ($key+1 < $other_count[$i])
+				$other_plus = $other_count[$i]-$key-1;
+			else
+				$other_plus = 0;
+			break;
+		}
+	}
+	$other_titles = "";
+	if (isset($other_plus) && $other_plus)
+		$other_titles = $other_title[0] . ", " . $other_title[1] . "... (+" . $other_plus . ")";
+	else
+		if ($other_count[$i] == 1)
+			$other_titles = $other_title[0];
+		if ($other_count[$i] == 2)
+				$other_titles = $other_title[0] . ", " . $other_title[1];
+	
+	echo "
+	<div class='row mt-2'>
+		<div class='col-1 text-center'>
+			<h3>$num.</h3>
+		</div>
+		<div class='col-6'>
+			<h3><a href='$link'>$title</a></h3>
+		</div>
+		<div class='col-1'>
+			<h3>$fortress%</h3>
+		</div>
+		<div class='col-4'>
+			<h5><p class='text-primary'>$matched_titles</p>$other_titles</h5>
+		</div>
+	</div>
+	";
+}
+
+?>
+
+<?php
+
+//временное VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+print_r($added); echo "<br><br><br>";
+echo $query; echo "<br><br><br>";
+print_r($any_match); echo "<br><br><br>";
+print_r($output); echo "<br><br><br>";
+print_r($recieved); echo "<br><br><br>";
+echo $count; echo "<br><br><br>";
+print_r($matched_title); echo "<br><br><br>";
+echo $matched_plus; echo "<br><br><br>";
+//временное ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+?>
+
 <div class="row mt-2">
 	<div class="col-1 text-center">
 		<h3>1.</h3>
