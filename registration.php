@@ -3,7 +3,7 @@
 <html>
 <head>
 	
-	<title>Регистрация</title>
+	<title></title>
 </head>
 <style >
 .reg{
@@ -58,12 +58,9 @@ if (isset($ur)){ ?> <div class="alert alert-danger" role="alert"> <?php echo $ur
 			<label for="data_born" class="text-center pb-3">Дата рождения:</label>
 			<input type="date" name="data_born" class="form-control" placeholder="Дата рождения" required="Заполните это поле."><br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
-
-
-
 	</form>
 </body>
 </html>
-
+</div>
 
 <?php include "footer.php"; ?>
