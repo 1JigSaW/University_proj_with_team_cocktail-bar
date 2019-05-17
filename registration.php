@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-	<title></title>
+	<title>Регистрация</title>
 </head>
 <style >
 .reg{
@@ -35,12 +34,8 @@ if($result){
 				$br="Ошибка";}
 			}
 			else { $ur="Пользователь с таким логином уже зарегистрирован";}
-
-
-
 }
  ?>
-
 <div class="container">
 	<form class="reg" method="POST" >
 <h2> Регистрация</h2>
@@ -59,8 +54,9 @@ if (isset($ur)){ ?> <div class="alert alert-danger" role="alert"> <?php echo $ur
 			<input type="date" name="data_born" class="form-control" placeholder="Дата рождения" required="Заполните это поле."><br>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
 	</form>
+</div>
 </body>
 </html>
-</div>
+
 
 <?php include "footer.php"; ?>
