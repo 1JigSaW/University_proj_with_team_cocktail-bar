@@ -71,28 +71,22 @@
 					$user_id=$_SESSION['user'];
 					$login=$_SESSION['log'];
 					if($user_id!=0){  // определяет, сделал ли вход пользователь
-						if(($_POST['like'] || $_POST['dislike'])){
-							$rating=mysqli_query($connect,"SELECT  `user_id`,`article_id` FROM `rating`")or die(mysqli_error());
-							while($arr_rating = mysqli_fetch_assoc($rating)){
-								if($user_id==$arr_rating['user_id'] && $id==$arr_rating['article_id'] ){ ?>   <!-- Проверяет, не голосовал ли этот пользователь на этой статье -->
-
-								<div class="alert alert-success text-center" role="alert">
-									<h4 class="alert-heading">
-										<?php  echo $login; ?>
-									</h4> 
-									Вы уже оставляли свой голос! 
-								</div>
-								<?php  $a=true;
-								break;}
-
+						$rating=mysqli_query($connect,"SELECT  `user_id`,`article_id` FROM `rating`")or die(mysqli_error());
+						while($arr_rating = mysqli_fetch_assoc($rating)){
+							if($user_id==$arr_rating['user_id'] && $id==$arr_rating['article_id'] ){
+								$paste="disabled";
+								}
 							}
+								if(($_POST['like'] || $_POST['dislike'])){
 								if($a==false){	//Пользователь не голосовал
 									if($_POST['like']){
 										$plus=1;
-										$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$plus','$id')";}
+										$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$plus','$id')";
+									$paste="disabled";}
 										if($_POST['dislike']){
 											$minus=-1;
-											$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$minus','$id')";}
+											$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$minus','$id')";
+										$paste="disabled";}
 											$result = mysqli_query($connect, $golos) or die("Ошибка " . mysqli_error($connect));
 											include "popular.php";
 											set_popular($connect)
@@ -107,7 +101,9 @@
 												Спасибо за вашу активность! 
 											</div>
 
-										<?php  }} ?>
+											<?php
+
+										}} ?>
 
 										<?php 
 										$rating = mysqli_query($connect,"SELECT SUM(`sum`) as sum FROM `rating` WHERE $id=`article_id`")or die(mysqli_error());	
@@ -115,13 +111,13 @@
 											?>
 
 											<form action="" method="post" class="row p-3">
-												<input class="btn btn-outline-danger col" type="submit" name="dislike" value="DISLIKE">
+												<input class="btn btn-outline-danger col" <?php echo $paste; ?> type="submit" name="dislike" value="DISLIKE">
 												<div class="display-5 text-center alert alert-info m-3" role="alert">
 													ТЕКУЩИЙ РЕЙТИНГ:
-											
+
 													<?php echo $arr_rating['sum'];?>													
 												</div>
-												<input class="btn btn-outline-success col" type="submit" name="like" value="LIKE">
+												<input class="btn btn-outline-success col" <?php echo $paste; ?> type="submit" name="like" value="LIKE">
 											</form>
 
 										<?php }} ?>
