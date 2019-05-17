@@ -1,6 +1,6 @@
 <?php include "header.php";?>
 <?php include "connect_bd.php";?>
-
+<title>Подбор коктейля по ингридиентам</title>
 <div class="row">
 	<div class="col">
 		<h1 class="display-3 d-none d-lg-block text-center">Подбор коктейля</h1>

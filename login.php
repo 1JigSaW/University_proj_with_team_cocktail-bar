@@ -1,4 +1,5 @@
 <?php include "header.php" ?>
+<title>Авторизация</title>
 <h3 class="text-center pb-3">Авторизация</h3>
 <?php 
 if (!@$_SESSION['user']) 

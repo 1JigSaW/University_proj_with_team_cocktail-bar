@@ -3,7 +3,7 @@
 <html>
 <head>
 	
-	<title></title>
+	<title>Регистрация</title>
 </head>
 <style >
 .reg{
