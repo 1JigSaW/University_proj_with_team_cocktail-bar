@@ -1,5 +1,4 @@
 <?php
-if (!isset($_SESSION['user']) && !isset($_SESSION['log']))
 	session_start();
 if(@$_GET['do'] == 'logout')
 	{
