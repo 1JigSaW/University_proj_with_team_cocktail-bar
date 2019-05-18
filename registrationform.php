@@ -1,11 +1,11 @@
 <?php require ('header.php');?>
 <title>Регистрация</title>
 <h3 class="text-center pb-3">Регистрация</h3>
-<form method="POST" class="">
-	<?php
+<?php
 	if ($msg)
 		echo '<div class="alert alert-danger" role="alert">'.$msg.'</div>';
-	?>
+?>
+<form method="POST" class="">
   	<div class="form-group">
   		<label for="log">Введите ваш логин:</label>
     	<input type="text" name="log" class="form-control" placeholder="Имя пользователя" required="Заполните это поле.">
