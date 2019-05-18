@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 18 2019 г., 17:16
+-- Время создания: Май 18 2019 г., 17:51
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -235,16 +235,17 @@ CREATE TABLE IF NOT EXISTS `popular` (
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
   KEY `article_id_2` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=108 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=116 ;
 
 --
 -- Дамп данных таблицы `popular`
 --
 
 INSERT INTO `popular` (`id`, `article_id`) VALUES
-(105, 1),
-(106, 2),
-(107, 4);
+(112, 1),
+(113, 2),
+(114, 4),
+(115, 6);
 
 -- --------------------------------------------------------
 
@@ -258,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ingredient_id_2` (`title_product`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
 
 --
 -- Дамп данных таблицы `product`
@@ -278,7 +279,28 @@ INSERT INTO `product` (`id`, `title_product`, `type`) VALUES
 (11, 'Дынный ликер', 'drink'),
 (12, 'Энергетик', 'drink'),
 (13, 'Коктейльная вишня', 'product'),
-(14, 'Сахарный сироп', 'product');
+(14, 'Сахарный сироп', 'product'),
+(15, 'Кофейный ликёр', 'drink'),
+(16, 'Айриш крим', 'drink'),
+(17, 'Ликер трипл сек', 'drink'),
+(18, 'Мята', 'product'),
+(19, 'Содовая', 'drink'),
+(20, 'Спрайт', 'drink'),
+(21, 'Ананас', 'product'),
+(22, 'Сливки', 'product'),
+(23, 'Клюквенный сок', 'drink'),
+(24, 'Лаймовый сок', 'drink'),
+(25, 'Апельсин', 'product'),
+(26, 'Джин', 'drink'),
+(27, 'Вермут', 'drink'),
+(28, 'Биттер', 'drink'),
+(29, 'Темный ром', 'drink'),
+(30, 'Сверхкрепкий ром', 'drink'),
+(31, 'Корица', 'product'),
+(32, 'Грйепфрутовый сок', 'drink'),
+(33, 'Грейпфрут', 'product'),
+(34, 'Гренадин', 'drink'),
+(35, 'Табаско соус', 'product');
 
 -- --------------------------------------------------------
 
@@ -296,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `rating` (
   KEY `user_id` (`user_id`),
   KEY `article_id_2` (`article_id`),
   KEY `article_id_3` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
 -- Дамп данных таблицы `rating`
@@ -363,7 +385,9 @@ INSERT INTO `rating` (`id`, `user_id`, `sum`, `article_id`) VALUES
 (58, 13, -1, 2),
 (59, 14, -1, 1),
 (60, 14, -1, 2),
-(61, 14, 1, 4);
+(61, 14, 1, 4),
+(62, 14, 1, 6),
+(63, 14, 1, 6);
 
 -- --------------------------------------------------------
 
