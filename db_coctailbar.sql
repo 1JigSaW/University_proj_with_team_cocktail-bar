@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 18 2019 г., 16:57
+-- Время создания: Май 18 2019 г., 17:12
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `img` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `img` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Дамп данных таблицы `img`
@@ -190,7 +190,15 @@ CREATE TABLE IF NOT EXISTS `img` (
 
 INSERT INTO `img` (`id`, `img`) VALUES
 (1, 'zel.jpg'),
-(2, 'dai.jpg');
+(2, 'dai.jpg'),
+(3, 'b52.jpg'),
+(4, 'moxito.jpg'),
+(5, 'gollag.jpg'),
+(6, 'rus.jpg'),
+(7, 'cosmos.jpg'),
+(8, 'negr.jpg'),
+(9, 'zombie.jpg'),
+(10, 'boyar.jpg');
 
 -- --------------------------------------------------------
 
@@ -227,15 +235,16 @@ CREATE TABLE IF NOT EXISTS `popular` (
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
   KEY `article_id_2` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=105 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=108 ;
 
 --
 -- Дамп данных таблицы `popular`
 --
 
 INSERT INTO `popular` (`id`, `article_id`) VALUES
-(103, 1),
-(104, 2);
+(105, 1),
+(106, 2),
+(107, 4);
 
 -- --------------------------------------------------------
 
@@ -287,14 +296,14 @@ CREATE TABLE IF NOT EXISTS `rating` (
   KEY `user_id` (`user_id`),
   KEY `article_id_2` (`article_id`),
   KEY `article_id_3` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=61 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
 
 --
 -- Дамп данных таблицы `rating`
 --
 
 INSERT INTO `rating` (`id`, `user_id`, `sum`, `article_id`) VALUES
-(1, 1, 110101010, 1),
+(1, 1, 0, 1),
 (2, 2, 1, 2),
 (3, 4, 1, 1),
 (4, 1, 1, 2),
@@ -353,7 +362,8 @@ INSERT INTO `rating` (`id`, `user_id`, `sum`, `article_id`) VALUES
 (57, 13, -1, 2),
 (58, 13, -1, 2),
 (59, 14, -1, 1),
-(60, 14, -1, 2);
+(60, 14, -1, 2),
+(61, 14, 1, 4);
 
 -- --------------------------------------------------------
 
