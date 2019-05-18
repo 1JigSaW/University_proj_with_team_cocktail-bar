@@ -1,5 +1,4 @@
 <?php
-if (!isset($_SESSION['user']) && !isset($_SESSION['log']))
 	session_start();
 if(@$_GET['do'] == 'logout')
 	{
@@ -9,11 +8,6 @@ if(@$_GET['do'] == 'logout')
 <!DOCTYPE html>
 <html>
 <head>
-
-	<!--Удалить, когда с цветами наиграемся-->
-	<meta http-equiv="Cache-Control" content="no-cache">
-	<!--Удалить, когда с цветами наиграемся-->
-	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
