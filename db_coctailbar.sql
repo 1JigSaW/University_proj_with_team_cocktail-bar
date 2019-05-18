@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 18 2019 г., 17:12
+-- Время создания: Май 18 2019 г., 17:16
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -378,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `set_img` (
   PRIMARY KEY (`id`),
   KEY `img_id` (`img_id`),
   KEY `article_id` (`content_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Дамп данных таблицы `set_img`
@@ -386,7 +386,15 @@ CREATE TABLE IF NOT EXISTS `set_img` (
 
 INSERT INTO `set_img` (`id`, `img_id`, `content_id`) VALUES
 (1, 1, 1),
-(2, 2, 4);
+(2, 2, 4),
+(3, 3, 5),
+(4, 4, 6),
+(5, 5, 7),
+(6, 6, 8),
+(7, 7, 9),
+(8, 8, 10),
+(9, 9, 11),
+(10, 10, 12);
 
 -- --------------------------------------------------------
 
