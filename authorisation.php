@@ -13,7 +13,7 @@ if (!empty($_POST["login"]) && !empty($_POST["password"]))
 	}
 	else
 	{
-		$_SESSION['error'] = 'asdas';
+		$_SESSION['error'] = $_POST["login"];
 		header("Location: login");
 		exit();
 		
