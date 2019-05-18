@@ -9,7 +9,7 @@
 		while($arr_cocktail = mysqli_fetch_assoc($cocktail)){
 			echo $arr_cocktail['title_coctail'];  ?></title>
 			<style>
-			
+			.s{word-break: break-all;}
 		</style>
 	</head>
 	<body>
@@ -107,13 +107,18 @@
 											set_popular($connect)
 											?>
 
-											<div class="alert alert-success text-center" role="alert">
-												<h4 class="alert-heading">
-
-													<?php  echo $login; ?>
-
-												</h4> 
-												Спасибо за вашу активность! 
+											<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+												<div class="toast-header">
+													<img src="..." class="rounded mr-2" alt="...">
+													<strong class="mr-auto">Bootstrap</strong>
+													<small>11 mins ago</small>
+													<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="toast-body">
+													Hello, world! This is a toast message.
+												</div>
 											</div>
 
 											<?php
@@ -158,7 +163,7 @@
 										<div>
 											<form action="" method="post" accept-charset="utf-8" >
 												<div class="m-2">
-													<input required class="form-control form-control-lg rounded " type="text" placeholder="Введите ваш комментраий" name="comment">
+													<input required class="form-control form-control-lg rounded" type="text" placeholder="Введите ваш комментраий" name="comment">
 												</div>
 												<div class="container">
 
@@ -190,15 +195,14 @@
 											<div class="bg-info rounded  container text-light">
 												<p>
 												</p>
-												<div class="text-warning m-1">
+												<div class="text-warning m-1 s">
 													<h5><?php  echo $arr_comment['log'];?></h5>
 												</div>
-												<div class="container-fluid h5">
-													<strong>
-														<?php  echo $arr_comment['text_comment'];?>
-													</strong>
+												
+												<div class="container h5">	
+														<p class="s"><?php  echo $arr_comment['text_comment'];?>	
 												</div>
-												<div class="text-right ">
+												<div class="text-right s">
 													<small>
 														<?php  echo $arr_comment['data_comment'];?>
 													</small>
