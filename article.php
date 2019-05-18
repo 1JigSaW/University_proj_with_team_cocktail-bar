@@ -40,7 +40,7 @@
 		</div>
 
 
-		<div class="container">
+		<div class="container text-center">
 
 			<?php 
 			$img = mysqli_query($connect,"SELECT * FROM `set_img` JOIN `content` JOIN `img`  WHERE `set_img`.`content_id`=`content`.`id` AND `set_img`.`img_id`=`img`.`id` AND $id=`set_img`.`id`")
@@ -66,7 +66,22 @@
 				</div>
 			<?php } ?>
 			<div>
-				<?php 
+				<div class="bg-light">
+					<h1 class="display-2">Ингредиенты:</h1>
+					<ul class="list-group list-group-flush ">
+						<?php
+						$id=$_GET['page'];
+						$ingr = mysqli_query($connect,"SELECT * FROM `set_ingredients` JOIN `product` WHERE `set_ingredients`.`cocktail_id`=$id  AND `set_ingredients`.`ingredient_id`=`product`.`id` ")or die(mysqli_error());
+						while($arr_ingr= mysqli_fetch_assoc($ingr)) { ?>
+							<li class="list-group-item bg-light"><?php echo $arr_ingr['title_product'];}?></li>
+
+						</ul>
+
+					</div>
+
+
+
+					<?php 
 					$a=false;        //  определяет, учавствовал ли в голосовании пользователь(начальное значение - не учавствовал)
 					$user_id=$_SESSION['user'];
 					$login=$_SESSION['log'];
@@ -75,18 +90,18 @@
 						while($arr_rating = mysqli_fetch_assoc($rating)){
 							if($user_id==$arr_rating['user_id'] && $id==$arr_rating['article_id'] ){
 								$paste="disabled";
-								}
 							}
-								if(($_POST['like'] || $_POST['dislike'])){
+						}
+						if(($_POST['like'] || $_POST['dislike'])){
 								if($a==false){	//Пользователь не голосовал
 									if($_POST['like']){
 										$plus=1;
 										$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$plus','$id')";
-									$paste="disabled";}
+										$paste="disabled";}
 										if($_POST['dislike']){
 											$minus=-1;
 											$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$minus','$id')";
-										$paste="disabled";}
+											$paste="disabled";}
 											$result = mysqli_query($connect, $golos) or die("Ошибка " . mysqli_error($connect));
 											include "popular.php";
 											set_popular($connect)
