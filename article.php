@@ -22,17 +22,16 @@
 					</h1> 
 				</div>
 			</div>
-			<div class="container ">																				  
-				<div class="container rounded text-right bg-danger">						
-					<h5><font color="white">
-						КРЕПОСТЬ: <?php  echo $arr_cocktail['fortress'];?>
-					</font></h5>
-				</div>   
-			</div>
-			<div class="container">
-				<div class=" container bg-success rounded text-left">	
-					<h5><font color="white">
-						КАТЕГОРИЯ:<?php echo $arr_cocktail['category'];}?>
+		</div>
+			<div class="container rounded">																				  
+				<div class="row">						
+					<div class="text-left col text-lowcase"><h5><font color="#8B0000">
+						<em>крепость: <?php  echo $arr_cocktail['fortress'];?></em>
+					</font></h5></div>
+			
+				
+					<div class="text-nowrap bd-highlight col text-right text-lowcase"><h5><font color="#8B0000" >
+						<em>категория: <?php echo $arr_cocktail['category'];}?></em>
 					</font></h5>
 				</div>
 			</div>
@@ -67,7 +66,7 @@
 			<?php } ?>
 			<div>
 				<div class="bg-light">
-					<h1 class="display-2">Ингредиенты:</h1>
+					<h1 class="display-2 s">Ингредиенты:</h1>
 					<ul class="list-group list-group-flush ">
 						<?php
 						$id=$_GET['page'];
