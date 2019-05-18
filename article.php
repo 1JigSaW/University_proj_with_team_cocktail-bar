@@ -70,9 +70,10 @@
 					<ul class="list-group list-group-flush ">
 						<?php
 						$id=$_GET['page'];
-						$ingr = mysqli_query($connect,"SELECT * FROM `set_ingredients` JOIN `product` WHERE `set_ingredients`.`cocktail_id`=$id  AND `set_ingredients`.`ingredient_id`=`product`.`id` ")or die(mysqli_error());
+						$ingr = mysqli_query($connect,"SELECT * FROM `set_ingredients` JOIN `product` JOIN `ingredient` WHERE `set_ingredients`.`cocktail_id`=$id  AND 
+							`set_ingredients`.`ingredient_id`=`product`.`id` AND `ingredient`.`set_ingredients_id`=`set_ingredients`.`id`")or die(mysqli_error());
 						while($arr_ingr= mysqli_fetch_assoc($ingr)) { ?>
-							<li class="list-group-item bg-light"><?php echo $arr_ingr['title_product'];}?></li>
+							<li class="list-group-item bg-light"><?php echo $arr_ingr['title_product']."\t".$arr_ingr['count']."\t".$arr_ingr['unit'];}?></li>
 
 						</ul>
 
