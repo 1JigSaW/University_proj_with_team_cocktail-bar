@@ -104,32 +104,8 @@ if(isset($_POST['search']) && !$ndrink && !$nproduct)
 	exit;
 }
 ?>
+
 <?php include "header.php"; //включается только тут, потому что иначе он мешает функции header()?>
-
-<?php
-// временное  VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-print_r($_POST);
-echo "<br>";
-print_r($_SESSION['added_drink']);
-echo "<br>";
-print_r($_SESSION['added_product']);
-
-$result = mysqli_query($connect, "SELECT title_product FROM `product` WHERE `id` = " . $_POST['drink']);
-$name = mysqli_fetch_assoc($result);
-
-echo "<br><br>В первом столбце был выбран продукт из базы данных под названием: ";
-if($_POST['drink'])
-echo $name['title_product'];
-else
-echo "[ПРОДУКТ НЕ БЫЛ ВЫБРАН]";
-
-echo "<br><br>Во втором столбце был выбран продукт из списка под названием: ";
-if($_POST['product'])
-echo $_POST['product'];
-else
-echo "[ПРОДУКТ НЕ БЫЛ ВЫБРАН]";
-//временное  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-?>
 
 <div class="row mt-2 text-center">
 	<div class="col-2">
@@ -379,21 +355,7 @@ for ($i=0; $i<$count; $i++)
 	";
 }
 
-?>
-
-<?php
-
-//временное VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-print_r($added); echo "<br><br><br>";
-echo $query; echo "<br><br><br>";
-print_r($any_match); echo "<br><br><br>";
-print_r($output); echo "<br><br><br>";
-print_r($recieved); echo "<br><br><br>";
-echo $count; echo "<br><br><br>";
-print_r($matched_title); echo "<br><br><br>";
-echo $matched_plus; echo "<br><br><br>";
-//временное ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+//ниже идет разметка, удалю позже
 ?>
 
 <div class="row mt-2">
