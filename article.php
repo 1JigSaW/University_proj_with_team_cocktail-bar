@@ -14,23 +14,23 @@
 	</head>
 	<body>
 
-		<div class="container  bg-white rounded">
+		<div class="container  bg-white rounded ">
 			<div class="container">
-				<div class="container bg-white rounded ">
+				<div class="container bg-white rounded s">
 					<h1 class="display-4">
 						<?php echo $arr_cocktail['title_coctail'];?>
 					</h1> 
 				</div>
 			</div>
 		</div>
-			<div class="container rounded">																				  
+			<div class="container rounded bg-light">																				  
 				<div class="row">						
 					<div class="text-left col text-lowcase"><h5><font color="#8B0000">
 						<em>крепость: <?php  echo $arr_cocktail['fortress'];?></em>
 					</font></h5></div>
 			
 				
-					<div class="text-nowrap bd-highlight col text-right text-lowcase"><h5><font color="#8B0000" >
+					<div class="text-nowrap bd-highlight col text-right text-lowcase s"><h5><font color="#8B0000" >
 						<em>категория: <?php echo $arr_cocktail['category'];}?></em>
 					</font></h5>
 				</div>
@@ -106,19 +106,7 @@
 											set_popular($connect)
 											?>
 
-											<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-												<div class="toast-header">
-													<img src="..." class="rounded mr-2" alt="...">
-													<strong class="mr-auto">Bootstrap</strong>
-													<small>11 mins ago</small>
-													<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="toast-body">
-													Hello, world! This is a toast message.
-												</div>
-											</div>
+											
 
 											<?php
 
