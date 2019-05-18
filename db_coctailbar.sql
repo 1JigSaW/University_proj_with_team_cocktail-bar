@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 18 2019 г., 17:51
+-- Время создания: Май 18 2019 г., 19:30
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -208,20 +208,12 @@ INSERT INTO `img` (`id`, `img`) VALUES
 
 CREATE TABLE IF NOT EXISTS `ingredient` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `product_id` int(10) unsigned NOT NULL,
+  `set_ingredients_id` int(10) unsigned NOT NULL,
   `count` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `product_id_2` (`product_id`),
-  KEY `product_id_3` (`product_id`)
+  KEY `set_ingredients_id` (`set_ingredients_id`),
+  KEY `set_ingredients_id_2` (`set_ingredients_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `ingredient`
---
-
-INSERT INTO `ingredient` (`id`, `product_id`, `count`) VALUES
-(1, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -257,6 +249,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title_product` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
+  `unit` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ingredient_id_2` (`title_product`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
@@ -265,42 +258,42 @@ CREATE TABLE IF NOT EXISTS `product` (
 -- Дамп данных таблицы `product`
 --
 
-INSERT INTO `product` (`id`, `title_product`, `type`) VALUES
-(1, 'Виски', 'drink'),
-(2, 'Водка', 'drink'),
-(3, 'Пиво', 'drink'),
-(4, 'Лимон', 'product'),
-(5, 'Лайм', 'product'),
-(6, 'Лёд', 'product'),
-(7, 'Серебряная текила', 'drink'),
-(8, 'Абсент', 'drink'),
-(9, 'Белый ром', 'drink'),
-(10, 'Ликер блю кюрасао', 'drink'),
-(11, 'Дынный ликер', 'drink'),
-(12, 'Энергетик', 'drink'),
-(13, 'Коктейльная вишня', 'product'),
-(14, 'Сахарный сироп', 'product'),
-(15, 'Кофейный ликёр', 'drink'),
-(16, 'Айриш крим', 'drink'),
-(17, 'Ликер трипл сек', 'drink'),
-(18, 'Мята', 'product'),
-(19, 'Содовая', 'drink'),
-(20, 'Спрайт', 'drink'),
-(21, 'Ананас', 'product'),
-(22, 'Сливки', 'product'),
-(23, 'Клюквенный сок', 'drink'),
-(24, 'Лаймовый сок', 'drink'),
-(25, 'Апельсин', 'product'),
-(26, 'Джин', 'drink'),
-(27, 'Вермут', 'drink'),
-(28, 'Биттер', 'drink'),
-(29, 'Темный ром', 'drink'),
-(30, 'Сверхкрепкий ром', 'drink'),
-(31, 'Корица', 'product'),
-(32, 'Грйепфрутовый сок', 'drink'),
-(33, 'Грейпфрут', 'product'),
-(34, 'Гренадин', 'drink'),
-(35, 'Табаско соус', 'product');
+INSERT INTO `product` (`id`, `title_product`, `type`, `unit`) VALUES
+(1, 'Виски', 'drink', 'мл'),
+(2, 'Водка', 'drink', 'мл'),
+(3, 'Пиво', 'drink', 'мл'),
+(4, 'Лимон', 'product', 'г'),
+(5, 'Лайм', 'product', 'г'),
+(6, 'Лёд', 'product', 'г'),
+(7, 'Серебряная текила', 'drink', 'мл'),
+(8, 'Абсент', 'drink', 'мл'),
+(9, 'Белый ром', 'drink', 'мл'),
+(10, 'Ликер блю кюрасао', 'drink', 'мл'),
+(11, 'Дынный ликер', 'drink', 'мл'),
+(12, 'Энергетик', 'drink', 'мл'),
+(13, 'Коктейльная вишня', 'product', 'мл'),
+(14, 'Сахарный сироп', 'product', 'мл'),
+(15, 'Кофейный ликёр', 'drink', 'мл'),
+(16, 'Айриш крим', 'drink', 'мл'),
+(17, 'Ликер трипл сек', 'drink', 'мл'),
+(18, 'Мята', 'product', 'г'),
+(19, 'Содовая', 'drink', 'мл'),
+(20, 'Спрайт', 'drink', 'мл'),
+(21, 'Ананас', 'product', 'г'),
+(22, 'Сливки', 'product', 'мл'),
+(23, 'Клюквенный сок', 'drink', 'мл'),
+(24, 'Лаймовый сок', 'drink', 'мл'),
+(25, 'Апельсин', 'product', 'г'),
+(26, 'Джин', 'drink', 'мл'),
+(27, 'Вермут', 'drink', 'мл'),
+(28, 'Биттер', 'drink', 'мл'),
+(29, 'Темный ром', 'drink', 'мл'),
+(30, 'Сверхкрепкий ром', 'drink', 'мл'),
+(31, 'Корица', 'product', 'г'),
+(32, 'Грйепфрутовый сок', 'drink', 'мл'),
+(33, 'Грейпфрут', 'product', 'г'),
+(34, 'Гренадин', 'drink', 'мл'),
+(35, 'Табаско соус', 'product', 'г');
 
 -- --------------------------------------------------------
 
@@ -433,7 +426,7 @@ CREATE TABLE IF NOT EXISTS `set_ingredients` (
   PRIMARY KEY (`id`),
   KEY `ingredient_id` (`ingredient_id`),
   KEY `cocktail_id` (`cocktail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 --
 -- Дамп данных таблицы `set_ingredients`
@@ -453,7 +446,46 @@ INSERT INTO `set_ingredients` (`id`, `cocktail_id`, `ingredient_id`) VALUES
 (13, 2, 9),
 (14, 2, 14),
 (15, 2, 5),
-(16, 2, 6);
+(16, 2, 6),
+(17, 3, 15),
+(18, 3, 17),
+(19, 3, 16),
+(20, 4, 9),
+(21, 4, 14),
+(22, 4, 19),
+(23, 4, 5),
+(24, 4, 18),
+(25, 4, 6),
+(26, 5, 2),
+(27, 5, 10),
+(28, 5, 20),
+(29, 5, 21),
+(30, 5, 6),
+(31, 6, 2),
+(32, 6, 15),
+(33, 6, 22),
+(34, 6, 6),
+(35, 7, 2),
+(36, 7, 17),
+(37, 7, 23),
+(38, 7, 24),
+(39, 7, 25),
+(40, 7, 6),
+(41, 8, 26),
+(42, 8, 27),
+(43, 8, 28),
+(44, 8, 21),
+(45, 8, 6),
+(46, 9, 29),
+(47, 9, 30),
+(48, 9, 31),
+(49, 9, 32),
+(50, 9, 24),
+(51, 9, 33),
+(52, 9, 18),
+(53, 10, 2),
+(54, 10, 34),
+(55, 10, 35);
 
 -- --------------------------------------------------------
 
@@ -516,7 +548,7 @@ ALTER TABLE `content`
 -- Ограничения внешнего ключа таблицы `ingredient`
 --
 ALTER TABLE `ingredient`
-  ADD CONSTRAINT `ingredient_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `ingredient_ibfk_1` FOREIGN KEY (`set_ingredients_id`) REFERENCES `set_ingredients` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `popular`
