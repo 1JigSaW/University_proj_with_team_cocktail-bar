@@ -41,7 +41,7 @@ if(@$_GET['do'] == 'logout')
 					</div>
 				</div>
 				<div class="col my-auto d-none d-sm-block">
-					    <form action='#' method="get" class="form-inline float-right">
+					    <form action='search.php' method="get" class="form-inline float-right">
 					       <input class="form-control p-0 m-0" name="q" type="text" class="input-medium search-query" placeholder=" Search...">
 						</form>
 				</div>
