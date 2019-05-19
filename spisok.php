@@ -1,7 +1,7 @@
 <?php include "header.php";
 include "connect_bd.php";?>
 <title>Все статьи</title>
-<h1 class="display-4 text-center pb-3">СПИСОК ВСЕХ ДОСТУПНЫХ СТАТЕЙ</h1>		
+<h1 class="display-4 text-center pb-3">Доступные статьи</h1>		
 <?php
 $res = mysqli_query($connect,"SELECT * FROM `cocktail`")or die(mysqli_error());
 
