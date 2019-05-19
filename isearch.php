@@ -112,7 +112,7 @@ if(isset($_POST['search']) && !$ndrink && !$nproduct)
 		<a href="/" role="button" class="btn btn-block bg-secondary text-white border mx-1 mt-4">Назад</a>
 	</div>
 	<div class="col-8">
-		<h1 class="display-3 d-none d-lg-block">Результаты поиска</h1>
+		<h1 class="display-4 text-center pb-3">Результаты поиска</h1>
 	</div>
 	<div class="col-2"></div>
 </div>
