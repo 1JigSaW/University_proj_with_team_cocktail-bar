@@ -9,7 +9,7 @@
 								include "connect_bd.php";
 								$return=popular_range($connect);
 								$query=
-										"<a class='col col-md-12 %s text-center popular' href='/article_%d'><div class='row align-items-center text-white' style='height:144px; background:url(img/%s);background-size: cover;background-position: center;'><div class='col item'><p style='text-shadow:black 1px 1px 0, black -1px -1px 0,black -1px 1px 0, black 1px -1px 0;'>%s</p></div></div></a>
+										"<a class='col col-md-12 %s text-center popular' href='/article_%d'><div class='row align-items-center text-white' style='height:144px; background:url(img/articles/covers/%s);background-size: cover;background-position: center;'><div class='col item'><p style='text-shadow:black 1px 1px 0, black -1px -1px 0,black -1px 1px 0, black 1px -1px 0;'>%s</p></div></div></a>
 										";
 								$m=array('mr-2 mr-md-0 mb-md-2','ml-2 ml-md-0 mt-md-2');
 								for($i=0;$i<2;$i++){
