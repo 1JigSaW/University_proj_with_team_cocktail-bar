@@ -46,7 +46,7 @@
 		or die(mysqli_error($connect));
 		while($arr_img = mysqli_fetch_assoc($img)){
 			?>
-			<img src="<?php echo $arr_img['img'];?>" class="img-fluid p-3 m-1">
+			<img src="img/article/<?php echo $arr_img['img'];?>" class="img-fluid p-3 m-1">
 		<?php } ?>
 	</div>
 
