@@ -44,7 +44,6 @@ if(@$_GET['do'] == 'logout')
 					    <form action='#' method="get" class="form-inline float-right">
 					       <input class="form-control p-0 m-0" name="q" type="text" class="input-medium search-query" placeholder=" Search...">
 						</form>
-
 				</div>
 				<div class="col d-sm-none py-1 px-0">
 					<a href="#" role="button" class="btn btn-lg text-white pl-0 pr-2 mx-0"><span class="oi oi-magnifying-glass"></span></a>
@@ -56,13 +55,9 @@ if(@$_GET['do'] == 'logout')
 							echo '<a href="/login" role="button" class="btn  border-white rounded text-white mr-1" style="">Вход</a>';
 							echo '<a href="/registration" role="button" class="btn  border-white rounded text-white">Регистрация</a>';}
 						else
-							{if (isset($_SERVER['QUERY_STRING']))
-								$request=$_SERVER['QUERY_STRING']."&";
-							else
-								$request="";
-							$logout='<a href="?'.$request.'do=logout" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-logout"></span></a>';
+							{
 							echo '<ul class="list-inline my-auto"><li class="list-inline-item">Вы вошли как <b>'.$_SESSION['log'].'</b></li>';
-							echo $logout;}
+							echo '<a href="?do=logout" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-logout"></span></a>';}
 					?>
 					</div>
 					<div class="d-md-none p-0 m-auto">
