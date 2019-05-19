@@ -1,5 +1,6 @@
 <?php include "header.php";
 include "connect_bd.php";?>
+<title>Все статьи</title>
 <div>
 	<h1 class="display-4 text-center ">СПИСОК ВСЕХ ДОСТУПНЫХ СТАТЕЙ</h1>		
 	<?php
