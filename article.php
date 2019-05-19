@@ -10,6 +10,7 @@
 			echo $arr_cocktail['title_coctail'];  ?></title>
 			<style>
 			.s{word-break: break-all;}
+			.d{background: #008080;}
 		</style>
 	</head>
 	<body>
@@ -46,7 +47,7 @@
 		or die(mysqli_error($connect));
 		while($arr_img = mysqli_fetch_assoc($img)){
 			?>
-			<img src="img/articles/<?php echo $arr_img['img'];?>" class="img-fluid p-3 m-1">
+			<img src="img/articles/<?php echo $arr_img['img'];?>" class="img-fluid p-3 m-1" width="300px">
 		<?php } ?>
 	</div>
 
@@ -173,7 +174,7 @@
 							while($arr_comment = mysqli_fetch_assoc($comment)) {
 								if($id==$arr_comment['article_id']){
 									?>
-									<div class="bg-info rounded  container text-light">
+									<div class="d rounded  container text-light">
 										<p>
 										</p>
 										<div class="text-warning m-1 s">
