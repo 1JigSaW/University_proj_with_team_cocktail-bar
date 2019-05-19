@@ -1,6 +1,5 @@
 <?php include "header.php" ?>
-<title>Авторизация</title>
-<h3 class="text-center pb-3">Авторизация</h3>
+	<h1 class="display-4 text-center pb-3">Авторизация</h1>
 <?php 
 if (!@$_SESSION['user']) 
 	include "loginform.php";

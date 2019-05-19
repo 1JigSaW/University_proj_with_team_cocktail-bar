@@ -1,13 +1,7 @@
 <?php include "header.php";?>
 <?php include "connect_bd.php";?>
 <title>Подбор коктейля по ингридиентам</title>
-<div class="row">
-	<div class="col">
-		<h1 class="display-3 d-none d-lg-block text-center">Подбор коктейля</h1>
-		<h1 class="display-4 d-lg-none text-center">Подбор коктейля</h1>
-	</div>
-</div>
-
+<h1 class="display-4 text-center pb-3">Подбор коктейля</h1>
 <div class="row mt-2">
 	<div class="col-6">
 		<h3 class="display-5 d-none d-md-block">Имеющиеся ингридиенты:</h3>
