@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 18 2019 г., 20:00
+-- Время создания: Май 20 2019 г., 02:06
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `content` (
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
   KEY `article_id_2` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Дамп данных таблицы `content`
@@ -191,13 +191,13 @@ CREATE TABLE IF NOT EXISTS `img` (
 INSERT INTO `img` (`id`, `img`) VALUES
 (1, 'zel.jpg'),
 (2, 'dai.jpg'),
-(3, 'b52.jpg'),
+(3, 'b52.png'),
 (4, 'moxito.jpg'),
-(5, 'gollag.jpg'),
+(5, 'gollag.png'),
 (6, 'rus.jpg'),
 (7, 'cosmos.jpg'),
 (8, 'negr.jpg'),
-(9, 'zombie.jpg'),
+(9, 'zombie.png'),
 (10, 'boyar.jpg');
 
 -- --------------------------------------------------------
@@ -287,17 +287,18 @@ CREATE TABLE IF NOT EXISTS `popular` (
   PRIMARY KEY (`id`),
   KEY `article_id` (`article_id`),
   KEY `article_id_2` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=116 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=135 ;
 
 --
 -- Дамп данных таблицы `popular`
 --
 
 INSERT INTO `popular` (`id`, `article_id`) VALUES
-(112, 1),
-(113, 2),
-(114, 4),
-(115, 6);
+(130, 1),
+(131, 2),
+(132, 4),
+(133, 5),
+(134, 6);
 
 -- --------------------------------------------------------
 
@@ -371,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `rating` (
   KEY `user_id` (`user_id`),
   KEY `article_id_2` (`article_id`),
   KEY `article_id_3` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
 
 --
 -- Дамп данных таблицы `rating`
@@ -440,7 +441,11 @@ INSERT INTO `rating` (`id`, `user_id`, `sum`, `article_id`) VALUES
 (60, 14, -1, 2),
 (61, 14, 1, 4),
 (62, 14, 1, 6),
-(63, 14, 1, 6);
+(63, 14, 1, 6),
+(64, 15, 1, 1),
+(65, 15, 1, 8),
+(66, 15, 1, 7),
+(67, 15, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -559,7 +564,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) NOT NULL,
   `data_born` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Дамп данных таблицы `user`
@@ -579,7 +584,8 @@ INSERT INTO `user` (`id`, `log`, `password`, `data_born`) VALUES
 (11, '1', '1', '1111-11-11'),
 (12, '2', '2', '2222-02-22'),
 (13, 'ы', 'ы', '1111-11-11'),
-(14, 'z', 'z', '0000-00-00');
+(14, 'z', 'z', '0000-00-00'),
+(15, 'qqq', 'qqq', '0000-00-00');
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
