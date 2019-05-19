@@ -7,7 +7,7 @@ RewriteRule ^login$ login.php [NC]
 RewriteRule ^success$ success.php [NC]
 RewriteRule ^$ main.php [NC]
 RewriteRule ^about$ about.php [NC]
-RewriteRule ^localhost/.* http://www.coctailbar.com
+RewriteRule ^search(.*)$ search.php?q=$зомби [L,QSA]
 
 ErrorDocument 404 /404.php
 RewriteRule ^error$ 404.php [NC]
