@@ -8,4 +8,11 @@
 	<p> Надеемся, мы будем дарить вам только радость от новых открытий!</p>
 	<a href="https://www.rosminzdrav.ru/"><p class="text-center"><i>ЧРЕЗМЕРНОЕ УПОТРЕБЛЕНИЕ АЛКОГОЛЯ ВРЕДИТ ВАШЕМУ ЗДОРОВЬЮ</i>
 	</p></a>
+	<div class="container">
+  		<div class="row">
+		    <div class="col-12 text-center">
+		      	<img src="img/nikolaev.jpg" style="width: 80%; max-width: 500px;">
+		    </div>
+  		</div>
+	</div>
 <?php include 'footer.php';?>
