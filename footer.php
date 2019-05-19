@@ -1,7 +1,7 @@
 </div>		
 				</div>
 				<div class="col-md-3 p-0 ">
-					<div class="container p-2 my-auto text-white rounded" style="min-width:200px; background-color:rgba(0,100,0,.95);">
+					<div class="container p-2 my-auto text-white rounded" style="min-width:200px; background-color:rgba(0,75,75,.9);">
 						<h6 class="text-center ">Популярные статьи</h6>
 						<div class="row p-0 mx-2 my-2">
 							<?php
