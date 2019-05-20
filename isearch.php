@@ -355,50 +355,6 @@ for ($i=0; $i<$count; $i++)
 	";
 }
 
-//ниже идет разметка, удалю позже
 ?>
-
-<div class="row mt-2">
-	<div class="col-1 text-center">
-		<h3>1.</h3>
-	</div>
-	<div class="col-6">
-		<h3><a href="/article_1">Зеленая фея</a></h3>
-	</div>
-	<div class="col-1">
-		<h3>36%</h3>
-	</div>
-	<div class="col-4">
-		<h5><p class="text-primary">Белый ром, Лёд,</p>Лимон, Абсент, Энергетик... (+5)</h5>
-	</div>
-</div>
-<div class="row mt-2">
-	<div class="col-1 text-center">
-		<h3>2.</h3>
-	</div>
-	<div class="col-6">
-		<h3><a href="/article_2">Дайкири</a></h3>
-	</div>
-	<div class="col-1">
-		<h3>100%</h3>
-	</div>
-	<div class="col-4">
-		<h5><p class="text-primary">Белый ром, Лёд,</p>Лайм, Сахарный сироп</h5>
-	</div>
-</div>
-<div class="row mt-2">
-	<div class="col-1 text-center">
-		<h3>3.</h3>
-	</div>
-	<div class="col-6">
-		<h3><a href="###">Коктейль с длинным названием</a></h3>
-	</div>
-	<div class="col-1">
-		<h3>5%</h3>
-	</div>
-	<div class="col-4">
-		<h5><p class="text-primary">Ингридиенты, Совпавшие... (+4),</p>Прочие, Еще прочие... (+12)</h5>
-	</div>
-</div>
 
 <?php include "footer.php";?>
