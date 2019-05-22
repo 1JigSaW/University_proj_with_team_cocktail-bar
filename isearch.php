@@ -235,7 +235,7 @@ if ($_GET['sort'] == 'k')
 ?>
 
 <div class="row justify-content-end">
-	<div class='col-auto col-sm p-0 my-auto'>
+	<div class='col-auto p-0 my-auto'>
 		<h4 class='m-0 p-0 text-right'><a href='/isearch.php?sort=s' role='button' class='btn bg-basic'>Сортировать по: </a></h4>
 	</div>
 		<div class="row col col-sm-auto">
