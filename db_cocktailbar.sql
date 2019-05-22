@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 20 2019 г., 19:28
+-- Время создания: Май 22 2019 г., 23:26
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- База данных: `db_coctailbar`
+-- База данных: `db_cocktailbar`
 --
 
 -- --------------------------------------------------------
@@ -103,42 +103,6 @@ CREATE TABLE IF NOT EXISTS `comment` (
   KEY `user_id_2` (`user_id`),
   KEY `article_id_3` (`article_id`,`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
-
---
--- Дамп данных таблицы `comment`
---
-
-INSERT INTO `comment` (`id`, `text_comment`, `data_comment`, `article_id`, `user_id`) VALUES
-(68, '&Ntilde;', '2019-03-25 15:16:37', 2, 3),
-(69, 'qwewerty', '2019-03-25 15:24:50', 1, 3),
-(70, 'qwewerty', '2019-03-25 15:25:04', 1, 3),
-(71, 'ewfew', '2019-03-25 13:25:25', 2, 3),
-(72, 'qweqewtgegrs', '2019-03-25 13:24:59', 2, 3),
-(73, 'qweqewtgegrs', '2019-03-25 12:26:12', 2, 3),
-(74, '&ETH;&deg;&Ntilde;', '2019-03-25 12:27:16', 2, 3),
-(75, '&ETH;&frac14;&ETH;&cedil;&Ntilde;', '2019-03-25 12:28:01', 2, 3),
-(76, '&Ntilde;', '2019-03-25 12:33:12', 2, 3),
-(77, '&ETH;&deg;&ETH;&cedil;&ETH;&sup2;&ETH;&deg;', '2019-03-25 12:34:25', 2, 3),
-(78, '&Ntilde;', '2019-03-25 12:38:30', 2, 3),
-(79, '&Ntilde;', '2019-03-25 12:38:59', 2, 3),
-(80, '&Ntilde;', '2019-03-25 12:41:09', 1, 3),
-(81, 'sad', '2019-04-01 12:55:43', 2, 4),
-(82, 'qwerty', '2019-04-11 02:13:55', 2, 1),
-(83, 'qqq', '2019-04-11 02:21:16', 2, 1),
-(84, 'qqq', '2019-04-11 02:30:17', 2, 1),
-(85, 'qqq', '2019-04-11 02:33:11', 2, 1),
-(86, 'qqq', '2019-04-11 02:33:34', 2, 1),
-(87, 'Очень вкусный коктейль!', '2019-05-18 12:12:40', 1, 12),
-(88, 'Очень вкусный коктейль!', '2019-05-18 12:13:53', 1, 12),
-(89, 'asocnvlwsknciewncewnjewncjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', '2019-05-18 12:14:33', 1, 12),
-(90, 'erw2ertre', '2019-05-18 12:34:14', 1, 13),
-(91, 'dsdfdsf', '2019-05-18 12:34:24', 1, 13),
-(92, 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', '2019-05-18 12:34:38', 1, 13),
-(93, 'sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddd', '2019-05-18 12:45:09', 1, 13),
-(94, 'dsdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', '2019-05-18 12:45:59', 1, 13),
-(95, 'sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddd', '2019-05-18 12:47:40', 1, 13),
-(96, 'sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssddddddddddddddd', '2019-05-18 12:51:21', 1, 13),
-(97, 'eweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', '2019-05-18 12:58:05', 1, 13);
 
 -- --------------------------------------------------------
 
