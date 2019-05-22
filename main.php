@@ -11,7 +11,7 @@
 	</div>
 </div>
 
-<form id="isearch" action = "isearch.php?sort=s" method = "post">
+<form id="isearch" action = "isearch_sort=s" method = "post">
 	<fieldset>
 		<div class="control-group">
 			<div class="row mt-4">
