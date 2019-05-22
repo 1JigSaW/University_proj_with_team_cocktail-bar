@@ -234,30 +234,28 @@ if ($_GET['sort'] == 'k')
 
 ?>
 
-<div class="row mt-2 text-center">
-	<div class="col-5"></div>
-	<div class="col-3 mt-2">
-		<h4>Сортировать по:</h4>
+<div class="row justify-content-end">
+	<div class='col-auto col-sm p-0 my-auto'>
+		<h4 class='m-0 p-0 text-right'><a href='/isearch.php?sort=s' role='button' class='btn bg-basic'>Сортировать по: </a></h4>
 	</div>
-	<div class="col-2">
+		<div class="row col col-sm-auto">
 		<?php
 		if ($_GET['sort'] == "s")
 			$paste = "disabled";
 		else
 			$paste = "";
-		echo "<h4><a href='/isearch.php?sort=s' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Совпадению</a></h4>";
 		?>
-	</div>
-	<div class="col-2">
 		<?php
+		echo "<div class='col-auto p-0 m-0'><h4 class='m-0 p-0'><a href='/isearch.php?sort=s' role='button' class='btn bg-primary text-white border ml-1 " . $paste . "'>Совпадению</a></h4></div>";
 		if ($_GET['sort'] == "k")
 				$paste = "disabled";
 			else
 				$paste = "";
-		echo "<h4><a href='/isearch.php?sort=k' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Крепости</a></h4>";
+		echo "<div class='col-auto p-0 m-0'><h4 class='m-0 p-0'><a href='/isearch.php?sort=k' role='button' class='btn bg-primary text-white border mx-1 " . $paste . "'>Крепости</a ></h4></div>";
 		?>
-	</div>
+		</div>
 </div>
+
 
 <div class="row mt-2">
 	<div class="col-1 text-center">
