@@ -26,12 +26,12 @@
 		</div>
 		<div class="container rounded bg-light">																				  
 			<div class="row">						
-				<div class="text-left col text-lowcase"><h5><font color="#8B0000">
+				<div class="text-left col-6 text-lowcase"><h5><font color="#8B0000">
 					<em>крепость: <?php  echo $arr_cocktail['fortress'];?></em>
 				</font></h5></div>
 				
 				
-				<div class="text-nowrap bd-highlight col text-right text-lowcase s"><h5><font color="#8B0000" >
+				<div class=" col-6 text-right text-lowcase s"><h5><font color="#8B0000">
 					<em>категория: <?php echo $arr_cocktail['category'];}?></em>
 				</font></h5>
 			</div>
