@@ -1,6 +1,6 @@
 <?php require_once ('header.php');?>
 <title>Регистрация</title>
-<h3 class="text-center pb-3">Регистрация</h3>
+<h3 class="display-4 text-center pb-1 pb-md-3">Регистрация</h3>
 <?php
 	if ($msg)
 		echo '<div class="alert alert-danger" role="alert">'.$msg.'</div>';

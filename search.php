@@ -43,7 +43,7 @@ else
 ?>
 
 <title>Поиск по сайту: "<?php echo $query ?>"</title>
-<h1 class="display-4 text-center pb-3">Результаты поиска</h1>
+<h1 class="display-4 text-center pb-1 pb-md-3">Результаты поиска</h1>
 <div class="row mt-2">
 	<div class="col">
 		<h3><?php echo $text; ?></h3>
