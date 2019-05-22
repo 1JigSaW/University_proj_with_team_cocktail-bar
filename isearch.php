@@ -107,12 +107,12 @@ if(isset($_POST['search']) && !$ndrink && !$nproduct)
 
 <?php include "header.php"; //включается только тут, потому что иначе он мешает функции header()?>
 
-<div class="row mt-2 text-center">
+<div class="row text-center">
 	<div class="col-2 d-md-block d-none">
 		<a href="/" role="button" class="btn  bg-secondary  text-white border mx-1 mt-4">Назад</a>
 	</div>
 	<div class="col">
-		<h1 class="display-4 text-center pb-3">Результаты поиска</h1>
+		<h1 class="display-4 text-center pb-1 pb-md-3">Результаты поиска</h1>
 	</div>
 	<div class="col-2 d-md-block d-none"></div>
 </div>
@@ -234,11 +234,11 @@ if ($_GET['sort'] == 'k')
 
 ?>
 
-<div class="row justify-content-end">
-	<div class='col-auto p-0 my-auto'>
-		<h4 class='m-0 p-0 text-right'><a href='/isearch.php?sort=s' role='button' class='btn bg-basic'>Сортировать по: </a></h4>
+<div class="row  justify-content-end p-0 m-0">
+	<div class='col col-sm-auto p-0 my-auto text-right'>
+		<h4 class='m-0 p-0 '><a href='/isearch.php?sort=s' role='button' class='btn bg-basic'>Сортировать по: </a></h4>
 	</div>
-		<div class="row col col-sm-auto">
+		<div class="row justify-content-end col-auto p-0 m-0">
 		<?php
 		if ($_GET['sort'] == "s")
 			$paste = "disabled";
@@ -246,12 +246,12 @@ if ($_GET['sort'] == 'k')
 			$paste = "";
 		?>
 		<?php
-		echo "<div class='col-auto p-0 m-0'><h4 class='m-0 p-0'><a href='/isearch.php?sort=s' role='button' class='btn bg-primary text-white border ml-1 " . $paste . "'>Совпадению</a></h4></div>";
+		echo "<div class='col p-0 m-0'><h4 class='m-0 p-0'><a href='/isearch.php?sort=s' role='button' class='btn bg-primary text-white border ml-1 " . $paste . "'>Совпадению</a></h4></div>";
 		if ($_GET['sort'] == "k")
 				$paste = "disabled";
 			else
 				$paste = "";
-		echo "<div class='col-auto p-0 m-0'><h4 class='m-0 p-0'><a href='/isearch.php?sort=k' role='button' class='btn bg-primary text-white border mx-1 " . $paste . "'>Крепости</a ></h4></div>";
+		echo "<div class='col p-0 m-0'><h4 class='m-0 p-0'><a href='/isearch.php?sort=k' role='button' class='btn bg-primary text-white border mx-1 " . $paste . "'>Крепости</a ></h4></div>";
 		?>
 		</div>
 </div>
@@ -259,16 +259,16 @@ if ($_GET['sort'] == 'k')
 
 <div class="row mt-2">
 	<div class="col-1 text-center">
-		<h3>№</h3>
+		<h5>№</h5>
 	</div>
-	<div class="col-6">
-		<h3>Название</h3>
+	<div class="col">
+		<h5>Название</h5>
 	</div>
-	<div class="col-1">
-		<h3>Креп.</h3>
+	<div class="col-auto d-sm-block d-none">
+		<h5>Креп.</h5>
 	</div>
-	<div class="col-4">
-		<h3>Совпадения</h3>
+	<div class="col">
+		<h5>Совпадения</h5>
 	</div>
 </div>
 
@@ -340,14 +340,14 @@ for ($i=0; $i<$count; $i++)
 		<div class='col-1 text-center'>
 			<h3>$num.</h3>
 		</div>
-		<div class='col-6'>
+		<div class='col'>
 			<h3><a href='$link'>$title</a></h3>
 		</div>
-		<div class='col-1'>
+		<div class='col-auto d-sm-block d-none'>
 			<h3>$fortress%</h3>
 		</div>
-		<div class='col-4'>
-			<h5><p class='text-primary'>$matched_titles</p>$other_titles</h5>
+		<div class='col'>
+			<h5><p class='text-primary' style='text-indent: 0;'>$matched_titles</p>$other_titles</h5>
 		</div>
 	</div>
 	";
