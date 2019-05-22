@@ -48,7 +48,7 @@ if(@$_GET['do'] == 'logout')
 				<div class="col-auto col-md p-0 m-0 btn-group my-auto">
 					<div class="container text-white text-center d-none d-sm-none d-md-block p-0 m-0">
 					<?php
-						$logout='<a href="?do=logout" role="button" class="p-0 m-0 btn btn-lg text-white"><span class="oi oi-account-logout"></span></a>';
+						$logout='<a href="?do=logout" role="button" class="p-0 m-0 btn btn-lg mr-1 text-white"><span class="oi oi-account-logout"></span></a>';
 						if (!@$_SESSION['user']){
 							echo '<a href="/login" role="button" class="btn border-white rounded text-white mr-1" style="">Вход</a>';
 							echo '<a href="/registration" role="button" class="btn  border-white rounded text-white">Регистрация</a>';}
