@@ -72,10 +72,8 @@ if(@$_GET['do'] == 'logout')
 		</header>
 	
 	<div class="container-fluid p-0" style="min-height: calc(100% - 50px);">
-		<div class="container-fluid" style="height:56px;">	
-		</div>
-	
-		<div class=" mx-xl-4 mx-lg-3 mx-md-2 p-3">
+		<div class="container-fluid" style="height:56px;"></div>
+		<div class="mx-xl-4 mx-lg-3 mx-md-2 p-sm-3 p-1">
 			<div class="row m-0">
 				<div class="col-md-9 p-0 pr-md-2 m-0">
 					<div class="container mb-3 p-2 p-sm-3 p-md-4 bg-white rounded">
