@@ -60,7 +60,7 @@
 				<?php  echo $arr_content['text_article'];?>				
 			</p>
 			<div class="container-fluid text-right ">
-				<a href="<?php echo $arr_content['links'];?>" class="h4 text-secondary">
+				<a href="http://<?php echo $arr_content['links'];?>" class="h4 text-secondary">
 					ССЫЛКА
 				</a>
 			</div>
