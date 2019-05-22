@@ -245,7 +245,7 @@ if ($_GET['sort'] == 'k')
 			$paste = "disabled";
 		else
 			$paste = "";
-		echo "<h4><a href='/isearch.php?sort=s' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Совпадению</a></h4>";
+		echo "<h4><a href='/isearch_sort=s' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Совпадению</a></h4>";
 		?>
 	</div>
 	<div class="col-2">
@@ -254,7 +254,7 @@ if ($_GET['sort'] == 'k')
 				$paste = "disabled";
 			else
 				$paste = "";
-		echo "<h4><a href='/isearch.php?sort=k' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Крепости</a></h4>";
+		echo "<h4><a href='/isearch_sort=k' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Крепости</a></h4>";
 		?>
 	</div>
 </div>
