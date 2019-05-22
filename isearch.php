@@ -108,13 +108,13 @@ if(isset($_POST['search']) && !$ndrink && !$nproduct)
 <?php include "header.php"; //включается только тут, потому что иначе он мешает функции header()?>
 
 <div class="row mt-2 text-center">
-	<div class="col-2">
-		<a href="/" role="button" class="btn btn-block bg-secondary text-white border mx-1 mt-4">Назад</a>
+	<div class="col-2 d-md-block d-none">
+		<a href="/" role="button" class="btn  bg-secondary  text-white border mx-1 mt-4">Назад</a>
 	</div>
-	<div class="col-8">
+	<div class="col">
 		<h1 class="display-4 text-center pb-3">Результаты поиска</h1>
 	</div>
-	<div class="col-2"></div>
+	<div class="col-2 d-md-block d-none"></div>
 </div>
 
 <?php
@@ -236,8 +236,8 @@ if ($_GET['sort'] == 'k')
 
 <div class="row mt-2 text-center">
 	<div class="col-5"></div>
-	<div class="col-3 font-size-2 mt-2">
-		<h4>Сортировать по:</h3>
+	<div class="col-3 mt-2">
+		<h4>Сортировать по:</h4>
 	</div>
 	<div class="col-2">
 		<?php
@@ -245,7 +245,7 @@ if ($_GET['sort'] == 'k')
 			$paste = "disabled";
 		else
 			$paste = "";
-		echo "<h4><a href='/isearch_sort=s' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Совпадению</a></h4>";
+		echo "<h4><a href='/isearch.php?sort=s' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Совпадению</a></h4>";
 		?>
 	</div>
 	<div class="col-2">
@@ -254,7 +254,7 @@ if ($_GET['sort'] == 'k')
 				$paste = "disabled";
 			else
 				$paste = "";
-		echo "<h4><a href='/isearch_sort=k' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Крепости</a></h4>";
+		echo "<h4><a href='/isearch.php?sort=k' role='button' class='btn btn-lg bg-primary text-white border mx-1 " . $paste . "'>Крепости</a></h4>";
 		?>
 	</div>
 </div>
