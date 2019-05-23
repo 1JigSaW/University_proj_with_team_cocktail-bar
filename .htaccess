@@ -8,7 +8,7 @@ RewriteRule ^success$ success.php [NC]
 RewriteRule ^$ main.php [NC]
 RewriteRule ^about$ about.php [NC]
 RewriteRule ^search(.*)$ search.php?q=$зомби [L,QSA]
-RewriteRule ^isearch_(.*)$ isearch.php?sort=$s [L,QSA]
+
 ErrorDocument 404 /404.php
 RewriteRule ^error$ 404.php [NC]
 AddDefaultCharset utf-8 

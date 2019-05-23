@@ -11,7 +11,7 @@
 	</div>
 </div>
 
-<form id="isearch" action = "isearch_sort=s" method = "post">
+<form id="isearch" action = "isearch.php?sort=s" method = "post">
 	<fieldset>
 		<div class="control-group">
 			<div class="row mt-4">
@@ -69,7 +69,7 @@
 			
 			<div class="row mt-2">
 				<div class="col text-center">
-					<button type="button submit" form="isearch" name="add" value="drink" class="btn bg-success text-white btn-block">Добавить</button>
+					<button type="button submit" form="isearch.php?sort=s" name="add" value="drink" class="btn bg-success text-white btn-block">Добавить</button>
 				</div>
 				<div class="col text-center">
 					<button type="button submit" form="isearch" name="add" value="product" class="btn bg-success text-white btn-block">Добавить</button>
