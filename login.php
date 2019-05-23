@@ -1,4 +1,5 @@
 <?php include "header.php" ?>
+	<title>Авторизация</title>
 	<h1 class="display-4 text-center pb-1 pb-md-3">Вход</h1>
 <?php 
 if (!@$_SESSION['user']) 
