@@ -20,7 +20,7 @@ if (isset($_POST['log']) && isset($_POST['password']))
 				$result=mysqli_query($connect, $query);
 			if($result){
 					$suc=true;
-					header('Location: success.php');
+					header('Location: success');
 					exit();
 						} 
 			else 
