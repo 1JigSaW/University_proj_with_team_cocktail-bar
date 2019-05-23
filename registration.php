@@ -7,12 +7,11 @@ if (isset($_POST['log']) && isset($_POST['password']))
 	$data_born=strtotime($date);
 	if (!$data_born ||($data_born > mktime(0, 0, 0, date("m"),date("d"),date("Y"))||($data_born < mktime(0, 0, 0, date("m"),date("d"),date("Y")-130))))
 		$msg='Некорректная дата рождения';
-	elseif (!(preg_match('|[_\w&&[^A-Z]]{3,15}|',$log)))
-		$msg='Логин должен состоять из 3-15 строчных символов латинского алфавита. Также допускатся цифры и символ нижнего подчеркивания.';
+	elseif (!(preg_match('|[a-z_\d]{3,15}|',$log)))
+		$msg='Логин должен состоять из 3-15 символов латинского алфавита. Также допускатся цифры и символ нижнего подчеркивания.';
 	elseif (!(preg_match('|.{6,15}|',$password)))
 		$msg='Пароль должен состоять из 6-15 символов.';
 	elseif ($data_born<=mktime(0, 0, 0, date("m"),date("d"),date("Y")-18)){
-			
 			$s="SELECT * FROM user WHERE log = '$log'";
 			$res=mysqli_query( $connect, $s);
 			$num = mysqli_num_rows($res);
