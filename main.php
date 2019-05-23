@@ -6,7 +6,7 @@
 	<div class="col-6">
 		<h3 class="display-5 d-none d-md-block">Имеющиеся ингридиенты:</h3>
 	</div>
-	<div class="col-12 col-md-6">
+	<div class="col-6 d-none d-md-block">
 		<button type="button submit" name="search" form="isearch" class="btn btn-primary rounded text-white btn-lg btn-block">Подобрать</button>
 	</div>
 </div>
@@ -268,6 +268,9 @@
 		</div>
 	</fieldset>
 </form>
+<div class="p-0 m-0 d-md-none">
+		<button type="button submit" name="search" form="isearch" class="btn btn-primary rounded text-white btn-lg btn-block">Подобрать</button>
+	</div>
 
 <div class="row mt-2">
 	<div class="col">
