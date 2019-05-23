@@ -17,21 +17,24 @@
 
 		<div class="container  bg-white rounded ">
 			<div class="container">
-				<div class="container bg-white rounded s">
-					<h1 class="display-4">
+				<div class="container text-center bg-white rounded s">
+					<h1 class="display-4 d-none d-sm-block">
 						<?php echo $arr_cocktail['title_coctail'];?>
 					</h1> 
+					<h3 class="d-sm-none">
+						<?php echo $arr_cocktail['title_coctail'];?>
+					</h3> 
 				</div>
 			</div>
 		</div>
 		<div class="container rounded bg-light">																				  
 			<div class="row">						
-				<div class="text-left col-6 text-lowcase"><h5><font color="#8B0000">
+				<div class="text-left col-auto text-lowcase"><h5><font color="#8B0000">
 					<em>крепость: <?php  echo $arr_cocktail['fortress'];?></em>
 				</font></h5></div>
 				
 				
-				<div class=" col-6 text-right text-lowcase s"><h5><font color="#8B0000">
+				<div class="col text-sm-right text-lowcase"><h5><font color="#8B0000">
 					<em>категория: <?php echo $arr_cocktail['category'];}?></em>
 				</font></h5>
 			</div>
