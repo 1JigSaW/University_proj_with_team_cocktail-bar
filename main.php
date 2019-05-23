@@ -70,7 +70,7 @@
 					<label class="control-label display-4 d-none d-lg-block" for="select02"><h1>ПРОДУКТЫ</h1></label>
 					<label class="control-label display-5 d-lg-none" for="select02"><h3>ПРОДУКТЫ</h3></label>
 					<select id="select02" name="product" class="form-control">
-						<option value="0">Выберите</option>
+						<option value="" disabled selected style='display:none;'>Выберите</option>
 						<?php
 						//вывод всех продуктов из базы данных
 						$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `type` = 'product'");
@@ -95,7 +95,7 @@
 					<label class="control-label display-4 d-none d-lg-block" for="select02"><h1>ПРОДУКТЫ</h1></label>
 					<label class="control-label display-5 d-lg-none" for="select02"><h4>ПРОДУКТЫ</h4></label>
 					<select id="select02" name="product" class="form-control">
-						<option value="0">Выберите</option>
+						<option value="" disabled selected style='display:none;'>Выберите</option>
 						<?php
 						//вывод всех продуктов из базы данных
 						$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `type` = 'product'");
