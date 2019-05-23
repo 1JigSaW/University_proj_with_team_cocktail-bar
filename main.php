@@ -19,7 +19,8 @@
 					<label class="control-label d-none d-lg-block" for="select01"><h1>НАПИТКИ</h1></label>
 					<label class="control-label d-lg-none" for="select01"><h3>НАПИТКИ</h3></label>
 					<select id="select01" name="drink" class="form-control">
-						<option value="0">Выберите</option>
+						<option value="" disabled selected style='display:none;'>Выберите</option>
+
 						<?php
 						//вывод всех напитков из базы данных
 						$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `type` = 'drink'");
@@ -44,7 +45,7 @@
 					<label class="control-label d-none d-lg-block" for="select01"><h1>НАПИТКИ</h1></label>
 					<label class="control-label d-lg-none" for="select01"><h4>НАПИТКИ</h4></label>
 					<select id="select01" name="drink" class="form-control">
-						<option value="0">Выберите</option>
+						<option value="" disabled selected style='display:none;'>Выберите</option>
 						<?php
 						//вывод всех напитков из базы данных
 						$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `type` = 'drink'");
