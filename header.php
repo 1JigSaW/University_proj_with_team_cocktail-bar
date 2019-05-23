@@ -24,6 +24,10 @@ if(@$_GET['do'] == 'logout')
 			background: url(img/textur.jpg);
 		}
 		p { text-indent: 25px; }
+		.fix {
+			  width: 100px;
+			  background: transparent;
+			 }
 	</style>
 </head>
 	<body>

@@ -15,7 +15,7 @@
 	<fieldset>
 		<div class="control-group">
 			<div class="row mt-4">
-				<div class="col text-center">
+				<div class="col d-none d-sm-block text-center">
 					<label class="control-label d-none d-lg-block" for="select01"><h1>НАПИТКИ</h1></label>
 					<label class="control-label d-lg-none" for="select01"><h3>НАПИТКИ</h3></label>
 					<select id="select01" name="drink" class="form-control">
@@ -40,9 +40,59 @@
 						?>
 					</select>
 				</div>
-				<div class="col text-center">
+				<div class="col d-xs-block d-sm-none fix text-center">
+					<label class="control-label d-none d-lg-block" for="select01"><h1>НАПИТКИ</h1></label>
+					<label class="control-label d-lg-none" for="select01"><h4>НАПИТКИ</h4></label>
+					<select id="select01" name="drink" class="form-control">
+						<option value="0">Выберите</option>
+						<?php
+						//вывод всех напитков из базы данных
+						$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `type` = 'drink'");
+							for ($i=0; $i<mysqli_num_rows($result); $i++)
+							{
+								$titles = mysqli_fetch_assoc($result);
+								$title = $titles['title_product'];
+								$id = $titles['id'];
+								echo "<option ";
+								if(isset($_SESSION['tmp']) && $_SESSION['tmp'] == $id)
+								{
+									echo "selected value=" . '"' . $id . '">' . $title . "</option>";
+									session_unset($_SESSION['tmp']);
+								}
+								else
+									echo "value=" . '"' . $id . '">' . $title . "</option>";
+							}
+						?>
+					</select>
+				</div>
+				<div class="col d-none d-sm-block text-center">
 					<label class="control-label display-4 d-none d-lg-block" for="select02"><h1>ПРОДУКТЫ</h1></label>
 					<label class="control-label display-5 d-lg-none" for="select02"><h3>ПРОДУКТЫ</h3></label>
+					<select id="select02" name="product" class="form-control">
+						<option value="0">Выберите</option>
+						<?php
+						//вывод всех продуктов из базы данных
+						$result = mysqli_query($connect, "SELECT * FROM `product` WHERE `type` = 'product'");
+							for ($i=0; $i<mysqli_num_rows($result); $i++)
+							{
+								$titles = mysqli_fetch_assoc($result);
+								$title = $titles['title_product'];
+								$id = $titles['id'];
+								echo "<option ";
+								if(isset($_SESSION['tmp']) && $_SESSION['tmp'] == $id)
+								{
+									echo "selected value=" . '"' . $id . '">' . $title . "</option>";
+									session_unset($_SESSION['tmp']);
+								}
+								else
+									echo "value=" . '"' . $id . '">' . $title . "</option>";
+							}
+						?>
+					</select>
+				</div>
+				<div class="col d-xs-block d-sm-none fix text-center">
+					<label class="control-label display-4 d-none d-lg-block" for="select02"><h1>ПРОДУКТЫ</h1></label>
+					<label class="control-label display-5 d-lg-none" for="select02"><h4>ПРОДУКТЫ</h4></label>
 					<select id="select02" name="product" class="form-control">
 						<option value="0">Выберите</option>
 						<?php
