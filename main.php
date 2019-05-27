@@ -2,15 +2,6 @@
 <?php include "connect_bd.php";?>
 <title>Подбор коктейля по ингридиентам</title>
 <h1 class="display-4 text-center pb-1 pb-md-3">Подбор коктейля</h1>
-<div class="row mt-2">
-	<div class="col-6">
-		<h3 class="display-5 d-none d-md-block">Имеющиеся ингридиенты:</h3>
-	</div>
-	<div class="col-6 d-none d-md-block">
-		<button type="button submit" name="search" form="isearch" class="btn btn-primary rounded text-white btn-lg btn-block">Подобрать</button>
-	</div>
-</div>
-
 <form id="isearch" action = "isearch.php?sort=s" method = "post">
 	<fieldset>
 		<div class="control-group">
@@ -120,10 +111,10 @@
 			
 			<div class="row mt-2">
 				<div class="col text-center">
-					<button type="button submit" form="isearch" name="add" value="drink" class="btn bg-success text-white btn-block">Добавить</button>
+					<button type="button submit" form="isearch" name="add" value="drink" class="btn bg-secondary bg-success text-white btn-block"><span class="my-auto p-0 oi oi-plus"></span> Добавить</button>
 				</div>
 				<div class="col text-center">
-					<button type="button submit" form="isearch" name="add" value="product" class="btn bg-success text-white btn-block">Добавить</button>
+					<button type="button submit" form="isearch" name="add" value="product" class="btn bg-success text-white btn-block"><span class="my-auto p-0 oi oi-plus"></span> Добавить</button>
 				</div>
 			</div>
 
@@ -268,9 +259,9 @@
 		</div>
 	</fieldset>
 </form>
-<div class="p-0 m-0 d-md-none">
-		<button type="button submit" name="search" form="isearch" class="btn btn-primary rounded text-white btn-lg btn-block">Подобрать</button>
-	</div>
+<div class="p-0 m-0 pt-2">
+	<button type="button submit" name="search" form="isearch" class="btn btn-primary rounded text-white btn-lg btn-block">Подобрать</button>
+</div>
 
 <div class="row mt-2">
 	<div class="col">
