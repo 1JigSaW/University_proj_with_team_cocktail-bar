@@ -1,22 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
+-- version 3.5.1
+-- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 29 2019 г., 15:21
--- Версия сервера: 10.1.38-MariaDB
--- Версия PHP: 7.3.3
+-- Время создания: Май 29 2019 г., 18:27
+-- Версия сервера: 5.5.25
+-- Версия PHP: 5.3.13
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- База данных: `db_cocktailbar`
@@ -28,10 +26,16 @@ SET time_zone = "+00:00";
 -- Структура таблицы `article`
 --
 
-CREATE TABLE `article` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `cocktail_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `article` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cocktail_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`),
+  KEY `id_2` (`id`),
+  KEY `cocktail_id` (`cocktail_id`),
+  KEY `cocktail_id_2` (`cocktail_id`),
+  KEY `cocktail_id_3` (`cocktail_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Дамп данных таблицы `article`
@@ -49,7 +53,8 @@ INSERT INTO `article` (`id`, `cocktail_id`) VALUES
 (9, 9),
 (10, 10),
 (11, 11),
-(12, 12);
+(12, 12),
+(13, 13);
 
 -- --------------------------------------------------------
 
@@ -57,12 +62,14 @@ INSERT INTO `article` (`id`, `cocktail_id`) VALUES
 -- Структура таблицы `cocktail`
 --
 
-CREATE TABLE `cocktail` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `cocktail` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title_coctail` varchar(255) NOT NULL,
   `fortress` int(11) NOT NULL,
-  `category` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `category` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `title_coctail` (`title_coctail`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `cocktail`
@@ -80,7 +87,8 @@ INSERT INTO `cocktail` (`id`, `title_coctail`, `fortress`, `category`) VALUES
 (9, 'Зомби', 48, 'крепокоалкогольный'),
 (10, 'Боярский', 40, 'крепкоалкогольный'),
 (11, 'Апероль Шприц', 10, 'слабоалкогольные'),
-(12, 'Куба либре', 18, 'слабоалкогольные');
+(12, 'Куба либре', 18, 'слабоалкогольные'),
+(13, 'Кровавая Мэри', 18, 'слабоалкогольный');
 
 -- --------------------------------------------------------
 
@@ -88,13 +96,19 @@ INSERT INTO `cocktail` (`id`, `title_coctail`, `fortress`, `category`) VALUES
 -- Структура таблицы `comment`
 --
 
-CREATE TABLE `comment` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `text_comment` text NOT NULL,
   `data_comment` datetime NOT NULL,
-  `article_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `article_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `article_id` (`article_id`,`user_id`),
+  KEY `user_id` (`user_id`),
+  KEY `article_id_2` (`article_id`),
+  KEY `user_id_2` (`user_id`),
+  KEY `article_id_3` (`article_id`,`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
 
 -- --------------------------------------------------------
 
@@ -102,12 +116,15 @@ CREATE TABLE `comment` (
 -- Структура таблицы `content`
 --
 
-CREATE TABLE `content` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `article_id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `article_id` int(10) unsigned NOT NULL,
   `text_article` text NOT NULL,
-  `links` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `links` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `article_id` (`article_id`),
+  KEY `article_id_2` (`article_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Дамп данных таблицы `content`
@@ -117,7 +134,7 @@ INSERT INTO `content` (`id`, `article_id`, `text_article`, `links`) VALUES
 (1, 1, 'Одни бармены называют этот коктейль угощением безумцев, так как спиртное в сочетании с энергетиками дает непредсказуемый результат, другие – уверяют, что благодаря всего одной порции напитка можно веселиться всю ночь, не чувствуя усталости. Приготовить коктейль «Зеленая Фея» достаточно просто, главное достать ингредиенты – нужным составом алкогольных напитков укомплектован далеко не каждый домашний бар.\nВремя, место появления и автор рецепта неизвестны. Предполагается, что коктейль получил название из-за характерного зеленого, ближе к изумрудному цвету, который дает абсент в сочетании с Блю Курасао и дынным ликером.\nДо начала XX века за способность вызывать галлюцинации «зеленой феей» называли абсент. Некоторое время напиток даже был под запретом почти во всех странах Европы. Потом производители научились очищать абсент от наркотического вещества – туйона (содержится в полыни), и он снова поступил в продажу. Современный абсент в плане галлюцинаций безопасен.', 'wikienx.ru/eda-i-napitki/vina-i-spirtnye-napitki/110166-zelenaja-feja-koktejl-dlja-gurmanov.html'),
 (4, 2, 'Секрет популярности алкогольного коктейля на долгие годы – подбор правильных составляющих и пропорций. В истории часто бывало так, что случайно смешивая ингредиенты, получался алкогольный напиток с идеальным вкусом, который становился знаменитым на долгие годы.\nИменно так произошло с коктейлем «Дайкири» — существуют три версии об истории его создания, но все они интересны и оригинальны. Основа напитка – ром, сок лайма и дробленый лед. По желанию можно добавлять фруктовые соки. Существует множество разновидностей коктейля – рецепты приготовления коктейля описаны в данной статье.\n\nИстория коктейля\nВерсия 1: на Кубе есть маленький городок Дайкири, в одном из баров которого в начале 20 века случайно закончился джин. Находчивый бармен без зазрения совести заменил его ромом, но, чтобы не разочаровать посетителей, он добавил в него сахар, лаймовый сок и лед. Коктейль, названный в честь кубинского городка быстро стал популярным.Поклонники: Эрнест Хемингуэй (писатель),  Джон Кеннеди (президент) и многие – многие другие.', 'alcofan.com/istoriya-i-recept-koktejlya-dajkiri.html'),
 (5, 3, 'На данный момент коктейль Б-52 считается неотъемлемым атрибутом клубной жизни, его подают во всех приличных барах мира. Дальше я расскажу об истории, способах употребления и двух основных рецептах этого знаменитого напитка, покорившего миллионы любителей спиртного на всех континентах.\r\n\r\nИсторическая справка. B-52 – алкогольный коктейль с приятным сладковатым вкусом, состоящий из трех слоев ликеров (кофейного, сливочного и апельсинового), которые наливаются в равных пропорциях. Напиток создан в 1955 году в одном из баров Малибу. Его назвали в честь американского стратегического бомбардировщика Боинг B-52 Stratofortress, который как раз в том году поступил на вооружение армии США.', 'ru.wikipedia.org/wiki/Б-52_(коктейль)'),
-(6, 4, 'В последние несколько лет одним из самых модных коктейлей считается кубинский Мохито (Mojito). Теперь чтобы насладиться его неповторимым вкусом необязательно идти в бар. Я расскажу о технологии приготовления Мохито в домашних условиях. Узнав все тонкости, вы сможете сделать этот коктейль у себя на кухне. Мы рассмотрим алкогольный и безалкогольный рецепты.\r\n\r\nИсторическая справка. Коктейль «Мохито» является усовершенствованной версией напитка «Драк», рецепт которого придумал известный пират Ф. Дрейк. Морские разбойники настаивали ром на лайме и мяте. Полученный напиток помогал им бороться с инфекционными заболеваниями в морских походах.\r\nВ 1942 году семейство Мартинес открыло в Гаване собственный бар La Bodeguita del Medio. Главной изюминкой заведения стал коктейль «Мохито» (с испанского слово mojito переводится как «немного влажный»), который отличался от пиратского рецепта одним дополнительным ингредиентом – газировкой (содовой). Вкусный умеренно крепкий коктейль быстро стал популярным и распространился по всему миру, а бар Мартинесов успешно работает до сих пор.', 'ru.wikipedia.org/wiki/Мохито\n'),
+(6, 4, 'В последние несколько лет одним из самых модных коктейлей считается кубинский Мохито (Mojito). Теперь чтобы насладиться его неповторимым вкусом необязательно идти в бар. Я расскажу о технологии приготовления Мохито в домашних условиях. Узнав все тонкости, вы сможете сделать этот коктейль у себя на кухне. Мы рассмотрим алкогольный и безалкогольный рецепты.\n\nИсторическая справка. Коктейль «Мохито» является усовершенствованной версией напитка «Драк», рецепт которого придумал известный пират Ф. Дрейк. Морские разбойники настаивали ром на лайме и мяте. Полученный напиток помогал им бороться с инфекционными заболеваниями в морских походах.\nВ 1942 году семейство Мартинес открыло в Гаване собственный бар La Bodeguita del Medio. Главной изюминкой заведения стал коктейль «Мохито» (с испанского слово mojito переводится как «немного влажный»), который отличался от пиратского рецепта одним дополнительным ингредиентом – газировкой (содовой). Вкусный умеренно крепкий коктейль быстро стал популярным и распространился по всему миру, а бар Мартинесов успешно работает до сих пор.', 'ru.wikipedia.org/wiki/Мохито\n'),
 (7, 5, 'Любители экзотического спиртного ценят этот коктейль за оригинальный цвет, насыщенный вкус и простоту приготовления. Сделать коктейль «Голубая лагуна» в домашних условиях может любой начинающий бармен. В классическом рецепте используются легкодоступные ингредиенты, при их смешивании получается настоящий шедевр.\r\nИсторическая справка. Рецепт «Голубой лагуны» в 1960 году придумал американский бармен Энди МакЭлхон. Сначала считалось, что коктейль назван в честь одноименного фильма, который в то время был весьма популярен. Но позже выяснилось, что кино не имеет к напитку никакого отношения. «Голубая лагуна» – это термальный курорт в Исландии, где когда-то побывал МакЭлхон. Цвет полученного коктейля напомнил ему увиденные там красоты.\r\nПо еще одной версии «Голубую лагуну» впервые сделал французский художник Поль Гоген, после того как врачи запретили ему пить абсент. Переехав на Таити, он начал экспериментировать со смешиванием разных алкогольных напитков. Но эта гипотеза не нашла подтверждения, так и оставшись легендой.', 'ru.inshaker.com/cocktails/314-golubaya-laguna\n'),
 (8, 6, 'Рецепт этого коктейля придумали не в России. Благодаря умеренной крепости с приятным молочным послевкусием он стал хитом западных дискотек 80-х годов. Доступность ингредиентов и простота приготовления позволяют насладиться коктейлем «Белый русский» в домашних условиях.\nИсторическая справка. «Белый русский» назван в честь белогвардейцев, бежавших за границу после поражения в гражданской войне. На Западе их называли «white russians». В пособиях для барменов первая версия коктейля встречается в 1930 году. Тогда он назывался «Белый медведь». Его готовили из водки, джина и какао-ликера. В 1950 году американские бармены модифицировали рецепт, после чего дали напитку его современное название.\nВ 1998 году на экраны вышел новый фильм братьев Коэнов «Большой Лебовски». Главный герой Джеффри «Чувак» Лебовски обожал пить молочный коктейль с водкой и кофейным ликером. Ценителям кино нравится делать «Белый русский» одновременно с главным героем, они утверждают, что так лучше чувствуют происходящее на экране. Также в сериале «Сверхъестественное» этот коктейль готовит Эйнштейн в раю.', 'ru.wikipedia.org/wiki/Белый_русский\n'),
 (9, 7, 'Вначале 70-х годов прошлого века об этом коктейле знал лишь ограниченный круг лиц подпольных американских тусовок. Но стоило напитку однажды появиться на телевизионном экране, как о нем заговорил весь мир. Теперь «Космополитен» считается одним из лучших женских коктейлей.\r\n\r\nИсторическая справка. Изначально коктейль «Космополитен» создавался для поддержки алкогольного бренда Absolut Citron (водки с лимонным вкусом). Но рецепт так и не стал популярным, со временем о нем быстро забыли. Напиток «прижился» лишь в некоторых неформальных группах США.\r\nНо по-настоящему популярным «Космополитен» стал только после выхода на экран в 1998 году культового сериала «Секс в большом городе», героини которого почти в каждой серии пили этот коктейль, делясь женскими секретами.\r\nВторое рождение «Космополитену» дала женщина-бармен из Флориды Черил Кук, решившая придумать чисто женский коктейль, который стал бы альтернативой мартини. Черил смешала цитрусовую водку Absolut Citron, апельсиновый ликер Трипл-сек, клюквенный и лимонный соки. Но и этот рецепт быстро вышел из моды.\r\n', 'ru.inshaker.com/cocktails/29-kosmopoliten\n'),
@@ -125,7 +142,8 @@ INSERT INTO `content` (`id`, `article_id`, `text_article`, `links`) VALUES
 (11, 9, 'Тропический коктейль с грозным названием на основе трех видов рома. Соки скрывают жгучий привкус крепкого алкоголя, делая напиток мягким, но эта мягкость обманчива. «Зомби» быстро опьяняет, а иногда и вовсе валит с ног.\r\nИсторическая справка. Рецепт коктейля «Зомби» придумал в 1934 году владелец известного в Калифорнии бара Дон Бич (Don Beach). По одной из версий напиток получил название благодаря быстрому опьяняющему эффекту. Две порции превращают большинство посетителей в зомби. Еще этот коктейль иногда используется как средство от похмелья. По составу и вкусу он похож на «Май Тай». Сразу после появления «Зомби» стал популярным на родине. В 30-х годах он часто мелькал в голливудских фильмах или герои кино упоминали о нем.', 'gradusinfo.ru/alkogol/koktejli/s-romom/zombi-v-domashnix-usloviyax.html\n'),
 (12, 10, 'Традиционный русский алкогольный коктейль, названный в честь актера Михаила Сергеевича Боярского. Бюджетный состав, простота приготовления и хорошо сбалансированный вкус сделали этот напиток хитом многих домашних вечеринок и праздников на открытом воздухе.\r\nИсторическая справка. Согласно самой правдоподобной версии коктейль «Боярский» придумали в 2004 году на музыкальном фестивале «Казантип» в Крыму. После выступления питерская группа «ILWT» отдыха в одном из баров. Музыкантам надоело пить чистую водку, тогда бармен предложил добавить сироп Гренадин (на основе гранатового сока). Во время дегустации коктейля посетители выкрикивали реплики из фильмов, в которых снялся Михаил Боярский, так и появилось название.\r\nПо другой версии рецепт предложил на «Казантипе» оставшийся неизвестным врач-нарколог, который хотел создать идеальное спиртное для праздника. Также выдвигается гипотеза, что автором коктейля является сам Михаил Боярский, но актер никогда публично не подтверждал своё отношение к напитку.\r\nКак пить. Из-за высокой крепости коктейль «Боярский» подают в стопках (шотах) и пьют залпом. После того как стопка опустеет, нужно ударить рукой по столу и прокричать: «Тысяча чертей!» или «Каналья!».', 'alcofan.com/kak-sdelat-koktejl-boyarskij.html\n'),
 (13, 11, 'Слабоалкогольный освежающий напиток с нотками фруктов, легкой цитрусовой горечью и умеренной газированостью. В Венеции туристы и местные жители выпивают примерно 300 тысяч порций «Апероль Шприц» за один день. Благодаря простоте приготовления этот коктейль легко сделать в домашних условиях. В составе только три ингредиенты: шампанское, биттер и минеральная вода.\r\n\r\nИсторическая справка. По одной из версий коктейль «Апероль Шприц» появился в середине XIX века в Венеции после захвата региона Австрийской империей. Прибывшие солдаты разбавляли местные вина водой, как это было принято на их родине — в австрийской долине Вахау (Wachau), которая славится винодельческими традициями. Правда, в те времена биттер Апероль еще не изобрели, поэтому тот напиток можно считать лишь прародителем традиционного коктейля.\r\n\r\nПо другой версии рецепт Апероль Шприц придумали военные Австро-Венгрии, которые во время Первой мировой войны заняли северную часть региона Венето. Как и их предшественники, захватчики тоже разбавляли игристые вина водой (в основном игристое Просекко), добавляя в состав еще и слабоалкогольный Aperol, который как раз начал набирать популярность.', 'https://ru.inshaker.com/cocktails/1098-aperol-shprits'),
-(14, 12, 'В жаркий знойный день сложно найти более подходящий коктейль, чем «Куба Либре». Придуманный более ста лет назад он и сегодня не выходит из моды. Благодаря доступным ингредиентам и простоте приготовления каждый желающий может сделать коктейль «Куба Либре» в домашних условиях. Мы рассмотрим правильный рецепт и технологию.\r\n\r\nИсторическая справка. Коктейль «Куба Либре» (свободная Куба) впервые приготовили в одном из баров Гаваны в 1900 году. За два года до этого кубинцы победили в войне с Испанией, получив независимость от метрополии. На их стороне воевали американские солдаты.\r\n\r\nДаже после победы часть американских войск продолжала оставаться на острове. Одним из этих военнослужащих был капитан Рассел, любивший смешивать ром, колу и сок лайма. Однажды он узнал, что у его любимого коктейля нет названия. Тогда Рассел воскликнул «¡Por Cuba libre!» (За свободную Кубу). Так самый популярный тост кубинского побережья стал названием коктейля.\r\n\r\nВ составе «Куба Либре» хорошо сочетаются кубинский ром и американская кола. Вначале прошлого века казалось, что дружба между США и Кубой будет вечной, поэтому коктейль с удовольствием пили жители обеих стран. Но даже после фактического разрыва отношений о напитке не забыли. Сейчас он является одним из самых популярных коктейлей в мире.', 'https://ru.inshaker.com/cocktails/33-kuba-libre');
+(14, 12, 'В жаркий знойный день сложно найти более подходящий коктейль, чем «Куба Либре». Придуманный более ста лет назад он и сегодня не выходит из моды. Благодаря доступным ингредиентам и простоте приготовления каждый желающий может сделать коктейль «Куба Либре» в домашних условиях. Мы рассмотрим правильный рецепт и технологию.\r\n\r\nИсторическая справка. Коктейль «Куба Либре» (свободная Куба) впервые приготовили в одном из баров Гаваны в 1900 году. За два года до этого кубинцы победили в войне с Испанией, получив независимость от метрополии. На их стороне воевали американские солдаты.\r\n\r\nДаже после победы часть американских войск продолжала оставаться на острове. Одним из этих военнослужащих был капитан Рассел, любивший смешивать ром, колу и сок лайма. Однажды он узнал, что у его любимого коктейля нет названия. Тогда Рассел воскликнул «¡Por Cuba libre!» (За свободную Кубу). Так самый популярный тост кубинского побережья стал названием коктейля.\r\n\r\nВ составе «Куба Либре» хорошо сочетаются кубинский ром и американская кола. Вначале прошлого века казалось, что дружба между США и Кубой будет вечной, поэтому коктейль с удовольствием пили жители обеих стран. Но даже после фактического разрыва отношений о напитке не забыли. Сейчас он является одним из самых популярных коктейлей в мире.', 'https://ru.inshaker.com/cocktails/33-kuba-libre'),
+(15, 13, 'Этот коктейль создал месье Пите Петьо в "Харриз-бар" в Париже в 1921 году. Свое название напиток унаследовал, по всей видимости, от дочери английского короля Генриха VIII, получившей прозвище Кровавая Мэри от своей жестокости.', 'https://ru.inshaker.com/cocktails/31-krovavaya-meri');
 
 -- --------------------------------------------------------
 
@@ -133,10 +151,11 @@ INSERT INTO `content` (`id`, `article_id`, `text_article`, `links`) VALUES
 -- Структура таблицы `img`
 --
 
-CREATE TABLE `img` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `img` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `img` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `img` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `img`
@@ -154,7 +173,8 @@ INSERT INTO `img` (`id`, `img`) VALUES
 (9, 'zombie.jpg'),
 (10, 'boyar.jpg'),
 (11, 'aperol.jpg'),
-(12, 'cuba.jpg');
+(12, 'cuba.jpg'),
+(13, 'mery.jpg');
 
 -- --------------------------------------------------------
 
@@ -162,11 +182,14 @@ INSERT INTO `img` (`id`, `img`) VALUES
 -- Структура таблицы `ingredient`
 --
 
-CREATE TABLE `ingredient` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `set_ingredients_id` int(10) UNSIGNED NOT NULL,
-  `count` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ingredient` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `set_ingredients_id` int(10) unsigned NOT NULL,
+  `count` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `set_ingredients_id` (`set_ingredients_id`),
+  KEY `set_ingredients_id_2` (`set_ingredients_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=70 ;
 
 --
 -- Дамп данных таблицы `ingredient`
@@ -235,7 +258,12 @@ INSERT INTO `ingredient` (`id`, `set_ingredients_id`, `count`) VALUES
 (61, 61, 10),
 (62, 62, 20),
 (63, 63, 180),
-(64, 64, 140);
+(64, 64, 140),
+(65, 65, 50),
+(66, 66, 120),
+(67, 67, 10),
+(68, 68, 1),
+(69, 69, 1);
 
 -- --------------------------------------------------------
 
@@ -243,10 +271,13 @@ INSERT INTO `ingredient` (`id`, `set_ingredients_id`, `count`) VALUES
 -- Структура таблицы `popular`
 --
 
-CREATE TABLE `popular` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `article_id` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `popular` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `article_id` (`article_id`),
+  KEY `article_id_2` (`article_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=135 ;
 
 --
 -- Дамп данных таблицы `popular`
@@ -265,12 +296,14 @@ INSERT INTO `popular` (`id`, `article_id`) VALUES
 -- Структура таблицы `product`
 --
 
-CREATE TABLE `product` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `product` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title_product` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `unit` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `unit` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ingredient_id_2` (`title_product`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=43 ;
 
 --
 -- Дамп данных таблицы `product`
@@ -314,7 +347,11 @@ INSERT INTO `product` (`id`, `title_product`, `type`, `unit`) VALUES
 (35, 'Табаско соус', 'product', 'г'),
 (36, 'Просекко', 'drink', 'мл'),
 (37, 'Кока-кола', 'drink', 'мл'),
-(38, 'Золотой ром', 'drink', 'мл');
+(38, 'Золотой ром', 'drink', 'мл'),
+(39, 'Томатный сок', 'drink', 'мл'),
+(40, 'Соус тобаско', 'product', 'мл'),
+(41, 'Соус ворчестер', 'product', 'мл'),
+(42, 'Лимонный сок', 'product', 'мл');
 
 -- --------------------------------------------------------
 
@@ -322,12 +359,17 @@ INSERT INTO `product` (`id`, `title_product`, `type`, `unit`) VALUES
 -- Структура таблицы `rating`
 --
 
-CREATE TABLE `rating` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `rating` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
   `sum` int(11) NOT NULL,
-  `article_id` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `article_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `article_id` (`user_id`),
+  KEY `user_id` (`user_id`),
+  KEY `article_id_2` (`article_id`),
+  KEY `article_id_3` (`article_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
 
 --
 -- Дамп данных таблицы `rating`
@@ -408,11 +450,14 @@ INSERT INTO `rating` (`id`, `user_id`, `sum`, `article_id`) VALUES
 -- Структура таблицы `set_img`
 --
 
-CREATE TABLE `set_img` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `img_id` int(10) UNSIGNED NOT NULL,
-  `content_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `set_img` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `img_id` int(10) unsigned NOT NULL,
+  `content_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `img_id` (`img_id`),
+  KEY `article_id` (`content_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `set_img`
@@ -430,7 +475,8 @@ INSERT INTO `set_img` (`id`, `img_id`, `content_id`) VALUES
 (9, 9, 11),
 (10, 10, 12),
 (11, 11, 13),
-(12, 12, 14);
+(12, 12, 14),
+(13, 13, 15);
 
 -- --------------------------------------------------------
 
@@ -438,11 +484,14 @@ INSERT INTO `set_img` (`id`, `img_id`, `content_id`) VALUES
 -- Структура таблицы `set_ingredients`
 --
 
-CREATE TABLE `set_ingredients` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `cocktail_id` int(10) UNSIGNED NOT NULL,
-  `ingredient_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `set_ingredients` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cocktail_id` int(10) unsigned NOT NULL,
+  `ingredient_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ingredient_id` (`ingredient_id`),
+  KEY `cocktail_id` (`cocktail_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=70 ;
 
 --
 -- Дамп данных таблицы `set_ingredients`
@@ -510,7 +559,12 @@ INSERT INTO `set_ingredients` (`id`, `cocktail_id`, `ingredient_id`) VALUES
 (61, 12, 24),
 (62, 12, 5),
 (63, 12, 6),
-(64, 12, 37);
+(64, 12, 37),
+(65, 13, 2),
+(66, 13, 39),
+(67, 13, 42),
+(68, 13, 40),
+(69, 13, 41);
 
 -- --------------------------------------------------------
 
@@ -518,12 +572,13 @@ INSERT INTO `set_ingredients` (`id`, `cocktail_id`, `ingredient_id`) VALUES
 -- Структура таблицы `user`
 --
 
-CREATE TABLE `user` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `log` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `data_born` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `data_born` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Дамп данных таблицы `user`
@@ -545,184 +600,6 @@ INSERT INTO `user` (`id`, `log`, `password`, `data_born`) VALUES
 (13, 'ы', 'ы', '1111-11-11'),
 (14, 'z', 'z', '0000-00-00'),
 (15, 'qqq', 'qqq', '0000-00-00');
-
---
--- Индексы сохранённых таблиц
---
-
---
--- Индексы таблицы `article`
---
-ALTER TABLE `article`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`),
-  ADD KEY `id_2` (`id`),
-  ADD KEY `cocktail_id` (`cocktail_id`),
-  ADD KEY `cocktail_id_2` (`cocktail_id`),
-  ADD KEY `cocktail_id_3` (`cocktail_id`);
-
---
--- Индексы таблицы `cocktail`
---
-ALTER TABLE `cocktail`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `title_coctail` (`title_coctail`);
-
---
--- Индексы таблицы `comment`
---
-ALTER TABLE `comment`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `article_id` (`article_id`,`user_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `article_id_2` (`article_id`),
-  ADD KEY `user_id_2` (`user_id`),
-  ADD KEY `article_id_3` (`article_id`,`user_id`);
-
---
--- Индексы таблицы `content`
---
-ALTER TABLE `content`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `article_id` (`article_id`),
-  ADD KEY `article_id_2` (`article_id`);
-
---
--- Индексы таблицы `img`
---
-ALTER TABLE `img`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `ingredient`
---
-ALTER TABLE `ingredient`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `set_ingredients_id` (`set_ingredients_id`),
-  ADD KEY `set_ingredients_id_2` (`set_ingredients_id`);
-
---
--- Индексы таблицы `popular`
---
-ALTER TABLE `popular`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `article_id` (`article_id`),
-  ADD KEY `article_id_2` (`article_id`);
-
---
--- Индексы таблицы `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ingredient_id_2` (`title_product`);
-
---
--- Индексы таблицы `rating`
---
-ALTER TABLE `rating`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `article_id` (`user_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `article_id_2` (`article_id`),
-  ADD KEY `article_id_3` (`article_id`);
-
---
--- Индексы таблицы `set_img`
---
-ALTER TABLE `set_img`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `img_id` (`img_id`),
-  ADD KEY `article_id` (`content_id`);
-
---
--- Индексы таблицы `set_ingredients`
---
-ALTER TABLE `set_ingredients`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ingredient_id` (`ingredient_id`),
-  ADD KEY `cocktail_id` (`cocktail_id`);
-
---
--- Индексы таблицы `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT для сохранённых таблиц
---
-
---
--- AUTO_INCREMENT для таблицы `article`
---
-ALTER TABLE `article`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT для таблицы `cocktail`
---
-ALTER TABLE `cocktail`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT для таблицы `comment`
---
-ALTER TABLE `comment`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
-
---
--- AUTO_INCREMENT для таблицы `content`
---
-ALTER TABLE `content`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT для таблицы `img`
---
-ALTER TABLE `img`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT для таблицы `ingredient`
---
-ALTER TABLE `ingredient`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
-
---
--- AUTO_INCREMENT для таблицы `popular`
---
-ALTER TABLE `popular`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
-
---
--- AUTO_INCREMENT для таблицы `product`
---
-ALTER TABLE `product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
---
--- AUTO_INCREMENT для таблицы `rating`
---
-ALTER TABLE `rating`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
-
---
--- AUTO_INCREMENT для таблицы `set_img`
---
-ALTER TABLE `set_img`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT для таблицы `set_ingredients`
---
-ALTER TABLE `set_ingredients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
-
---
--- AUTO_INCREMENT для таблицы `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -779,7 +656,6 @@ ALTER TABLE `set_img`
 ALTER TABLE `set_ingredients`
   ADD CONSTRAINT `set_ingredients_ibfk_3` FOREIGN KEY (`cocktail_id`) REFERENCES `cocktail` (`id`),
   ADD CONSTRAINT `set_ingredients_ibfk_4` FOREIGN KEY (`ingredient_id`) REFERENCES `product` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
