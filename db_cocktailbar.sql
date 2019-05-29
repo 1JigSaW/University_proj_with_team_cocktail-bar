@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 22 2019 г., 23:26
--- Версия сервера: 5.5.25
--- Версия PHP: 5.3.13
+-- Время создания: Май 29 2019 г., 14:18
+-- Версия сервера: 10.1.38-MariaDB
+-- Версия PHP: 7.3.3
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- База данных: `db_cocktailbar`
@@ -26,16 +28,10 @@ SET time_zone = "+00:00";
 -- Структура таблицы `article`
 --
 
-CREATE TABLE IF NOT EXISTS `article` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `cocktail_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id` (`id`),
-  KEY `id_2` (`id`),
-  KEY `cocktail_id` (`cocktail_id`),
-  KEY `cocktail_id_2` (`cocktail_id`),
-  KEY `cocktail_id_3` (`cocktail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+CREATE TABLE `article` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `cocktail_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `article`
@@ -51,7 +47,8 @@ INSERT INTO `article` (`id`, `cocktail_id`) VALUES
 (7, 7),
 (8, 8),
 (9, 9),
-(10, 10);
+(10, 10),
+(11, 11);
 
 -- --------------------------------------------------------
 
@@ -59,14 +56,12 @@ INSERT INTO `article` (`id`, `cocktail_id`) VALUES
 -- Структура таблицы `cocktail`
 --
 
-CREATE TABLE IF NOT EXISTS `cocktail` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cocktail` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title_coctail` varchar(255) NOT NULL,
   `fortress` int(11) NOT NULL,
-  `category` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `title_coctail` (`title_coctail`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `category` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `cocktail`
@@ -82,7 +77,8 @@ INSERT INTO `cocktail` (`id`, `title_coctail`, `fortress`, `category`) VALUES
 (7, 'Космополитен', 30, 'крепкоалкогольный'),
 (8, 'Негрони', 29, 'крепкоалкогольный'),
 (9, 'Зомби', 48, 'крепокоалкогольный'),
-(10, 'Боярский', 40, 'крепкоалкогольный');
+(10, 'Боярский', 40, 'крепкоалкогольный'),
+(11, 'Апероль Шприц', 10, 'слабоалкогольные');
 
 -- --------------------------------------------------------
 
@@ -90,19 +86,13 @@ INSERT INTO `cocktail` (`id`, `title_coctail`, `fortress`, `category`) VALUES
 -- Структура таблицы `comment`
 --
 
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comment` (
+  `id` int(10) UNSIGNED NOT NULL,
   `text_comment` text NOT NULL,
   `data_comment` datetime NOT NULL,
-  `article_id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `article_id` (`article_id`,`user_id`),
-  KEY `user_id` (`user_id`),
-  KEY `article_id_2` (`article_id`),
-  KEY `user_id_2` (`user_id`),
-  KEY `article_id_3` (`article_id`,`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
+  `article_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -110,15 +100,12 @@ CREATE TABLE IF NOT EXISTS `comment` (
 -- Структура таблицы `content`
 --
 
-CREATE TABLE IF NOT EXISTS `content` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `article_id` int(10) unsigned NOT NULL,
+CREATE TABLE `content` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `article_id` int(10) UNSIGNED NOT NULL,
   `text_article` text NOT NULL,
-  `links` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `article_id` (`article_id`),
-  KEY `article_id_2` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+  `links` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `content`
@@ -134,7 +121,8 @@ INSERT INTO `content` (`id`, `article_id`, `text_article`, `links`) VALUES
 (9, 7, 'Вначале 70-х годов прошлого века об этом коктейле знал лишь ограниченный круг лиц подпольных американских тусовок. Но стоило напитку однажды появиться на телевизионном экране, как о нем заговорил весь мир. Теперь «Космополитен» считается одним из лучших женских коктейлей.\r\n\r\nИсторическая справка. Изначально коктейль «Космополитен» создавался для поддержки алкогольного бренда Absolut Citron (водки с лимонным вкусом). Но рецепт так и не стал популярным, со временем о нем быстро забыли. Напиток «прижился» лишь в некоторых неформальных группах США.\r\nНо по-настоящему популярным «Космополитен» стал только после выхода на экран в 1998 году культового сериала «Секс в большом городе», героини которого почти в каждой серии пили этот коктейль, делясь женскими секретами.\r\nВторое рождение «Космополитену» дала женщина-бармен из Флориды Черил Кук, решившая придумать чисто женский коктейль, который стал бы альтернативой мартини. Черил смешала цитрусовую водку Absolut Citron, апельсиновый ликер Трипл-сек, клюквенный и лимонный соки. Но и этот рецепт быстро вышел из моды.\r\n', 'ru.inshaker.com/cocktails/29-kosmopoliten\n'),
 (10, 8, 'Простой в приготовлении коктейль, который принято подавать на аперитив. Имеет красивый внешний вид и оригинальный запоминающийся вкус. Из-за высокой крепости (29-30 градусов) считается больше мужским напитком, хотя на одну часть состоит из сладкого вермута. Всё это о коктейле «Негрони», рецептом которого гордятся итальянцы.\r\n\r\nИсторическая справка. Коктейль «Негрони» придумал граф Камилло Негрони, родившийся в 1868 году в семье флорентийских аристократов. Будучи военным, он много путешествовал по миру, пробуя спиртное разных стран. Со временем у Негрони появилось два любимых напитка: лондонский джин и коктейль «Американо», состоящий из содовой, мартини Россо и биттера Кампари.\r\nВ 1919 году Негрони приехал на родину во Флоренцию. Он зашел в свой любимый бар «Casoni» и попросил старого друга Фоско Скарселли приготовить ему «Американо», но вместо содовой добавить джин для увеличения крепости. Полученный коктейль понравился не только графу, но и другим гостям. В 1948 году рецепт назвали в честь создателя.\r\nВо время светских приемов Негрони пил только свой коктейль. Он просил барменов украшать бокал долькой апельсина, чтобы не путать его с «Американо», который внешним видом очень похож на «Негрони», но традиционно украшается лимоном.', 'samogonman.com/koktejli/kak-pravilno-prigotovit-koktejl-negroni-negroni-sostav-i-klassicheskij-sposob-prigotovleniya-napitka.html\n'),
 (11, 9, 'Тропический коктейль с грозным названием на основе трех видов рома. Соки скрывают жгучий привкус крепкого алкоголя, делая напиток мягким, но эта мягкость обманчива. «Зомби» быстро опьяняет, а иногда и вовсе валит с ног.\r\nИсторическая справка. Рецепт коктейля «Зомби» придумал в 1934 году владелец известного в Калифорнии бара Дон Бич (Don Beach). По одной из версий напиток получил название благодаря быстрому опьяняющему эффекту. Две порции превращают большинство посетителей в зомби. Еще этот коктейль иногда используется как средство от похмелья. По составу и вкусу он похож на «Май Тай». Сразу после появления «Зомби» стал популярным на родине. В 30-х годах он часто мелькал в голливудских фильмах или герои кино упоминали о нем.', 'gradusinfo.ru/alkogol/koktejli/s-romom/zombi-v-domashnix-usloviyax.html\n'),
-(12, 10, 'Традиционный русский алкогольный коктейль, названный в честь актера Михаила Сергеевича Боярского. Бюджетный состав, простота приготовления и хорошо сбалансированный вкус сделали этот напиток хитом многих домашних вечеринок и праздников на открытом воздухе.\r\nИсторическая справка. Согласно самой правдоподобной версии коктейль «Боярский» придумали в 2004 году на музыкальном фестивале «Казантип» в Крыму. После выступления питерская группа «ILWT» отдыха в одном из баров. Музыкантам надоело пить чистую водку, тогда бармен предложил добавить сироп Гренадин (на основе гранатового сока). Во время дегустации коктейля посетители выкрикивали реплики из фильмов, в которых снялся Михаил Боярский, так и появилось название.\r\nПо другой версии рецепт предложил на «Казантипе» оставшийся неизвестным врач-нарколог, который хотел создать идеальное спиртное для праздника. Также выдвигается гипотеза, что автором коктейля является сам Михаил Боярский, но актер никогда публично не подтверждал своё отношение к напитку.\r\nКак пить. Из-за высокой крепости коктейль «Боярский» подают в стопках (шотах) и пьют залпом. После того как стопка опустеет, нужно ударить рукой по столу и прокричать: «Тысяча чертей!» или «Каналья!».', 'alcofan.com/kak-sdelat-koktejl-boyarskij.html\n');
+(12, 10, 'Традиционный русский алкогольный коктейль, названный в честь актера Михаила Сергеевича Боярского. Бюджетный состав, простота приготовления и хорошо сбалансированный вкус сделали этот напиток хитом многих домашних вечеринок и праздников на открытом воздухе.\r\nИсторическая справка. Согласно самой правдоподобной версии коктейль «Боярский» придумали в 2004 году на музыкальном фестивале «Казантип» в Крыму. После выступления питерская группа «ILWT» отдыха в одном из баров. Музыкантам надоело пить чистую водку, тогда бармен предложил добавить сироп Гренадин (на основе гранатового сока). Во время дегустации коктейля посетители выкрикивали реплики из фильмов, в которых снялся Михаил Боярский, так и появилось название.\r\nПо другой версии рецепт предложил на «Казантипе» оставшийся неизвестным врач-нарколог, который хотел создать идеальное спиртное для праздника. Также выдвигается гипотеза, что автором коктейля является сам Михаил Боярский, но актер никогда публично не подтверждал своё отношение к напитку.\r\nКак пить. Из-за высокой крепости коктейль «Боярский» подают в стопках (шотах) и пьют залпом. После того как стопка опустеет, нужно ударить рукой по столу и прокричать: «Тысяча чертей!» или «Каналья!».', 'alcofan.com/kak-sdelat-koktejl-boyarskij.html\n'),
+(13, 11, 'Слабоалкогольный освежающий напиток с нотками фруктов, легкой цитрусовой горечью и умеренной газированостью. В Венеции туристы и местные жители выпивают примерно 300 тысяч порций «Апероль Шприц» за один день. Благодаря простоте приготовления этот коктейль легко сделать в домашних условиях. В составе только три ингредиенты: шампанское, биттер и минеральная вода.\r\n\r\nИсторическая справка. По одной из версий коктейль «Апероль Шприц» появился в середине XIX века в Венеции после захвата региона Австрийской империей. Прибывшие солдаты разбавляли местные вина водой, как это было принято на их родине — в австрийской долине Вахау (Wachau), которая славится винодельческими традициями. Правда, в те времена биттер Апероль еще не изобрели, поэтому тот напиток можно считать лишь прародителем традиционного коктейля.\r\n\r\nПо другой версии рецепт Апероль Шприц придумали военные Австро-Венгрии, которые во время Первой мировой войны заняли северную часть региона Венето. Как и их предшественники, захватчики тоже разбавляли игристые вина водой (в основном игристое Просекко), добавляя в состав еще и слабоалкогольный Aperol, который как раз начал набирать популярность.', 'https://ru.inshaker.com/cocktails/1098-aperol-shprits');
 
 -- --------------------------------------------------------
 
@@ -142,11 +130,10 @@ INSERT INTO `content` (`id`, `article_id`, `text_article`, `links`) VALUES
 -- Структура таблицы `img`
 --
 
-CREATE TABLE IF NOT EXISTS `img` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `img` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+CREATE TABLE `img` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `img` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `img`
@@ -162,7 +149,8 @@ INSERT INTO `img` (`id`, `img`) VALUES
 (7, 'cosmos.jpg'),
 (8, 'negr.jpg'),
 (9, 'zombie.jpg'),
-(10, 'boyar.jpg');
+(10, 'boyar.jpg'),
+(11, 'aperol.jpg');
 
 -- --------------------------------------------------------
 
@@ -170,14 +158,11 @@ INSERT INTO `img` (`id`, `img`) VALUES
 -- Структура таблицы `ingredient`
 --
 
-CREATE TABLE IF NOT EXISTS `ingredient` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `set_ingredients_id` int(10) unsigned NOT NULL,
-  `count` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `set_ingredients_id` (`set_ingredients_id`),
-  KEY `set_ingredients_id_2` (`set_ingredients_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
+CREATE TABLE `ingredient` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `set_ingredients_id` int(10) UNSIGNED NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `ingredient`
@@ -237,7 +222,11 @@ INSERT INTO `ingredient` (`id`, `set_ingredients_id`, `count`) VALUES
 (52, 52, 60),
 (53, 53, 25),
 (54, 54, 25),
-(55, 55, 50);
+(55, 55, 50),
+(56, 56, 40),
+(57, 57, 100),
+(58, 58, 100),
+(59, 59, 60);
 
 -- --------------------------------------------------------
 
@@ -245,13 +234,10 @@ INSERT INTO `ingredient` (`id`, `set_ingredients_id`, `count`) VALUES
 -- Структура таблицы `popular`
 --
 
-CREATE TABLE IF NOT EXISTS `popular` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `article_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `article_id` (`article_id`),
-  KEY `article_id_2` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=135 ;
+CREATE TABLE `popular` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `article_id` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `popular`
@@ -270,14 +256,12 @@ INSERT INTO `popular` (`id`, `article_id`) VALUES
 -- Структура таблицы `product`
 --
 
-CREATE TABLE IF NOT EXISTS `product` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `product` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title_product` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `unit` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ingredient_id_2` (`title_product`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+  `unit` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `product`
@@ -318,7 +302,8 @@ INSERT INTO `product` (`id`, `title_product`, `type`, `unit`) VALUES
 (32, 'Грйепфрутовый сок', 'drink', 'мл'),
 (33, 'Грейпфрут', 'product', 'г'),
 (34, 'Гренадин', 'drink', 'мл'),
-(35, 'Табаско соус', 'product', 'г');
+(35, 'Табаско соус', 'product', 'г'),
+(36, 'Просекко', 'drink', 'мл');
 
 -- --------------------------------------------------------
 
@@ -326,17 +311,12 @@ INSERT INTO `product` (`id`, `title_product`, `type`, `unit`) VALUES
 -- Структура таблицы `rating`
 --
 
-CREATE TABLE IF NOT EXISTS `rating` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
+CREATE TABLE `rating` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
   `sum` int(11) NOT NULL,
-  `article_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `article_id` (`user_id`),
-  KEY `user_id` (`user_id`),
-  KEY `article_id_2` (`article_id`),
-  KEY `article_id_3` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
+  `article_id` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `rating`
@@ -417,14 +397,11 @@ INSERT INTO `rating` (`id`, `user_id`, `sum`, `article_id`) VALUES
 -- Структура таблицы `set_img`
 --
 
-CREATE TABLE IF NOT EXISTS `set_img` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `img_id` int(10) unsigned NOT NULL,
-  `content_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `img_id` (`img_id`),
-  KEY `article_id` (`content_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+CREATE TABLE `set_img` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `img_id` int(10) UNSIGNED NOT NULL,
+  `content_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `set_img`
@@ -440,7 +417,8 @@ INSERT INTO `set_img` (`id`, `img_id`, `content_id`) VALUES
 (7, 7, 9),
 (8, 8, 10),
 (9, 9, 11),
-(10, 10, 12);
+(10, 10, 12),
+(11, 11, 13);
 
 -- --------------------------------------------------------
 
@@ -448,14 +426,11 @@ INSERT INTO `set_img` (`id`, `img_id`, `content_id`) VALUES
 -- Структура таблицы `set_ingredients`
 --
 
-CREATE TABLE IF NOT EXISTS `set_ingredients` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `cocktail_id` int(10) unsigned NOT NULL,
-  `ingredient_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ingredient_id` (`ingredient_id`),
-  KEY `cocktail_id` (`cocktail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
+CREATE TABLE `set_ingredients` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `cocktail_id` int(10) UNSIGNED NOT NULL,
+  `ingredient_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `set_ingredients`
@@ -514,7 +489,11 @@ INSERT INTO `set_ingredients` (`id`, `cocktail_id`, `ingredient_id`) VALUES
 (52, 9, 18),
 (53, 10, 2),
 (54, 10, 34),
-(55, 10, 35);
+(55, 10, 35),
+(56, 11, 25),
+(57, 11, 36),
+(58, 11, 28),
+(59, 11, 6);
 
 -- --------------------------------------------------------
 
@@ -522,13 +501,12 @@ INSERT INTO `set_ingredients` (`id`, `cocktail_id`, `ingredient_id`) VALUES
 -- Структура таблицы `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id` int(11) UNSIGNED NOT NULL,
   `log` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `data_born` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+  `data_born` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `user`
@@ -550,6 +528,184 @@ INSERT INTO `user` (`id`, `log`, `password`, `data_born`) VALUES
 (13, 'ы', 'ы', '1111-11-11'),
 (14, 'z', 'z', '0000-00-00'),
 (15, 'qqq', 'qqq', '0000-00-00');
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `article`
+--
+ALTER TABLE `article`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`),
+  ADD KEY `id_2` (`id`),
+  ADD KEY `cocktail_id` (`cocktail_id`),
+  ADD KEY `cocktail_id_2` (`cocktail_id`),
+  ADD KEY `cocktail_id_3` (`cocktail_id`);
+
+--
+-- Индексы таблицы `cocktail`
+--
+ALTER TABLE `cocktail`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `title_coctail` (`title_coctail`);
+
+--
+-- Индексы таблицы `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `article_id` (`article_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `article_id_2` (`article_id`),
+  ADD KEY `user_id_2` (`user_id`),
+  ADD KEY `article_id_3` (`article_id`,`user_id`);
+
+--
+-- Индексы таблицы `content`
+--
+ALTER TABLE `content`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `article_id` (`article_id`),
+  ADD KEY `article_id_2` (`article_id`);
+
+--
+-- Индексы таблицы `img`
+--
+ALTER TABLE `img`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `ingredient`
+--
+ALTER TABLE `ingredient`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `set_ingredients_id` (`set_ingredients_id`),
+  ADD KEY `set_ingredients_id_2` (`set_ingredients_id`);
+
+--
+-- Индексы таблицы `popular`
+--
+ALTER TABLE `popular`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `article_id` (`article_id`),
+  ADD KEY `article_id_2` (`article_id`);
+
+--
+-- Индексы таблицы `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ingredient_id_2` (`title_product`);
+
+--
+-- Индексы таблицы `rating`
+--
+ALTER TABLE `rating`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `article_id` (`user_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `article_id_2` (`article_id`),
+  ADD KEY `article_id_3` (`article_id`);
+
+--
+-- Индексы таблицы `set_img`
+--
+ALTER TABLE `set_img`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `img_id` (`img_id`),
+  ADD KEY `article_id` (`content_id`);
+
+--
+-- Индексы таблицы `set_ingredients`
+--
+ALTER TABLE `set_ingredients`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ingredient_id` (`ingredient_id`),
+  ADD KEY `cocktail_id` (`cocktail_id`);
+
+--
+-- Индексы таблицы `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `article`
+--
+ALTER TABLE `article`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT для таблицы `cocktail`
+--
+ALTER TABLE `cocktail`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT для таблицы `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+
+--
+-- AUTO_INCREMENT для таблицы `content`
+--
+ALTER TABLE `content`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT для таблицы `img`
+--
+ALTER TABLE `img`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT для таблицы `ingredient`
+--
+ALTER TABLE `ingredient`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
+-- AUTO_INCREMENT для таблицы `popular`
+--
+ALTER TABLE `popular`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+
+--
+-- AUTO_INCREMENT для таблицы `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT для таблицы `rating`
+--
+ALTER TABLE `rating`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+
+--
+-- AUTO_INCREMENT для таблицы `set_img`
+--
+ALTER TABLE `set_img`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT для таблицы `set_ingredients`
+--
+ALTER TABLE `set_ingredients`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
+-- AUTO_INCREMENT для таблицы `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -606,6 +762,7 @@ ALTER TABLE `set_img`
 ALTER TABLE `set_ingredients`
   ADD CONSTRAINT `set_ingredients_ibfk_3` FOREIGN KEY (`cocktail_id`) REFERENCES `cocktail` (`id`),
   ADD CONSTRAINT `set_ingredients_ibfk_4` FOREIGN KEY (`ingredient_id`) REFERENCES `product` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
