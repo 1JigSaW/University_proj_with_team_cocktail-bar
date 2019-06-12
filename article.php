@@ -86,119 +86,139 @@
 					<?php 
 					$user_id=$_SESSION['user'];
 					$login=$_SESSION['log'];
+
+
 					if($user_id!=0){  // определяет, сделал ли вход пользователь
 						$rating=mysqli_query($connect,"SELECT  `user_id`,`article_id` FROM `rating`")or die(mysqli_error());
 						while($arr_rating = mysqli_fetch_assoc($rating)){
 							if($user_id==$arr_rating['user_id'] && $id==$arr_rating['article_id'] ){
 								$paste="disabled";
 							}
+
 						}
-						if(($_POST['like'] || $_POST['dislike'])){
+						if(($_POST['like'] || $_POST['dislike'] || $_POST['revert'])){
+
 							if($_POST['like']){
 								$plus=1;
 								$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$plus','$id')";
-								$paste="disabled";}
-								if($_POST['dislike']){
-									$minus=-1;
-									$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$minus','$id')";
-									$paste="disabled";}
-									$result = mysqli_query($connect, $golos) or die("Ошибка " . mysqli_error($connect));
-									include "popular.php";
-									set_popular($connect)
-									?>
-									<?php
-
-								} ?>
-
-								<?php 
-								$rating = mysqli_query($connect,"SELECT SUM(`sum`) as sum FROM `rating` WHERE $id=`article_id`")or die(mysqli_error());	
-								while($arr_rating = mysqli_fetch_assoc($rating)){
-									?>
-
+								$paste="disabled";
+							}
+							if($_POST['dislike']){
+								$minus=-1;
+								$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$minus','$id')";
+								$paste="disabled";
+							}
+							if($_POST['revert']){
+								$last=mysqli_query($connect,"SELECT * FROM `rating` order by `id` DESC LIMIT 1")or die(mysqli_error());
+								while($arr_last= mysqli_fetch_assoc($last)){
+									$nat=$arr_last['sum'];
+									$nat*=-1;
+									$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$nat','$id')";
+									$paste=" ";
+									$hidden="hidden";
+								}}
+								$result = mysqli_query($connect, $golos) or die("Ошибка " . mysqli_error($connect));
+								include "popular.php";
+								set_popular($connect)
+								?>
+								<div class="alert alert-warning text-center" role="alert" <?php echo $hidden; ?>>
+									<p>Спасибо за вашу активность!</p>
 									<form action="" method="post" class="row p-3">
-										<input class="btn btn-outline-danger col" <?php echo $paste; ?> type="submit" name="dislike" value="DISLIKE">
-										<div class="display-5 text-center alert alert-info m-3" role="alert">
-											ТЕКУЩИЙ РЕЙТИНГ:
-
-											<?php echo $arr_rating['sum'];?>													
-										</div>
-										<input class="btn btn-outline-success col" <?php echo $paste; ?> type="submit" name="like" value="LIKE">
+										<input class="btn btn-warning btn-primary btn-lg btn-block" type="submit" name="revert" value="Изменить оценку">
 									</form>
+								</div>
+							<?php } 
+							?>
 
-								<?php }} ?>
+							<?php 
+							$rating = mysqli_query($connect,"SELECT SUM(`sum`) as sum FROM `rating` WHERE $id=`article_id`")or die(mysqli_error());	
+							while($arr_rating = mysqli_fetch_assoc($rating)){
+								?>
+
+								<form action="" method="post" class="row p-3">
+									<input class="btn btn-outline-danger col" <?php echo $paste; ?> type="submit" name="dislike" value="DISLIKE">
+									<div class="display-5 text-center alert alert-info m-3" role="alert">
+										ТЕКУЩИЙ РЕЙТИНГ:
+
+										<?php echo $arr_rating['sum'];?>													
+									</div>
+									<input class="btn btn-outline-success col" <?php echo $paste; ?> type="submit" name="like" value="LIKE">
+								</form>
+
+							<?php }} ?>
+						</div>
+					</div>
+
+
+					<div>
+
+						<?php
+
+						$comment=$_POST['comment'];
+						$id=$_GET['page'];
+						$data=date("Y-m-d H:i:s", (time()-60*60));
+
+						if($user_id!=0){										
+							if(isset($comment)){
+								$add_comment =mysqli_query($connect,"INSERT INTO  comment VALUES(NULL,'$comment','$data','$id' ,'$user_id')") or die("Ошибка " . mysqli_error($connect));
+							}?>
+
+
+
+							<div>
+								<form action="" method="post" accept-charset="utf-8" >
+									<div class="m-2">
+										<input required class="form-control form-control-lg rounded" type="text" placeholder="Введите ваш комментраий" name="comment">
+									</div>
+									<div class="container">
+
+									</div>
+									<div class="row">
+
+									</div>
+									<div class="m-2">
+										<input class="btn btn-primary p-1 text-center col-12" type="submit" value="Добавить комментарий" name="submit">
+									</div>
+
+								</form>
 							</div>
+
+						<?php } 
+						else { ?>
+							<div class="alert alert-success text-center" role="alert">
+								<h4 class="alert-heading">
+									Войдите на сайт для комментирования 
+								</h4> 
+
+							</div>
+						<?php  } ?>
+						<?php 
+						$comment = mysqli_query($connect,"SELECT * FROM `comment` JOIN `user` WHERE `user`.`id`=`comment`.`user_id`  ORDER BY `comment`.`id` desc ")or die(mysqli_error());
+						while($arr_comment = mysqli_fetch_assoc($comment)) {
+							if($id==$arr_comment['article_id']){
+								?>
+								<div class="d rounded  container text-light">
+									<p>
+									</p>
+									<div class="text-warning m-1 s">
+										<h5><?php  echo $arr_comment['log'];?></h5>
+									</div>
+
+									<div class="container h5">	
+										<p class="s"><?php  echo $arr_comment['text_comment'];?>	
+									</div>
+									<div class="text-right s">
+										<small>
+											<?php  echo $arr_comment['data_comment'];?>
+										</small>
+									</div>
+								</div>
+							<?php  }}?>
 						</div>
 
 
-						<div>
-
-							<?php
-							
-							$comment=$_POST['comment'];
-							$id=$_GET['page'];
-							$data=date("Y-m-d H:i:s", (time()-60*60));
-
-							if($user_id!=0){										
-								if(isset($comment)){
-									$add_comment =mysqli_query($connect,"INSERT INTO  comment VALUES(NULL,'$comment','$data','$id' ,'$user_id')") or die("Ошибка " . mysqli_error($connect));
-								}?>
-								
 
 
-								<div>
-									<form action="" method="post" accept-charset="utf-8" >
-										<div class="m-2">
-											<input required class="form-control form-control-lg rounded" type="text" placeholder="Введите ваш комментраий" name="comment">
-										</div>
-										<div class="container">
-
-										</div>
-										<div class="row">
-
-										</div>
-										<div class="m-2">
-											<input class="btn btn-primary p-1 text-center col-12" type="submit" value="Добавить комментарий" name="submit">
-										</div>
-
-									</form>
-								</div>
-
-							<?php } 
-							else { ?>
-								<div class="alert alert-success text-center" role="alert">
-									<h4 class="alert-heading">
-										Войдите на сайт для комментирования 
-									</h4> 
-
-								</div>
-							<?php  } ?>
-							<?php 
-							$comment = mysqli_query($connect,"SELECT * FROM `comment` JOIN `user` WHERE `user`.`id`=`comment`.`user_id`  ORDER BY `comment`.`id` desc ")or die(mysqli_error());
-							while($arr_comment = mysqli_fetch_assoc($comment)) {
-								if($id==$arr_comment['article_id']){
-									?>
-									<div class="d rounded  container text-light">
-										<p>
-										</p>
-										<div class="text-warning m-1 s">
-											<h5><?php  echo $arr_comment['log'];?></h5>
-										</div>
-										
-										<div class="container h5">	
-											<p class="s"><?php  echo $arr_comment['text_comment'];?>	
-										</div>
-										<div class="text-right s">
-											<small>
-												<?php  echo $arr_comment['data_comment'];?>
-											</small>
-										</div>
-									</div>
-								<?php  }}?>
-							</div>
-
-
-
-
-							<?php include "footer.php" ?>
-						</body>
-						</html>
+						<?php include "footer.php" ?>
+					</body>
+					</html>
