@@ -4,6 +4,8 @@
 <html>
 <head>
 	<title>
+		
+
 		<?php   $id=$_GET['page'];
 		$cocktail = mysqli_query($connect,"SELECT * FROM `cocktail` WHERE $id=`id` ")or die(mysqli_error()); 
 		while($arr_cocktail = mysqli_fetch_assoc($cocktail)){
@@ -11,81 +13,89 @@
 			<style>
 			.s{word-break: break-all;}
 			.d{background: #008080;}
+			
+			
 		</style>
-	</head>
-	<body>
+		<script language="JavaScript">
+			function functionvniz(){
+				document.getElementById('xxx').scrollIntoView();}
+			</script>
 
-		<div class="container  bg-white rounded ">
-			<div class="container">
-				<div class="container text-center bg-white rounded s">
-					<h1 class="display-4 d-none d-sm-block">
-						<?php echo $arr_cocktail['title_coctail'];?>
-					</h1> 
-					<h3 class="d-sm-none">
-						<?php echo $arr_cocktail['title_coctail'];?>
-					</h3> 
+
+		</head>
+		<body onload=functionvniz();>
+
+			<div class="container  bg-white rounded ">
+				<div class="container">
+					<div class="container text-center bg-white rounded s">
+						<h1 class="display-4 d-none d-sm-block">
+							<?php echo $arr_cocktail['title_coctail'];?>
+						</h1> 
+						<h3 class="d-sm-none">
+							<?php echo $arr_cocktail['title_coctail'];?>
+						</h3> 
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="container rounded bg-light">																				  
-			<div class="row">						
-				<div class="text-left col-auto text-lowcase"><h5><font color="#8B0000">
-					<em>крепость: <?php  echo $arr_cocktail['fortress'];?></em>
-				</font></h5></div>
-				
-				
-				<div class="col text-sm-right text-lowcase"><h5><font color="#8B0000">
-					<em>категория: <?php echo $arr_cocktail['category'];}?></em>
-				</font></h5>
+			<div class="container rounded bg-light">																				  
+				<div class="row">						
+					<div class="text-left col-auto text-lowcase"><h5><font color="#8B0000">
+						<em>крепость: <?php  echo $arr_cocktail['fortress'];?></em>
+					</font></h5></div>
+
+
+					<div class="col text-sm-right text-lowcase"><h5><font color="#8B0000">
+						<em>категория: <?php echo $arr_cocktail['category'];}?></em>
+					</font></h5>
+				</div>
 			</div>
+
 		</div>
 
-	</div>
+
+		<div class="container text-center">
+
+			<?php 
+			$img = mysqli_query($connect,"SELECT * FROM `set_img` JOIN `content` JOIN `img`  WHERE `set_img`.`content_id`=`content`.`id` AND `set_img`.`img_id`=`img`.`id` AND $id=`set_img`.`id`")
+			or die(mysqli_error($connect));
+			while($arr_img = mysqli_fetch_assoc($img)){
+				?>
+				<img src="img/articles/<?php echo $arr_img['img'];?>" class="img-fluid p-3 m-1" width="300px">
+			<?php } ?>
+		</div>
 
 
-	<div class="container text-center">
-
-		<?php 
-		$img = mysqli_query($connect,"SELECT * FROM `set_img` JOIN `content` JOIN `img`  WHERE `set_img`.`content_id`=`content`.`id` AND `set_img`.`img_id`=`img`.`id` AND $id=`set_img`.`id`")
-		or die(mysqli_error($connect));
-		while($arr_img = mysqli_fetch_assoc($img)){
-			?>
-			<img src="img/articles/<?php echo $arr_img['img'];?>" class="img-fluid p-3 m-1" width="300px">
-		<?php } ?>
-	</div>
-
-
-	<div class="container-fluid h5 bg-light rounded mybtn text-secondary">
-		<?php 
-		$content = mysqli_query($connect,"SELECT `article_id`,`text_article`,`links` FROM `content` WHERE $id=`article_id`")or die(mysqli_error());
-		while($arr_content = mysqli_fetch_assoc($content)){?>
-			<p class="p-3">
-				<?php  echo $arr_content['text_article'];?>				
-			</p>
-			<div class="container-fluid text-right ">
-				<a href="http://<?php echo $arr_content['links'];?>" target="_blank" class="h4 text-secondary">
-					ССЫЛКА
-				</a>
-			</div>
-		<?php } ?>
-		<div>
-			<div class="bg-light">
-				<h1 class="display-2 s">Ингредиенты:</h1>
-				<ul class="list-group list-group-flush ">
-					<?php
-					$id=$_GET['page'];
-					$ingr = mysqli_query($connect,"SELECT * FROM `set_ingredients` JOIN `product` JOIN `ingredient` WHERE `set_ingredients`.`cocktail_id`=$id  AND 
-						`set_ingredients`.`ingredient_id`=`product`.`id` AND `ingredient`.`set_ingredients_id`=`set_ingredients`.`id`")or die(mysqli_error());
-						while($arr_ingr= mysqli_fetch_assoc($ingr)) { ?>
-							<li class="list-group-item bg-light"><?php echo $arr_ingr['title_product']."  -  ".$arr_ingr['count']."\t".$arr_ingr['unit'];}?></li>
-						</ul>
-					</div>
+		<div class="container-fluid h5 bg-light rounded mybtn text-secondary">
+			<?php 
+			$content = mysqli_query($connect,"SELECT `article_id`,`text_article`,`links` FROM `content` WHERE $id=`article_id`")or die(mysqli_error());
+			while($arr_content = mysqli_fetch_assoc($content)){?>
+				<p class="p-3">
+					<?php  echo $arr_content['text_article'];?>				
+				</p>
+				<div class="container-fluid text-right ">
+					<a href="http://<?php echo $arr_content['links'];?>" target="_blank" class="h4 text-secondary">
+						ССЫЛКА
+					</a>
+				</div>
+			<?php } ?>
+			<div>
+				<div class="bg-light">
+					<h1 class="display-2 s">Ингредиенты:</h1>
+					<ul class="list-group list-group-flush ">
+						<?php
+						$id=$_GET['page'];
+						$ingr = mysqli_query($connect,"SELECT * FROM `set_ingredients` JOIN `product` JOIN `ingredient` WHERE `set_ingredients`.`cocktail_id`=$id  AND 
+							`set_ingredients`.`ingredient_id`=`product`.`id` AND `ingredient`.`set_ingredients_id`=`set_ingredients`.`id`")or die(mysqli_error());
+							while($arr_ingr= mysqli_fetch_assoc($ingr)) { ?>
+								<li class="list-group-item bg-light"><?php echo $arr_ingr['title_product']."  -  ".$arr_ingr['count']."\t".$arr_ingr['unit'];}?></li>
+							</ul>
+						</div>
 
 
 
-					<?php 
-					$user_id=$_SESSION['user'];
-					$login=$_SESSION['log'];
+						<?php 
+						$user_id=$_SESSION['user'];
+						$login=$_SESSION['log'];
 
 
 					if($user_id!=0){  // определяет, сделал ли вход пользователь
@@ -116,12 +126,13 @@
 									$golos ="INSERT INTO  rating VALUES(NULL,'$user_id','$nat','$id')";
 									$paste=" ";
 									$hidden="hidden";
+									?><div onClick="functionvniz();" id="xxx"></div><?php
 								}}
 								$result = mysqli_query($connect, $golos) or die("Ошибка " . mysqli_error($connect));
 								include "popular.php";
 								set_popular($connect)
 								?>
-								<div class="alert alert-warning text-center" role="alert" <?php echo $hidden; ?>>
+								<div class="alert alert-warning text-center" role="alert" onClick="functionvniz();" id="xxx" <?php echo $hidden; ?>>
 									<p>Спасибо за вашу активность!</p>
 									<form action="" method="post" class="row p-3">
 										<input class="btn btn-warning btn-primary btn-lg btn-block" type="submit" name="revert" value="Изменить оценку">
@@ -135,14 +146,14 @@
 							while($arr_rating = mysqli_fetch_assoc($rating)){
 								?>
 
-								<form action="" method="post" class="row p-3">
+								<form action="" method="post" class="row p-3" >
 									<input class="btn btn-outline-danger col" <?php echo $paste; ?> type="submit" name="dislike" value="DISLIKE">
 									<div class="display-5 text-center alert alert-info m-3" role="alert">
 										ТЕКУЩИЙ РЕЙТИНГ:
 
 										<?php echo $arr_rating['sum'];?>													
 									</div>
-									<input class="btn btn-outline-success col" <?php echo $paste; ?> type="submit" name="like" value="LIKE">
+									<input class="btn btn-outline-success col" <?php echo $paste; ?> type="submit"  name="like" value="LIKE">
 								</form>
 
 							<?php }} ?>
@@ -165,7 +176,7 @@
 
 
 
-							<div>
+							<div >
 								<form action="" method="post" accept-charset="utf-8" >
 									<div class="m-2">
 										<input required class="form-control form-control-lg rounded" type="text" placeholder="Введите ваш комментраий" name="comment">
@@ -197,7 +208,7 @@
 						while($arr_comment = mysqli_fetch_assoc($comment)) {
 							if($id==$arr_comment['article_id']){
 								?>
-								<div class="d rounded  container text-light">
+								<div class="d rounded  container text-light" onClick="functionvniz();" id="xxx">
 									<p>
 									</p>
 									<div class="text-warning m-1 s">
